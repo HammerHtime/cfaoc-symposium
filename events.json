@@ -22,47 +22,55 @@
       "The Forum runs in three cities. Each is a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria is confirmed. The Central Canada and Atlantic Canada events are being planned, and both are announced on this site once the city and date are set."
     ],
     "themesHeading": "What we'll cover",
-    "themesIntro": "Sessions are confirmed closer to each event and drawn from the themes below. Not every theme runs in every city.",
+    "themesIntro": "Themes are drawn from the ground the Forum has covered before. Sessions are confirmed closer to each event, and not every theme runs in every city.",
     "themes": [
       {
-        "title": "Ports, airports and land crossings",
-        "body": "How marine terminals, air cargo, rail and land border crossings are exploited as entry and exit points, and what interdiction looks like at each."
+        "title": "Contraband tobacco and nicotine products",
+        "body": "Illicit trade in tobacco and the wider range of nicotine products, and how regulatory decisions shape the market that enforcement then has to police."
       },
       {
-        "title": "Firearms trafficking",
-        "body": "Smuggling routes, straw purchasing, privately made firearms, and the tracing work that connects a recovered gun back to a network."
+        "title": "Online illicit sales",
+        "body": "How illicit goods move through websites, marketplaces and social platforms, and what has worked to disrupt the sellers behind them."
       },
       {
-        "title": "Drug importation and the synthetic supply chain",
-        "body": "Precursor chemicals, clandestine production, and the distribution pipelines that run from the gateway to the street."
+        "title": "Interdiction on the open web",
+        "body": "Targeting websites, marketplaces and social media accounts — the civil and regulatory levers that sit alongside criminal enforcement."
       },
       {
-        "title": "Vehicle theft and export",
-        "body": "The theft-to-container pipeline, the groups behind it, and the partnerships that intercept vehicles before they leave the country."
+        "title": "Online monitoring and intelligence",
+        "body": "Running an online monitoring programme: current trends, what analysts are seeing, and where the work gets difficult."
       },
       {
-        "title": "Human trafficking and migrant smuggling",
-        "body": "How victims are recruited and moved along the national corridor, the indicators frontline staff can act on, and what a survivor-centred response asks of each agency."
+        "title": "Industry and law enforcement working together",
+        "body": "What private-sector investigators, brand protection teams and regulators bring to a case, and how those partnerships are set up."
       },
       {
-        "title": "Proceeds of crime and money laundering",
-        "body": "Trade-based laundering, cash movement, and the financial trail that ties transnational networks to domestic groups."
+        "title": "Gang trends and migration patterns",
+        "body": "How groups are moving between regions, what the current indices show, and what that means for the receiving community."
       },
       {
-        "title": "Transnational networks and domestic gangs",
-        "body": "How transnational criminal organizations connect with Canadian street gangs and outlaw motorcycle gangs, and what those relationships look like on the ground."
+        "title": "Gangs and human trafficking",
+        "body": "The links between gang activity and trafficking, indicators frontline staff can act on, and what a survivor-centred response asks of each agency."
       },
       {
-        "title": "Insider threat and supply-chain infiltration",
-        "body": "Recruitment and corruption of trusted insiders at ports, airports and logistics operators, and the detection, deterrence and vetting work that answers it."
+        "title": "Social media and gang violence",
+        "body": "The role online platforms play in recruitment, in escalating disputes, and in the evidence that follows."
       },
       {
-        "title": "Intelligence sharing across jurisdictions",
-        "body": "What agencies can lawfully share, what routinely gets stuck, and arrangements that have worked between municipal, provincial, federal and international partners."
+        "title": "Community reporting and Crime Stoppers",
+        "body": "Anonymous reporting as a public safety tool, and what it contributes to community safety and to investigations."
       },
       {
-        "title": "Prevention and community resilience",
-        "body": "How young people are drawn into trafficking and transport roles, and what schools, service providers and community organizations can do upstream."
+        "title": "Public health and public safety",
+        "body": "Where enforcement activity meets public health outcomes, and how the two sectors can work together rather than past each other."
+      },
+      {
+        "title": "Gateways, ports and border crossings",
+        "body": "The regional entry points that let contraband, product and people move — and what interdiction looks like at each."
+      },
+      {
+        "title": "Proceeds of crime",
+        "body": "Following the money behind illicit trade, and the financial trail that connects organized groups across jurisdictions."
       }
     ],
     "audienceHeading": "Who should attend",
@@ -75,6 +83,8 @@
       "Prosecutors and other legal counsel",
       "Corrections, parole and probation officers",
       "Financial crime, anti-money-laundering and compliance staff",
+      "Industry investigators, brand protection and regulatory staff",
+      "Public health and harm reduction staff",
       "Municipal, provincial and federal policy staff",
       "Educators, school administrators and school resource officers",
       "Social workers, youth workers and victim services staff",
@@ -146,8 +156,8 @@
       "provinceName": "British Columbia",
       "regionLabel": "West Coast",
       "date": "2026-11-24",
-      "startTime": "08:00",
-      "endTime": "16:30",
+      "startTime": "08:30",
+      "endTime": "17:00",
       "timezoneLabel": "PT",
       "utcOffset": "-08:00",
       "cost": "Free",
@@ -199,8 +209,8 @@
       "provinceName": "",
       "regionLabel": "Central Canada",
       "date": "",
-      "startTime": "08:00",
-      "endTime": "16:30",
+      "startTime": "08:30",
+      "endTime": "17:00",
       "timezoneLabel": "ET",
       "utcOffset": "-05:00",
       "cost": "Free",
@@ -228,8 +238,8 @@
       "provinceName": "",
       "regionLabel": "Atlantic Canada",
       "date": "",
-      "startTime": "08:00",
-      "endTime": "16:30",
+      "startTime": "08:30",
+      "endTime": "17:00",
       "timezoneLabel": "AT",
       "utcOffset": "-04:00",
       "cost": "Free",
