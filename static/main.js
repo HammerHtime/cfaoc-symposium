@@ -29,8 +29,46 @@
       if (e.target.closest('a')) setNav(false);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setNav(false);
+      if (e.key !== 'Escape' || toggle.getAttribute('aria-expanded') !== 'true') return;
+      setNav(false);
+      toggle.focus();
     });
+    /* Closing the drawer by resizing past the breakpoint keeps state honest. */
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860) setNav(false);
+    });
+  }
+
+  /* -------------------------------------- which section am I looking at? */
+  var spyLinks = [].slice
+    .call(document.querySelectorAll('.nav__list a[href*="#"]'))
+    .map(function (a) {
+      var id = a.getAttribute('href').split('#')[1];
+      var target = id && document.getElementById(id);
+      return target ? { link: a, target: target } : null;
+    })
+    .filter(Boolean);
+
+  if (spyLinks.length && 'IntersectionObserver' in window) {
+    var mark = function (active) {
+      spyLinks.forEach(function (s) {
+        if (s.link === active) s.link.setAttribute('aria-current', 'true');
+        else s.link.removeAttribute('aria-current');
+      });
+    };
+    var spy = new IntersectionObserver(
+      function () {
+        var best = null;
+        var line = window.innerHeight * 0.35;
+        spyLinks.forEach(function (s) {
+          var top = s.target.getBoundingClientRect().top;
+          if (top <= line && (!best || top > best.top)) best = { top: top, link: s.link };
+        });
+        mark(best && best.link);
+      },
+      { rootMargin: '-30% 0px -60% 0px', threshold: [0, 1] }
+    );
+    spyLinks.forEach(function (s) { spy.observe(s.target); });
   }
 
   /* ----------------------------------------------------------- countdown */
@@ -81,15 +119,22 @@
 
   /* ------------------------------------------------------------- lightbox */
   var overlay = document.querySelector('[data-lightbox-overlay]');
-  if (overlay) {
+  var triggers = [].slice.call(document.querySelectorAll('[data-lightbox]'));
+  if (overlay && triggers.length) {
     var lbImg = overlay.querySelector('[data-lightbox-img]');
     var lbCap = overlay.querySelector('[data-lightbox-cap]');
-    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+    var btnClose = overlay.querySelector('[data-lightbox-close]');
+    var btnPrev = overlay.querySelector('[data-lightbox-prev]');
+    var btnNext = overlay.querySelector('[data-lightbox-next]');
     var index = -1;
     var lastFocus = null;
 
+    if (triggers.length > 1) {
+      btnPrev.hidden = false;
+      btnNext.hidden = false;
+    }
+
     var show = function (i) {
-      if (!triggers.length) return;
       index = (i + triggers.length) % triggers.length;
       var t = triggers[index];
       lbImg.src = t.getAttribute('data-src');
@@ -97,7 +142,7 @@
       lbCap.textContent = t.getAttribute('data-caption') || '';
       overlay.hidden = false;
       document.body.style.overflow = 'hidden';
-      overlay.querySelector('[data-lightbox-close]').focus();
+      btnClose.focus();
     };
 
     var hide = function () {
@@ -114,14 +159,37 @@
     });
 
     overlay.addEventListener('click', function (e) {
-      if (e.target === overlay || e.target.hasAttribute('data-lightbox-close')) hide();
+      if (e.target === overlay) hide();
     });
+    btnClose.addEventListener('click', hide);
+    btnPrev.addEventListener('click', function () { show(index - 1); });
+    btnNext.addEventListener('click', function () { show(index + 1); });
 
     document.addEventListener('keydown', function (e) {
       if (overlay.hidden) return;
       if (e.key === 'Escape') hide();
       if (e.key === 'ArrowRight') show(index + 1);
       if (e.key === 'ArrowLeft') show(index - 1);
+      /* Keep tabbing inside the dialog while it is open. */
+      if (e.key === 'Tab') {
+        var stops = [].slice.call(overlay.querySelectorAll('button:not([hidden])'));
+        var first = stops[0];
+        var last = stops[stops.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
   }
+
+  /* ------------------------------------------------------------- printing */
+  /* Delegates print the event page — a collapsed answer is a lost answer. */
+  var reopen = [];
+  window.addEventListener('beforeprint', function () {
+    reopen = [].slice.call(document.querySelectorAll('details:not([open])'));
+    reopen.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener('afterprint', function () {
+    reopen.forEach(function (d) { d.open = false; });
+    reopen = [];
+  });
 })();

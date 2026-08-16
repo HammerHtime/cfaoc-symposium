@@ -309,7 +309,7 @@ summary:focus-visible,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: min(92svh, 900px);
+  min-height: min(90svh, 880px);
   padding: calc(var(--bar) + clamp(2.5rem, 6vw, 5rem)) 0 clamp(5rem, 9vw, 7rem);
   background:
     radial-gradient(105% 80% at 74% 40%, var(--maroon-700) 0%, var(--maroon-900) 40%, var(--ink) 76%),
@@ -325,30 +325,92 @@ summary:focus-visible,
   position: absolute;
   z-index: -1;
   top: 50%;
-  right: clamp(-22rem, -14vw, -6rem);
-  width: min(1120px, 88vw);
+  right: clamp(-21rem, -13vw, -5rem);
+  width: min(1140px, 90vw);
   aspect-ratio: 1;
   transform: translateY(-52%);
   opacity: 0.85;
   pointer-events: none;
 }
-.hero__media--art {
-  right: 0;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  transform: none;
-  aspect-ratio: auto;
-  opacity: 0.55;
+.whorl { width: 100%; height: 100%; }
+
+/* --- supplied artwork -----------------------------------------------------
+   static/assets/hero-artwork.png already contains the whole lockup: title,
+   rule, tagline and its own whorl. So when it is present it IS the hero type —
+   shown at full strength, never scrimmed, never stretched past its own pixels,
+   and never accompanied by a second copy of the same words. The ground of the
+   file is a near-black maroon (#1f0301 at the corners), which the hero
+   background below is tuned to, and the edges are feathered so the rectangle
+   dissolves instead of reading as a pasted-in box. */
+.hero--art {
+  /* Base tone sampled from the file's own corners (#1f0301). */
+  background:
+    radial-gradient(135% 125% at 44% 48%, #2d0907 0%, #250604 42%, #1e0403 70%, #170304 100%),
+    #1e0302;
 }
-.hero__media--art img { width: 100%; height: 100%; object-fit: cover; object-position: center right; }
-.hero__media--art::after {
+.hero--art .hero__media { display: none; }
+.hero--art .hero__inner {
+  grid-template-columns: minmax(0, 1.32fr) minmax(300px, 0.68fr);
+  gap: clamp(2rem, 3.4vw, 3rem);
+}
+.hero--art .hero__nextcity { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+.hero--art::before { background: none; }
+.hero--art { min-height: min(80svh, 720px); }
+
+.hero__lead { position: relative; min-width: 0; }
+/* Continues the artwork's own bottom-right glow past its edge, so the
+   feathered rectangle dissolves into a matching tone instead of into flat
+   black. Sampled from the file: the ground peaks near #521e19 bottom-centre. */
+.hero__lead::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(100deg, var(--ink) 12%, rgba(18, 4, 6, 0.72) 45%, rgba(18, 4, 6, 0.25) 100%);
+  inset: -14% -9%;
+  z-index: -1;
+  background: var(--hero-art) center / cover no-repeat;
+  filter: blur(70px) brightness(0.62) saturate(125%);
+  opacity: 0.9;
+  -webkit-mask-image: radial-gradient(66% 62% at 50% 52%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(66% 62% at 50% 52%, #000 30%, transparent 100%);
+  pointer-events: none;
 }
-.whorl { width: 100%; height: 100%; }
+.hero__art {
+  /* Nudged left by the artwork's own internal margin (measured: the type
+     starts at 4.13% of the file) so the baked lockup sits on the same left
+     edge as every heading further down the page. */
+  width: 104.31%;
+  max-width: none;
+  margin-left: -4.13%;
+  height: auto;
+  --feather:
+    linear-gradient(90deg, transparent 0, #000 3.6%, #000 98.6%, transparent 100%),
+    linear-gradient(180deg, transparent 0, #000 11%, #000 84%, transparent 100%);
+  -webkit-mask-image: var(--feather);
+  mask-image: var(--feather);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* The live lockup stays in the document for screen readers and crawlers, and
+   comes back visually at the width where the baked-in type stops being
+   readable. The image is decorative (alt=""), so the words are announced once. */
+@media (min-width: 700px) {
+  .hero--art .lockup {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+@media (max-width: 699.98px) {
+  .hero--art .hero__art { display: none; }
+  .hero--art .hero__media { display: block; }
+}
 
 /* Keeps the lockup legible where it crosses the ridges. */
 .hero::before {
@@ -356,7 +418,9 @@ summary:focus-visible,
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(96deg, var(--ink) 2%, rgba(18, 4, 6, 0.82) 30%, rgba(18, 4, 6, 0.15) 62%, rgba(18, 4, 6, 0.45) 100%);
+  background:
+    linear-gradient(rgba(18, 4, 6, 0.92) 0, rgba(18, 4, 6, 0.55) 70px, transparent 150px),
+    linear-gradient(96deg, var(--ink) 2%, rgba(18, 4, 6, 0.82) 30%, rgba(18, 4, 6, 0.15) 62%, rgba(18, 4, 6, 0.45) 100%);
   pointer-events: none;
 }
 /* Grounds the hero into the facts band underneath it. */
@@ -431,15 +495,14 @@ summary:focus-visible,
   font-size: clamp(1rem, 3.2cqw, 1.24rem);
   color: var(--rose);
   letter-spacing: 0.01em;
-  max-width: 34ch;
-  margin: 0.85rem 0 0;
+  max-width: 48ch;
+  margin: 0.9rem 0 0;
 }
 .lockup__meta {
-  margin: 1.5rem 0 0;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--line);
-  max-width: 34ch;
+  margin: 1.6rem 0 0;
+  max-width: 44ch;
   font-size: 0.78rem;
+  text-wrap: balance;
   letter-spacing: 0.15em;
   line-height: 1.7;
   text-transform: uppercase;
@@ -450,7 +513,7 @@ summary:focus-visible,
 
 .hero__next {
   position: relative;
-  background: linear-gradient(180deg, rgba(31, 8, 11, 0.9), rgba(10, 3, 4, 0.86));
+  background: linear-gradient(180deg, rgba(31, 8, 11, 0.78), rgba(10, 3, 4, 0.8));
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: clamp(1.5rem, 2.6vw, 2rem);
@@ -587,13 +650,13 @@ summary:focus-visible,
 }
 .facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .facts li {
-  padding: 1.5rem 1.5rem 1.5rem 0;
+  padding: 1.5rem 1.1rem 1.5rem 0;
   border-right: 1px solid var(--line);
 }
 .facts li:last-child { border-right: 0; padding-right: 0; }
@@ -610,9 +673,10 @@ summary:focus-visible,
   display: block;
   font-family: var(--display);
   font-weight: 500;
-  font-size: 1.08rem;
-  line-height: 1.3;
+  font-size: 0.98rem;
+  line-height: 1.35;
   letter-spacing: 0.02em;
+  text-wrap: balance;
   color: #fff;
 }
 
@@ -634,6 +698,16 @@ summary:focus-visible,
   display: grid;
   grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.7fr);
   gap: clamp(2rem, 4.5vw, 4.5rem);
+}
+/* Side headings size against their own narrow column, not the viewport. A long
+   single word ("PROGRAMME") is wider than the column in the fallback font, and
+   the viewport-based clamp let it break mid-word. */
+.cols__side { container-type: inline-size; }
+.cols__side .h2 {
+  font-size: clamp(1.6rem, 11.8cqw, 2.85rem);
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
 }
 .cols__side {
   position: sticky;
@@ -746,7 +820,9 @@ summary:focus-visible,
 .ticks li {
   position: relative;
   padding: 0.7rem 0 0.7rem 1.85rem;
-  border-bottom: 1px solid var(--line);
+  /* The rule goes on TOP of each item: every column starts on row one, so a
+     top border never leaves a line dangling under a short column. */
+  border-top: 1px solid var(--line);
   font-size: 0.97rem;
   line-height: 1.5;
 }
@@ -754,7 +830,7 @@ summary:focus-visible,
   content: '';
   position: absolute;
   left: 0;
-  top: 1.2rem;
+  top: 1.25rem;
   width: 8px;
   height: 8px;
   background: var(--red);
@@ -888,10 +964,13 @@ summary:focus-visible,
   margin-top: 1.25rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0.4rem clamp(1.2rem, 2.4vw, 1.75rem) 0.9rem;
+  padding: 0.9rem clamp(1.2rem, 2.4vw, 1.75rem) 1.1rem;
   background: rgba(255, 255, 255, 0.02);
 }
-.hotelfeat .ticks li:last-child { border-bottom: 0; }
+.hotelfeat .ticks li:nth-child(-n + 2) { border-top: 0; }
+@media (max-width: 700px) {
+  .hotelfeat .ticks li:nth-child(2) { border-top: 1px solid var(--line); }
+}
 
 /* --------------------------------------------------------------- gallery */
 
@@ -1277,8 +1356,12 @@ summary:focus-visible,
     min-height: 0;
     padding-bottom: clamp(4rem, 8vw, 6rem);
   }
-  .hero__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero__inner,
+  .hero--art .hero__inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .hero__next { max-width: 34rem; }
+  /* Both offsets below are percentages of the lead box, so the cap goes on the
+     box — putting it on the image itself would break the alignment nudge. */
+  .hero__lead { max-width: 46rem; }
   .hero__media { opacity: 0.6; right: -32%; width: min(1000px, 108vw); }
   .hero__foot { display: none; }
   .lockup__tagline, .lockup__meta { max-width: 46ch; }
@@ -1289,6 +1372,13 @@ summary:focus-visible,
   .cta__action { justify-self: start; text-align: left; }
   .foot__inner { grid-template-columns: 1fr 1fr; }
   .foot__brand { grid-column: 1 / -1; }
+}
+
+/* Four facts in a row stop fitting before the mobile breakpoint arrives. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts li:nth-child(2n) { border-right: 0; padding-right: 0; }
+  .facts li:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
 }
 
 @media (max-width: 860px) {

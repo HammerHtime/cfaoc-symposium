@@ -5,21 +5,23 @@ full page per city. No frameworks, no dependencies, no database — `events.json
 is the website, and `build.js` turns it into HTML.
 
 ```
-events.json          ← ALL content lives here. This is the file you edit.
-build.js             ← renders events.json + static/ into dist/
-netlify.toml         ← Netlify build + headers
-static/              ← copied verbatim into dist/
-  styles.css
-  main.js
-  assets/
-    favicon.svg
-    hotel/victoria/  ← drop hotel photos here (see below)
-dist/                ← generated. Never edit; never committed.
+cfaoc-site/
+  events.json        ← ALL content lives here. This is the file you edit.
+  build.js           ← renders events.json + static/ into dist/
+  netlify.toml       ← Netlify build + headers
+  static/            ← copied verbatim into dist/
+    styles.css
+    main.js
+    assets/
+      favicon.svg
+      hotel/victoria/  ← drop hotel photos here (see below)
+  dist/              ← generated. Never edit; never committed.
 ```
 
 ## Build it
 
 ```bash
+cd cfaoc-site
 node build.js            # writes ./dist
 node build.js --serve    # builds, then serves ./dist at http://localhost:8080
 ```
@@ -28,14 +30,16 @@ Node 18 or newer. Nothing to install.
 
 ## Deploy to Netlify
 
-Connect this repo in Netlify. The settings come from `netlify.toml` automatically:
+Connect the repo, then in **Site configuration → Build & deploy → Build settings**:
 
 | Setting | Value |
 | --- | --- |
+| Base directory | `cfaoc-site` |
 | Build command | `node build.js` |
-| Publish directory | `dist` |
+| Publish directory | `cfaoc-site/dist` |
 
-Push to the default branch and Netlify rebuilds.
+With the base directory set, Netlify picks up `cfaoc-site/netlify.toml` for the
+caching and security headers. Push to the branch and Netlify rebuilds.
 
 Prefer drag-and-drop? Run `node build.js` locally and drag the `dist` folder onto
 the Netlify dashboard. You have to repeat that after every content change, which

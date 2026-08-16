@@ -116,6 +116,48 @@ function heroArtwork() {
 }
 const HERO_ART = heroArtwork();
 
+/**
+ * Intrinsic pixel size of a static asset. Used to reserve layout space for the
+ * hero artwork and to declare the social card's dimensions — both of which
+ * matter and neither of which anyone will remember to update by hand.
+ * Reads the file header directly: PNG, JPEG, GIF, WebP. SVG has no raster size.
+ */
+function imageSize(webPath) {
+  if (!webPath) return null;
+  const file = path.join(SRC_STATIC, webPath.replace(/^\//, ''));
+  if (!fs.existsSync(file)) return null;
+  const b = fs.readFileSync(file);
+  if (b.length > 24 && b.toString('ascii', 1, 4) === 'PNG') {
+    return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+  }
+  if (b.length > 10 && b.toString('ascii', 0, 3) === 'GIF') {
+    return { w: b.readUInt16LE(6), h: b.readUInt16LE(8) };
+  }
+  if (b.length > 30 && b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+    if (b.toString('ascii', 12, 16) === 'VP8X') return { w: 1 + b.readUIntLE(24, 3), h: 1 + b.readUIntLE(27, 3) };
+    return null; // lossy/lossless WebP headers vary; not worth decoding here
+  }
+  if (b[0] === 0xff && b[1] === 0xd8) {
+    let o = 2;
+    while (o + 9 < b.length) {
+      if (b[o] !== 0xff) { o++; continue; }
+      const marker = b[o + 1];
+      if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+        return { h: b.readUInt16BE(o + 5), w: b.readUInt16BE(o + 7) };
+      }
+      o += 2 + b.readUInt16BE(o + 2);
+    }
+  }
+  return null;
+}
+const HERO_ART_SIZE = imageSize(HERO_ART);
+
+/** The social card. Falls back to the hero artwork, then to nothing at all. */
+const OG_IMAGE = ['/assets/og-default.png', HERO_ART].find(
+  (p) => p && fs.existsSync(path.join(SRC_STATIC, p.replace(/^\//, '')))
+) || null;
+const OG_SIZE = imageSize(OG_IMAGE);
+
 /* ------------------------------------------------- the fingerprint device */
 
 /** Deterministic PRNG so every build emits byte-identical SVG. */
@@ -251,7 +293,18 @@ ${parts.map((p) => '    ' + p).join('\n')}
 /* ------------------------------------------------------------- components */
 
 function head({ title, description, canonical, jsonld, ogImage }) {
-  const img = ogImage || `${BASE}/assets/og-default.png`;
+  const img = ogImage || (OG_IMAGE ? `${BASE}${OG_IMAGE}` : '');
+  /* A square card is centre-cropped by the large-image players; declaring the
+     real dimensions is what stops them guessing wrong. */
+  const imgMeta = !img
+    ? ''
+    : `<meta property="og:image" content="${attr(img)}">
+<meta property="og:image:alt" content="${attr(`${SITE.name} — ${SITE.tagline}`)}">${
+        OG_SIZE && !ogImage
+          ? `\n<meta property="og:image:width" content="${OG_SIZE.w}">
+<meta property="og:image:height" content="${OG_SIZE.h}">`
+          : ''
+      }`;
   return `<!doctype html>
 <html lang="en-CA">
 <head>
@@ -265,7 +318,7 @@ function head({ title, description, canonical, jsonld, ogImage }) {
 <meta property="og:title" content="${attr(title)}">
 <meta property="og:description" content="${attr(description)}">
 <meta property="og:url" content="${attr(canonical)}">
-<meta property="og:image" content="${attr(img)}">
+${imgMeta}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1b070a">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -339,13 +392,32 @@ function scrollCue() {
   </div>`;
 }
 
+/* The vector whorl behind the hero. When artwork is supplied it carries the
+   motif on small screens only — the artwork itself has a whorl of its own and
+   the two must never appear together. */
 function heroMedia() {
-  if (HERO_ART) {
-    return `<div class="hero__media hero__media--art">
-    <img src="${attr(HERO_ART)}" alt="${attr(SITE.name)} — ${attr(SITE.tagline)}" width="1456" height="816" fetchpriority="high" decoding="async">
-  </div>`;
-  }
   return `<div class="hero__media">${fingerprint({ id: 'hero' })}</div>`;
+}
+
+/**
+ * The left half of the hero.
+ *
+ * With no artwork on disk: the HTML lockup, set live.
+ * With artwork: the supplied graphic IS the lockup — it already contains the
+ * full title, rule and tagline — so it is shown at full strength and the HTML
+ * lockup is clipped away for screen readers and crawlers only. The image is
+ * silent (alt="") so the title is announced exactly once, by the <h1>. Below
+ * the artwork's legible size the swap reverses: image out, live lockup back.
+ */
+function heroLead(sub) {
+  const lockup = titleLockup(sub);
+  if (!HERO_ART) return lockup;
+  const size = HERO_ART_SIZE || { w: 1452, h: 830 };
+  return `<div class="hero__lead" style="--hero-art:url('${attr(HERO_ART)}')">
+    <img class="hero__art" src="${attr(HERO_ART)}" alt="" width="${size.w}" height="${size.h}"
+      fetchpriority="high" decoding="async">
+    ${lockup}
+  </div>`;
 }
 
 function factsStrip(ev) {
@@ -509,8 +581,10 @@ function hotelSection(ev) {
 
   const photos = hotelPhotos(ev.slug);
   const caps = h.captions || {};
+  // The gallery is laid out for however many photos actually exist — and the
+  // section is composed so that it still reads as finished with none at all.
   const gallery = photos.length
-    ? `<figure class="gallery" role="group" aria-label="Photos of ${attr(h.name)}">
+    ? `<figure class="gallery gallery--n${Math.min(photos.length, 6)}" role="group" aria-label="Photos of ${attr(h.name)}">
           ${photos
             .map(
               (p, i) => `<button class="gallery__item${i === 0 ? ' gallery__item--lead' : ''}" type="button"
@@ -547,9 +621,11 @@ function hotelSection(ev) {
         </div>
         ${
           h.highlights && h.highlights.length
-            ? `<ul class="ticks ticks--tight">
+            ? `<div class="hotelfeat">
+          <ul class="ticks ticks--tight">
           ${h.highlights.map((x) => `<li>${esc(x)}</li>`).join('\n          ')}
-        </ul>`
+          </ul>
+        </div>`
             : ''
         }
         ${gallery}
@@ -667,8 +743,10 @@ function footer() {
     <p>© ${year} ${esc(SITE.organizerName)}. Hosted as a non-profit training and education event.</p>
   </div>
 </footer>
-<div class="lightbox" data-lightbox-overlay hidden>
+<div class="lightbox" data-lightbox-overlay role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
   <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close photo">&times;</button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous photo" hidden>&#8592;</button>
+  <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photo" hidden>&#8594;</button>
   <figure class="lightbox__fig">
     <img alt="" data-lightbox-img>
     <figcaption data-lightbox-cap></figcaption>
@@ -709,10 +787,10 @@ function hubPage() {
     }) +
     navBar(nav, `<a class="btn btn--primary btn--sm nav__cta" href="#cities">Register</a>`) +
     `<main id="main">
-<section class="hero">
+<section class="hero${HERO_ART ? ' hero--art' : ''}">
   ${heroMedia()}
   <div class="wrap hero__inner">
-    ${titleLockup(`<p class="lockup__meta">A free one-day symposium series · Three cities · ${dm ? esc(dm.year) : '2026'}</p>`)}
+    ${heroLead(`<p class="lockup__meta">A free one-day symposium series · Three cities · ${dm ? esc(dm.year) : '2026'}</p>`)}
     <div class="hero__next">
       <p class="hero__nextlabel">Next event</p>
       <p class="hero__nextcity">${esc(featured.city || featured.regionLabel)}${featured.province ? `, ${esc(featured.province)}` : ''}</p>
@@ -764,10 +842,10 @@ function eventPage(ev) {
     }) +
     navBar(nav, registerButton(ev, { size: 'sm' }).replace('btn--primary', 'btn--primary nav__cta')) +
     `<main id="main">
-<section class="hero hero--event">
+<section class="hero hero--event${HERO_ART ? ' hero--art' : ''}">
   ${heroMedia()}
   <div class="wrap hero__inner">
-    ${titleLockup(`<p class="lockup__meta">${esc(ev.city)}, ${esc(ev.provinceName || ev.province)} · ${esc(fmtLong(ev.date))}</p>`)}
+    ${heroLead(`<p class="lockup__meta">${esc(ev.city)}, ${esc(ev.provinceName || ev.province)} · ${esc(fmtLong(ev.date))}</p>`)}
     <div class="hero__next">
       <p class="hero__nextlabel">${esc(ev.regionLabel)} edition</p>
       <p class="hero__nextcity">${esc(ev.city)}, ${esc(ev.province)}</p>
