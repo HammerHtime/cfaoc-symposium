@@ -508,11 +508,13 @@ function agendaSection() {
         <p class="muted">${esc(C.agendaNote)}</p>
       </div>
       <div class="cols__main">
-        <ol class="agenda">
+        ${
+          C.agenda && C.agenda.length
+            ? `<ol class="agenda">
           ${C.agenda
             .map(
               (s) => `<li class="agenda__row">
-            <span class="agenda__time">${esc(fmtTime(s.time))}</span>
+            <span class="agenda__time">${esc(s.time ? fmtTime(s.time) : 'TBD')}</span>
             <span class="agenda__body">
               <span class="agenda__title">${esc(s.title)}</span>
               ${s.detail ? `<span class="agenda__detail">${esc(s.detail)}</span>` : ''}
@@ -520,7 +522,18 @@ function agendaSection() {
           </li>`
             )
             .join('\n          ')}
-        </ol>
+        </ol>`
+            /* No sessions confirmed yet: say so plainly rather than show a
+               table of placeholder rows that reads as a real schedule. */
+            : `<div class="tbd">
+          <p class="tbd__mark">TBD</p>
+          <div class="tbd__body">
+            <h3 class="tbd__title">${esc(C.agendaEmptyTitle || 'Programme to be announced')}</h3>
+            ${(C.agendaEmptyBody || []).map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
+            <p class="tbd__cta"><a class="btn btn--ghost" href="mailto:${attr(SITE.contactEmail)}">Propose a session</a></p>
+          </div>
+        </div>`
+        }
       </div>
     </div>
   </div>

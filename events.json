@@ -82,69 +82,8 @@
       "Researchers and students working on organized crime"
     ],
     "agendaHeading": "Programme",
-    "agendaNote": "Draft only. The outline below shows the shape of a Forum day. No session, speaker or time on this page is confirmed. The final programme is posted here and sent to registered delegates before the event.",
-    "agenda": [
-      {
-        "time": "08:00",
-        "title": "Registration and coffee",
-        "detail": "Doors open. Check in and collect your delegate package."
-      },
-      {
-        "time": "08:45",
-        "title": "Opening and territorial acknowledgement",
-        "detail": "Welcome from ONGIA and the host region."
-      },
-      {
-        "time": "09:00",
-        "title": "Keynote: the national picture",
-        "detail": "Where organized crime is moving through Canada's gateways."
-      },
-      {
-        "time": "10:15",
-        "title": "Break",
-        "detail": ""
-      },
-      {
-        "time": "10:35",
-        "title": "Session: the regional gateway",
-        "detail": "The entry points in this region and the groups exploiting them."
-      },
-      {
-        "time": "11:35",
-        "title": "Session: following the commodity",
-        "detail": "Firearms, drugs and stolen vehicles, from the container to the street."
-      },
-      {
-        "time": "12:30",
-        "title": "Lunch",
-        "detail": "Note any dietary requirements when you register."
-      },
-      {
-        "time": "13:30",
-        "title": "Session: human trafficking and migrant smuggling",
-        "detail": "Recruitment and movement along the corridor, and a survivor-centred response."
-      },
-      {
-        "time": "14:30",
-        "title": "Break",
-        "detail": ""
-      },
-      {
-        "time": "14:50",
-        "title": "Panel: working across jurisdictions",
-        "detail": "Practitioners on how information sharing between agencies works in practice."
-      },
-      {
-        "time": "15:50",
-        "title": "Closing remarks",
-        "detail": "Summary, resources and next steps."
-      },
-      {
-        "time": "16:15",
-        "title": "Informal networking",
-        "detail": "Stay and connect with colleagues."
-      }
-    ],
+    "agendaNote": "The programme is being built now. Sessions and speakers are posted here as they are confirmed, and sent to registered delegates before the event.",
+    "agenda": [],
     "faqHeading": "Questions",
     "faq": [
       {
@@ -191,7 +130,12 @@
       "The speaker roster is being finalized.",
       "Presenters are drawn from policing, border and transport partners, prosecution services and community organizations working the file directly. Names and sessions are posted here as they are confirmed."
     ],
-    "speakersContact": "Interested in presenting or supporting the Forum in one of the three cities? Write to us."
+    "speakersContact": "Interested in presenting or supporting the Forum in one of the three cities? Write to us.",
+    "agendaEmptyTitle": "Sessions to be confirmed",
+    "agendaEmptyBody": [
+      "Presenters and session topics for this Forum have not been set. Nothing is confirmed yet, so nothing is listed here.",
+      "The day runs as a single track with breaks and lunch. The full running order goes up on this page once it is settled, and everyone who has registered gets it by email."
+    ]
   },
   "events": [
     {

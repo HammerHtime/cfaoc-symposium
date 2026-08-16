@@ -874,6 +874,48 @@ summary:focus-visible,
   max-width: 60ch;
 }
 
+/* ------------------------------------------------------------------- tbd */
+/* Used where a section has nothing confirmed yet. Deliberately looks finished
+   rather than empty — an unstyled gap reads as a broken page. */
+.tbd {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tbd__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 1.9rem 1rem;
+  background: linear-gradient(160deg, var(--red-deep), #5d0b0f);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2.1rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: #fff;
+}
+.tbd__body { padding: clamp(1.4rem, 3vw, 2rem); background: rgba(255, 255, 255, 0.025); }
+.tbd__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 0.7rem;
+}
+.tbd__cta { margin-top: 1.4rem; }
+
+@media (max-width: 760px) {
+  .tbd { grid-template-columns: 1fr; }
+  .tbd__mark { padding: 1rem; font-size: 1.6rem; }
+}
+
 /* ----------------------------------------------------------------- venue */
 
 .venue__name {
