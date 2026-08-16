@@ -1,0 +1,6 @@
+# generated build output
+dist/
+
+# junk
+.DS_Store
+node_modules/

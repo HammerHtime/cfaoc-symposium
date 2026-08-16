@@ -1,0 +1,309 @@
+{
+  "_comment": "ONGIA — Canadian Forum Against Organized Crime. THIS FILE IS THE WEBSITE. Edit it, run `node build.js`, push. Nothing else needs to change to add a city or paste a registration link.",
+  "site": {
+    "name": "Canadian Forum Against Organized Crime",
+    "shortName": "CFAOC",
+    "seriesLabel": "National Symposium",
+    "tagline": "Securing the Gateways and Borders Coast-to-Coast",
+    "baseUrl": "https://cfaoc-symposium.netlify.app",
+    "description": "A free one-day symposium on organized crime at Canada's ports, airports and land borders, for police, border and transport partners, prosecutors, corrections, analysts and community partners. Three cities, coast to coast.",
+    "organizerName": "ONGIA — Ontario Gang Investigators Association",
+    "organizerUrl": "https://www.ongia.org",
+    "contactEmail": "president@ongia.ca",
+    "twitterHandle": "",
+    "googleAnalyticsId": ""
+  },
+  "content": {
+    "aboutHeading": "About the Forum",
+    "aboutLead": "Organized crime does not stop at a provincial line. It moves through the gateways the country depends on: container terminals, airports, rail yards, land crossings and the highway corridors between them.",
+    "aboutBody": [
+      "The Canadian Forum Against Organized Crime is a one-day national symposium. It puts the people who work those gateways in the same room: police, border services and transport partners, port and airport authorities, prosecutors, corrections and probation staff, intelligence analysts, and the community organizations that see the downstream harm first.",
+      "The programme is built around current, practical material: how criminal networks exploit Canadian entry points, and what enforcement and disruption look like now. Information sharing runs through the whole day, including where it breaks down between agencies and jurisdictions and what has worked to fix that. Sessions are pitched at people who will take the material back to their own caseloads.",
+      "The Forum runs in three cities. Each is a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria is confirmed. The Central Canada and Atlantic Canada events are being planned, and both are announced on this site once the city and date are set."
+    ],
+    "themesHeading": "What we'll cover",
+    "themesIntro": "Sessions are confirmed closer to each event and drawn from the themes below. Not every theme runs in every city.",
+    "themes": [
+      {
+        "title": "Ports, airports and land crossings",
+        "body": "How marine terminals, air cargo, rail and land border crossings are exploited as entry and exit points, and what interdiction looks like at each."
+      },
+      {
+        "title": "Firearms trafficking",
+        "body": "Smuggling routes, straw purchasing, privately made firearms, and the tracing work that connects a recovered gun back to a network."
+      },
+      {
+        "title": "Drug importation and the synthetic supply chain",
+        "body": "Precursor chemicals, clandestine production, and the distribution pipelines that run from the gateway to the street."
+      },
+      {
+        "title": "Vehicle theft and export",
+        "body": "The theft-to-container pipeline, the groups behind it, and the partnerships that intercept vehicles before they leave the country."
+      },
+      {
+        "title": "Human trafficking and migrant smuggling",
+        "body": "How victims are recruited and moved along the national corridor, the indicators frontline staff can act on, and what a survivor-centred response asks of each agency."
+      },
+      {
+        "title": "Proceeds of crime and money laundering",
+        "body": "Trade-based laundering, cash movement, and the financial trail that ties transnational networks to domestic groups."
+      },
+      {
+        "title": "Transnational networks and domestic gangs",
+        "body": "How transnational criminal organizations connect with Canadian street gangs and outlaw motorcycle gangs, and what those relationships look like on the ground."
+      },
+      {
+        "title": "Insider threat and supply-chain infiltration",
+        "body": "Recruitment and corruption of trusted insiders at ports, airports and logistics operators, and the detection, deterrence and vetting work that answers it."
+      },
+      {
+        "title": "Intelligence sharing across jurisdictions",
+        "body": "What agencies can lawfully share, what routinely gets stuck, and arrangements that have worked between municipal, provincial, federal and international partners."
+      },
+      {
+        "title": "Prevention and community resilience",
+        "body": "How young people are drawn into trafficking and transport roles, and what schools, service providers and community organizations can do upstream."
+      }
+    ],
+    "audienceHeading": "Who should attend",
+    "audienceIntro": "The Forum is written for frontline professionals and open to the partners who work alongside them. Registration is open to everyone on this list.",
+    "audience": [
+      "Municipal, regional, provincial, First Nations and federal police, including the RCMP",
+      "Canada Border Services Agency, port and airport authorities, and transport security",
+      "Marine, rail, trucking and logistics security staff",
+      "Intelligence analysts and criminal intelligence units",
+      "Prosecutors and other legal counsel",
+      "Corrections, parole and probation officers",
+      "Financial crime, anti-money-laundering and compliance staff",
+      "Municipal, provincial and federal policy staff",
+      "Educators, school administrators and school resource officers",
+      "Social workers, youth workers and victim services staff",
+      "Community organizations and Indigenous community partners",
+      "Researchers and students working on organized crime"
+    ],
+    "agendaHeading": "Programme",
+    "agendaNote": "Draft only. The outline below shows the shape of a Forum day. No session, speaker or time on this page is confirmed. The final programme is posted here and sent to registered delegates before the event.",
+    "agenda": [
+      {
+        "time": "08:00",
+        "title": "Registration and coffee",
+        "detail": "Doors open. Check in and collect your delegate package."
+      },
+      {
+        "time": "08:45",
+        "title": "Opening and territorial acknowledgement",
+        "detail": "Welcome from ONGIA and the host region."
+      },
+      {
+        "time": "09:00",
+        "title": "Keynote: the national picture",
+        "detail": "Where organized crime is moving through Canada's gateways."
+      },
+      {
+        "time": "10:15",
+        "title": "Break",
+        "detail": ""
+      },
+      {
+        "time": "10:35",
+        "title": "Session: the regional gateway",
+        "detail": "The entry points in this region and the groups exploiting them."
+      },
+      {
+        "time": "11:35",
+        "title": "Session: following the commodity",
+        "detail": "Firearms, drugs and stolen vehicles, from the container to the street."
+      },
+      {
+        "time": "12:30",
+        "title": "Lunch",
+        "detail": "Note any dietary requirements when you register."
+      },
+      {
+        "time": "13:30",
+        "title": "Session: human trafficking and migrant smuggling",
+        "detail": "Recruitment and movement along the corridor, and a survivor-centred response."
+      },
+      {
+        "time": "14:30",
+        "title": "Break",
+        "detail": ""
+      },
+      {
+        "time": "14:50",
+        "title": "Panel: working across jurisdictions",
+        "detail": "Practitioners on how information sharing between agencies works in practice."
+      },
+      {
+        "time": "15:50",
+        "title": "Closing remarks",
+        "detail": "Summary, resources and next steps."
+      },
+      {
+        "time": "16:15",
+        "title": "Informal networking",
+        "detail": "Stay and connect with colleagues."
+      }
+    ],
+    "faqHeading": "Questions",
+    "faq": [
+      {
+        "q": "How much does it cost to attend?",
+        "a": "Nothing. Every event in the series is free, and lunch and refreshments are included. Travel and accommodation are at your own expense."
+      },
+      {
+        "q": "How do I register?",
+        "a": "Registration runs on ONGIA's own events site. Use the Register button for the city you want to attend. Places are limited and allocated in the order they are received, so register early."
+      },
+      {
+        "q": "Can I attend more than one city?",
+        "a": "Yes. Each event is registered separately. The themes are shared; the regional content differs."
+      },
+      {
+        "q": "Do I need to be a police officer to attend?",
+        "a": "No. The Forum is open to everyone listed under Who should attend. Some sessions may be restricted to law enforcement. Where that applies, it is marked in the final programme."
+      },
+      {
+        "q": "Will sessions be recorded or streamed?",
+        "a": "No. The Forum is in person only. Sessions are not streamed and recording is not planned, so presenters can speak frankly."
+      },
+      {
+        "q": "Is there a certificate of attendance?",
+        "a": "Tell us when you register if you need a certificate of attendance or a record of professional development hours, and we will confirm what we can provide for that event."
+      },
+      {
+        "q": "Is the venue accessible?",
+        "a": "Tell us about accessibility or dietary requirements when you register and we will arrange what we can with the venue. If you have a specific question about the building, the rooms or getting around the site, write to us before you register and we will get an answer from the hotel."
+      },
+      {
+        "q": "Can media attend?",
+        "a": "Contact the organizers in advance. Some sessions may be closed to media, and access is arranged case by case."
+      },
+      {
+        "q": "Can my organization sponsor or exhibit?",
+        "a": "Write to the organizers and we will tell you what is available for that city."
+      }
+    ],
+    "ctaHeading": "Free to attend. Limited seating.",
+    "ctaBody": "Registration for each city runs on ONGIA's own events site. Victoria is open now. The other two cities are posted here as they are confirmed.",
+    "speakersHeading": "Speakers",
+    "speakersBody": [
+      "The speaker roster is being finalized.",
+      "Presenters are drawn from policing, border and transport partners, prosecution services and community organizations working the file directly. Names and sessions are posted here as they are confirmed."
+    ],
+    "speakersContact": "Interested in presenting or supporting the Forum in one of the three cities? Write to us."
+  },
+  "events": [
+    {
+      "slug": "victoria",
+      "status": "open",
+      "city": "Victoria",
+      "province": "BC",
+      "provinceName": "British Columbia",
+      "regionLabel": "West Coast",
+      "date": "2026-11-24",
+      "startTime": "08:00",
+      "endTime": "16:30",
+      "timezoneLabel": "PT",
+      "utcOffset": "-08:00",
+      "cost": "Free",
+      "registerUrl": "https://www.ongia.org/event-details/canadian-forum-against-organized-crime-national-symposium",
+      "registerLabel": "Register — free",
+      "registerNote": "Registration is handled on ONGIA's events site.",
+      "blurb": "The Pacific gateway: container terminals, the marine corridor, cross-border movement through the Salish Sea, and the groups working the West Coast.",
+      "venue": {
+        "name": "Delta Hotels by Marriott Victoria Ocean Pointe Resort",
+        "street": "100 Harbour Road",
+        "city": "Victoria",
+        "region": "BC",
+        "postalCode": "V9A 0G1",
+        "country": "Canada",
+        "notes": "On the harbour in Vic West, across the Johnson Street Bridge from downtown Victoria. Contact the hotel directly about parking options and rates.",
+        "website": ""
+      },
+      "hotel": {
+        "name": "Delta Hotels by Marriott Victoria Ocean Pointe Resort",
+        "rate": "$249",
+        "rateUnit": "per night",
+        "rateNote": "Plus applicable taxes and fees, and subject to availability. Confirm the booking cut-off date with the hotel.",
+        "bookingUrl": "https://www.marriott.com/event-reservations/reservation-link.mi?id=1786044245922&key=GRP&app=resvlink&_branch_match_id=1591319704557417213&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXTywo0MtNLCrKzC8p0UvOz9UvSi0uy0wtN7IHytiCODmZedlqmSm2huYWZgYmJkYmppZGRmrZqZW27kEBanVFqWmpQO156fFJRfnlxalFtsGJaYlFmQAwwBYRYQAAAA%3D%3D",
+        "bookingLabel": "Book at the delegate rate",
+        "intro": "The Forum is held at the Delta Ocean Pointe, and a block of rooms is held there at a delegate rate for anyone travelling in. Book through the link below, which is tied to the Forum's room block.",
+        "highlights": [
+          "The Forum runs in the same building, so there is no travel on the day",
+          "Across the Johnson Street Bridge from downtown Victoria, on the harbour",
+          "Victoria International Airport (YYJ) is well north of downtown on the Saanich Peninsula, so allow travel time",
+          "The Coho and Victoria Clipper terminals are on Belleville Street, across the harbour",
+          "Ask the hotel about parking, accessibility and on-site facilities when you book"
+        ],
+        "photoCredit": "Photos courtesy of Delta Hotels by Marriott Victoria Ocean Pointe Resort.",
+        "captions": {
+          "01-exterior.jpg": "The hotel from the harbour side",
+          "02-room.jpg": "A guest room",
+          "03-harbour.jpg": "The harbour, seen from the property",
+          "04-lobby.jpg": "The lobby",
+          "05-pool.jpg": "The pool",
+          "06-dining.jpg": "The dining room"
+        }
+      }
+    },
+    {
+      "slug": "",
+      "status": "tba",
+      "city": "",
+      "province": "",
+      "provinceName": "",
+      "regionLabel": "Central Canada",
+      "date": "",
+      "startTime": "08:00",
+      "endTime": "16:30",
+      "timezoneLabel": "ET",
+      "utcOffset": "-05:00",
+      "cost": "Free",
+      "registerUrl": "",
+      "registerLabel": "Register — free",
+      "registerNote": "",
+      "blurb": "Planned focus: the land-border and highway corridor. Crossings, rail, air cargo, and the routes that run through the centre of the country.",
+      "venue": {
+        "name": "",
+        "street": "",
+        "city": "",
+        "region": "",
+        "postalCode": "",
+        "country": "Canada",
+        "notes": "",
+        "website": ""
+      },
+      "hotel": null
+    },
+    {
+      "slug": "",
+      "status": "tba",
+      "city": "",
+      "province": "",
+      "provinceName": "",
+      "regionLabel": "Atlantic Canada",
+      "date": "",
+      "startTime": "08:00",
+      "endTime": "16:30",
+      "timezoneLabel": "AT",
+      "utcOffset": "-04:00",
+      "cost": "Free",
+      "registerUrl": "",
+      "registerLabel": "Register — free",
+      "registerNote": "",
+      "blurb": "Planned focus: the Atlantic gateway. East Coast ports, the marine approach, and the movement of goods inland from the seaboard.",
+      "venue": {
+        "name": "",
+        "street": "",
+        "city": "",
+        "region": "",
+        "postalCode": "",
+        "country": "Canada",
+        "notes": "",
+        "website": ""
+      },
+      "hotel": null
+    }
+  ]
+}
