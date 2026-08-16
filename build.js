@@ -764,10 +764,11 @@ function hubPage() {
   const featured = EVENTS.find((e) => isLive(e)) || EVENTS[0];
   const nav = [
     { href: '#about', label: 'About' },
-    { href: '#themes', label: 'Topics' },
-    { href: '#who', label: 'Who attends' },
-    { href: '#programme', label: 'Programme' },
     { href: '#cities', label: 'Cities' },
+    { href: '#themes', label: 'Topics' },
+    { href: '#programme', label: 'Programme' },
+    { href: '#venue', label: 'Venue' },
+    { href: '#hotel', label: 'Hotel' },
     { href: '#faq', label: 'FAQ' },
   ];
 
@@ -812,6 +813,8 @@ ${themesSection()}
 ${audienceSection()}
 ${agendaSection()}
 ${speakersSection()}
+${isLive(featured) ? venueSection(featured) : ''}
+${isLive(featured) ? hotelSection(featured) : ''}
 ${faqSection()}
 ${ctaSection(isLive(featured) ? featured : null)}
 </main>` +
