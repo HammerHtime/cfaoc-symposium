@@ -530,7 +530,6 @@ function agendaSection() {
           <div class="tbd__body">
             <h3 class="tbd__title">${esc(C.agendaEmptyTitle || 'Programme to be announced')}</h3>
             ${(C.agendaEmptyBody || []).map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
-            <p class="tbd__cta"><a class="btn btn--ghost" href="mailto:${attr(SITE.contactEmail)}">Propose a session</a></p>
           </div>
         </div>`
         }
@@ -546,13 +545,18 @@ function speakersSection() {
     <div class="cols">
       <div class="cols__side">
         <p class="kicker">${num()} — Presenters</p>
-        <h2 class="h2">Speakers</h2>
+        <h2 class="h2">${esc(C.speakersHeading || 'Speakers')}</h2>
       </div>
       <div class="cols__main">
         <div class="panel">
-          <p class="lead" style="margin-top:0">The speaker roster is being finalized.</p>
-          <p>Presenters are drawn from policing, border and transportation partners, prosecution services and community organizations working the file directly. The full lineup is posted here and sent to registered delegates before the event.</p>
-          <p class="muted">Interested in presenting, sponsoring or hosting a partner display? <a href="mailto:${attr(SITE.contactEmail)}">Get in touch</a>.</p>
+          ${(C.speakersBody || []).map((t, i) =>
+            i === 0
+              ? `<p class="lead" style="margin-top:0">${esc(t)}</p>`
+              : `<p>${esc(t)}</p>`
+          ).join('\n          ')}
+          ${C.speakersContact
+            ? `<p class="muted">${esc(C.speakersContact)} <a href="mailto:${attr(SITE.contactEmail)}">${esc(SITE.contactEmail)}</a></p>`
+            : ''}
         </div>
       </div>
     </div>
