@@ -168,7 +168,6 @@
       "startTime": "08:30",
       "endTime": "17:00",
       "timezoneLabel": "PT",
-      "utcOffset": "-08:00",
       "cost": "Free",
       "registerUrl": "https://www.ongia.org/event-details/canadian-forum-against-organized-crime-national-symposium",
       "registerLabel": "Register — free",
@@ -208,7 +207,8 @@
           "05-pool.jpg": "The pool",
           "06-dining.jpg": "The dining room"
         }
-      }
+      },
+      "timezone": "America/Vancouver"
     },
     {
       "slug": "",
@@ -221,7 +221,6 @@
       "startTime": "08:30",
       "endTime": "17:00",
       "timezoneLabel": "ET",
-      "utcOffset": "-05:00",
       "cost": "Free",
       "registerUrl": "",
       "registerLabel": "Register — free",
@@ -237,7 +236,8 @@
         "notes": "",
         "website": ""
       },
-      "hotel": null
+      "hotel": null,
+      "timezone": "America/Toronto"
     },
     {
       "slug": "",
@@ -250,7 +250,6 @@
       "startTime": "08:30",
       "endTime": "17:00",
       "timezoneLabel": "AT",
-      "utcOffset": "-04:00",
       "cost": "Free",
       "registerUrl": "",
       "registerLabel": "Register — free",
@@ -266,7 +265,8 @@
         "notes": "",
         "website": ""
       },
-      "hotel": null
+      "hotel": null,
+      "timezone": "America/Halifax"
     }
   ]
 }

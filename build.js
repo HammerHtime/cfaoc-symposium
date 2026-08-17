@@ -78,8 +78,27 @@ const eventTitle = (ev) => `${SITE.name} — ${ev.city || ev.regionLabel}`;
 const eventPath = (ev) => (isLive(ev) ? `/${ev.slug}/` : '/');
 const eventUrl = (ev) => `${BASE}${eventPath(ev)}`;
 
-const startISO = (ev) => (ev.date ? `${ev.date}T${ev.startTime || '08:00'}:00${ev.utcOffset || '-05:00'}` : '');
-const endISO = (ev) => (ev.date ? `${ev.date}T${ev.endTime || '16:30'}:00${ev.utcOffset || '-05:00'}` : '');
+/* A hardcoded utcOffset silently goes an hour wrong the moment an event lands on
+   daylight time, and it feeds the calendar file, the structured data and the
+   countdown alike. Derive it from the event's IANA zone and its own local wall
+   time instead; utcOffset stays supported as an explicit override. */
+function offsetFor(dateISO, timeHM, tz) {
+  const read = (d) =>
+    new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'longOffset' })
+      .formatToParts(d)
+      .find((x) => x.type === 'timeZoneName')
+      .value.replace('GMT', '') || '+00:00';
+  // Two passes: the first resolves the zone at the wrong instant near a DST
+  // boundary, the second re-resolves using that answer and settles.
+  const guess = read(new Date(`${dateISO}T${timeHM}:00Z`));
+  return read(new Date(`${dateISO}T${timeHM}:00${guess}`));
+}
+
+const offsetOf = (ev) =>
+  ev.utcOffset || (ev.timezone ? offsetFor(ev.date, ev.startTime || '08:00', ev.timezone) : '-05:00');
+
+const startISO = (ev) => (ev.date ? `${ev.date}T${ev.startTime || '08:00'}:00${offsetOf(ev)}` : '');
+const endISO = (ev) => (ev.date ? `${ev.date}T${ev.endTime || '16:30'}:00${offsetOf(ev)}` : '');
 
 const venueLine = (v) =>
   [v.street, v.city, [v.region, v.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ');
@@ -327,9 +346,14 @@ ${imgMeta}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/styles.css">
-${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
+${jsonld ? `<script type="application/ld+json">${
+  /* JSON.stringify escapes quotes but not angle brackets: a stray "</script>"
+     or "<!--<script" pasted into any content field would otherwise terminate
+     this element and swallow the rest of the page. \u003c is valid JSON. */
+  JSON.stringify(jsonld).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026')
+}</script>` : ''}
 ${SITE.googleAnalyticsId ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${attr(SITE.googleAnalyticsId)}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${attr(SITE.googleAnalyticsId)}');</script>` : ''}
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(SITE.googleAnalyticsId).replace(/</g, '\\u003c')});</script>` : ''}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>`;
@@ -414,7 +438,7 @@ function heroLead(sub) {
   const lockup = titleLockup(sub);
   if (!HERO_ART) return lockup;
   const size = HERO_ART_SIZE || { w: 1452, h: 830 };
-  return `<div class="hero__lead" style="--hero-art:url('${attr(HERO_ART)}')">
+  return `<div class="hero__lead">
     <img class="hero__art" src="${attr(HERO_ART)}" alt="" width="${size.w}" height="${size.h}"
       fetchpriority="high" decoding="async">
     ${lockup}
@@ -453,10 +477,14 @@ function aboutSection() {
 </section>`;
 }
 
+/* Themes and Who-should-attend are lists, not prose: they run on the wide
+   variant of the chapter grid so twelve and fourteen items fit in three
+   columns instead of two, which is most of what made these two the tallest
+   sections on the page. */
 function themesSection() {
-  return `<section class="section section--alt" id="themes">
+  return `<section class="section section--alt section--tight" id="themes">
   <div class="wrap">
-    <div class="cols">
+    <div class="cols cols--wide">
       <div class="cols__side">
         <p class="kicker">${num()} — Content</p>
         <h2 class="h2">${esc(C.themesHeading)}</h2>
@@ -467,8 +495,7 @@ function themesSection() {
           ${C.themes
             .map(
               (t, i) => `<li class="theme" data-reveal>
-            <span class="theme__num">${String(i + 1).padStart(2, '0')}</span>
-            <h3 class="theme__title">${esc(t.title)}</h3>
+            <h3 class="theme__title"><span class="theme__num">${String(i + 1).padStart(2, '0')}</span>${esc(t.title)}</h3>
             <p class="theme__body">${esc(t.body)}</p>
           </li>`
             )
@@ -481,16 +508,16 @@ function themesSection() {
 }
 
 function audienceSection() {
-  return `<section class="section" id="who">
+  return `<section class="section section--tight" id="who">
   <div class="wrap">
-    <div class="cols">
+    <div class="cols cols--wide">
       <div class="cols__side">
         <p class="kicker">${num()} — Delegates</p>
         <h2 class="h2">${esc(C.audienceHeading)}</h2>
         <p class="muted">${esc(C.audienceIntro)}</p>
       </div>
       <div class="cols__main">
-        <ul class="ticks">
+        <ul class="ticks ticks--3">
           ${C.audience.map((a) => `<li>${esc(a)}</li>`).join('\n          ')}
         </ul>
       </div>
@@ -499,19 +526,25 @@ function audienceSection() {
 </section>`;
 }
 
-function agendaSection() {
-  return `<section class="section section--alt" id="programme">
-  <div class="wrap">
-    <div class="cols">
-      <div class="cols__side">
-        <p class="kicker">${num()} — The day</p>
-        <h2 class="h2">${esc(C.agendaHeading)}</h2>
-        <p class="muted">${esc(C.agendaNote)}</p>
-      </div>
-      <div class="cols__main">
-        ${
-          C.agenda && C.agenda.length
-            ? `<ol class="agenda">
+/**
+ * Programme and speakers, in one chapter.
+ *
+ * They used to be two adjacent sections, and while nothing is confirmed both
+ * of them said "to be announced" — two full screens of the same non-news, with
+ * two headings, two side columns and two lots of section padding. The same
+ * copy now runs as one section: the sessions panel, then the presenters note
+ * under it. Once real sessions land in events.json the agenda list replaces
+ * the panel and the shape still holds.
+ *
+ * #speakers stays addressable as the sub-block's own id so any existing deep
+ * link keeps landing on the right words.
+ */
+function programmeSection() {
+  const hasAgenda = C.agenda && C.agenda.length;
+  const speakers = (C.speakersBody || []).filter(Boolean);
+
+  const agendaBody = hasAgenda
+    ? `<ol class="agenda">
           ${C.agenda
             .map(
               (s) => `<li class="agenda__row">
@@ -524,41 +557,39 @@ function agendaSection() {
             )
             .join('\n          ')}
         </ol>`
-            /* No sessions confirmed yet: say so plainly rather than show a
-               table of placeholder rows that reads as a real schedule. */
-            : `<div class="tbd">
+    /* No sessions confirmed yet: say so plainly rather than show a table of
+       placeholder rows that reads as a real schedule. */
+    : `<div class="tbd">
           <p class="tbd__mark">TBD</p>
           <div class="tbd__body">
             <h3 class="tbd__title">${esc(C.agendaEmptyTitle || 'Programme to be announced')}</h3>
             ${(C.agendaEmptyBody || []).map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
           </div>
-        </div>`
-        }
-      </div>
-    </div>
-  </div>
-</section>`;
-}
+        </div>`;
 
-function speakersSection() {
-  return `<section class="section" id="speakers">
+  const speakerBlock = speakers.length
+    ? `<div class="subsec" id="speakers">
+          <h3 class="subsec__h">${esc(C.speakersHeading || 'Speakers')}</h3>
+          <div class="subsec__body">
+            ${speakers.map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
+            ${C.speakersContact
+              ? `<p class="muted">${esc(C.speakersContact)} <a href="mailto:${attr(SITE.contactEmail)}">${esc(SITE.contactEmail)}</a></p>`
+              : ''}
+          </div>
+        </div>`
+    : '';
+
+  return `<section class="section section--alt section--tight" id="programme">
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
-        <p class="kicker">${num()} — Presenters</p>
-        <h2 class="h2">${esc(C.speakersHeading || 'Speakers')}</h2>
+        <p class="kicker">${num()} — The day</p>
+        <h2 class="h2">${esc(C.agendaHeading)}</h2>
+        <p class="muted">${esc(C.agendaNote)}</p>
       </div>
       <div class="cols__main">
-        <div class="panel">
-          ${(C.speakersBody || []).map((t, i) =>
-            i === 0
-              ? `<p class="lead" style="margin-top:0">${esc(t)}</p>`
-              : `<p>${esc(t)}</p>`
-          ).join('\n          ')}
-          ${C.speakersContact
-            ? `<p class="muted">${esc(C.speakersContact)} <a href="mailto:${attr(SITE.contactEmail)}">${esc(SITE.contactEmail)}</a></p>`
-            : ''}
-        </div>
+        ${agendaBody}
+        ${speakerBlock}
       </div>
     </div>
   </div>
@@ -607,7 +638,7 @@ function hotelSection(ev) {
             .map(
               (p, i) => `<button class="gallery__item${i === 0 ? ' gallery__item--lead' : ''}" type="button"
             data-lightbox data-src="${attr(p.src)}" data-caption="${attr(caps[p.file] || h.name)}">
-            <img src="${attr(p.src)}" alt="${attr(caps[p.file] || h.name)}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
+            <img src="${attr(p.src)}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
             ${caps[p.file] ? `<span class="gallery__cap">${esc(caps[p.file])}</span>` : ''}
           </button>`
             )
@@ -616,7 +647,7 @@ function hotelSection(ev) {
         </figure>`
     : '';
 
-  return `<section class="section section--alt" id="hotel">
+  return `<section class="section section--alt section--tight" id="hotel">
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
@@ -653,20 +684,29 @@ function hotelSection(ev) {
 </section>`;
 }
 
-/* Netlify picks this form up at deploy time from the rendered HTML: the
-   data-netlify attribute enables capture, the hidden form-name field makes the
-   POST match, and bot-field is a honeypot the real form hides. Submissions
-   land in the Netlify dashboard — no backend, no third party. */
-function hostSection() {
-  return `<section class="section section--alt" id="host">
-  <div class="wrap">
-    <div class="cols">
-      <div class="cols__side">
-        <p class="kicker">${num()} — Future cities</p>
-        <h2 class="h2">${esc(C.hostHeading)}</h2>
-        <p class="muted">${esc(C.hostIntro)}</p>
-      </div>
-      <div class="cols__main">
+/**
+ * "Bring the Forum to your city" — the secondary ask.
+ *
+ * It used to be a chapter of its own: its own heading, its own side column,
+ * its own section padding and a five-field stack that ran a full screen tall,
+ * placed directly after the city cards where it competed with Register. It is
+ * now a closed disclosure at the foot of the Cities section — which is exactly
+ * where a reader thinks "my city isn't on that list". Shut it costs one row;
+ * open it is a four-up grid with a three-line textarea.
+ *
+ * Netlify picks the form up at deploy time from the rendered HTML, collapsed
+ * or not: the data-netlify attribute enables capture, the hidden form-name
+ * field makes the POST match, and bot-field is a honeypot the real form hides.
+ * Those attributes, the field names and action="/thanks/" are the contract —
+ * do not change them. Submissions land in the Netlify dashboard.
+ */
+function hostDisclosure() {
+  return `<details class="hostask" id="host">
+      <summary class="hostask__sum">
+        <h3 class="hostask__h">${esc(C.hostHeading)}<span class="hostask__cue">Send a request</span></h3>
+      </summary>
+      <div class="hostask__body">
+        <p class="hostask__intro">${esc(C.hostIntro)}</p>
         <form class="form" name="host-request" method="POST" action="/thanks/"
               data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="host-request">
@@ -674,40 +714,36 @@ function hostSection() {
             <label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
           </p>
 
-          <div class="form__row">
+          <div class="form__grid">
             <div class="field">
               <label for="f-name">Your name</label>
-              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <input id="f-name" name="name" type="text" maxlength="120" autocomplete="name" required>
             </div>
             <div class="field">
               <label for="f-email">Email</label>
-              <input id="f-email" name="email" type="email" autocomplete="email" required>
+              <input id="f-email" name="email" type="email" maxlength="200" autocomplete="email" required>
             </div>
-          </div>
-
-          <div class="form__row">
             <div class="field">
               <label for="f-agency">Agency or organization</label>
-              <input id="f-agency" name="agency" type="text" autocomplete="organization" required>
+              <input id="f-agency" name="agency" type="text" maxlength="120" autocomplete="organization" required>
             </div>
             <div class="field">
               <label for="f-city">City and province</label>
-              <input id="f-city" name="city" type="text" required>
+              <input id="f-city" name="city" type="text" maxlength="120" required>
+            </div>
+            <div class="field field--wide">
+              <label for="f-why">Why should the Forum come to your city?</label>
+              <textarea id="f-why" name="why" rows="3" maxlength="2000" required></textarea>
             </div>
           </div>
 
-          <div class="field">
-            <label for="f-why">Why should the Forum come to your city?</label>
-            <textarea id="f-why" name="why" rows="5" required></textarea>
+          <div class="form__foot">
+            <button class="btn btn--primary btn--sm" type="submit">${esc(C.hostButton)}</button>
+            <p class="form__note">${esc(C.hostNote)}</p>
           </div>
-
-          <p class="form__note">${esc(C.hostNote)}</p>
-          <button class="btn btn--primary" type="submit">${esc(C.hostButton)}</button>
         </form>
       </div>
-    </div>
-  </div>
-</section>`;
+    </details>`;
 }
 
 function citiesSection(current) {
@@ -742,12 +778,13 @@ function citiesSection(current) {
     <div class="cities">
     ${cards}
     </div>
+    ${hostDisclosure()}
   </div>
 </section>`;
 }
 
 function faqSection() {
-  return `<section class="section" id="faq">
+  return `<section class="section section--tight" id="faq">
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
@@ -837,10 +874,11 @@ function footer() {
 function hubPage() {
   resetSections();
   const featured = EVENTS.find((e) => isLive(e)) || EVENTS[0];
+  /* "Host it" came out: the request form now lives inside #cities, which is
+     where the question arises, and one fewer nav item is one fewer decision. */
   const nav = [
     { href: '#about', label: 'About' },
     { href: '#cities', label: 'Cities' },
-    { href: '#host', label: 'Host it' },
     { href: '#themes', label: 'Topics' },
     { href: '#programme', label: 'Programme' },
     { href: '#venue', label: 'Venue' },
@@ -885,11 +923,9 @@ function hubPage() {
 ${factsBand(featured)}
 ${aboutSection()}
 ${citiesSection(null)}
-${hostSection()}
 ${themesSection()}
 ${audienceSection()}
-${agendaSection()}
-${speakersSection()}
+${programmeSection()}
 ${isLive(featured) ? venueSection(featured) : ''}
 ${isLive(featured) ? hotelSection(featured) : ''}
 ${faqSection()}
@@ -903,7 +939,7 @@ function eventPage(ev) {
   resetSections();
   const nav = [
     { href: '/', label: 'Series' },
-    { href: '#about', label: 'About' },
+    { href: '#intro', label: 'About' },
     { href: '#themes', label: 'Topics' },
     { href: '#programme', label: 'Programme' },
     { href: '#venue', label: 'Venue' },
@@ -958,13 +994,11 @@ ${factsBand(ev)}
 </section>
 ${themesSection()}
 ${audienceSection()}
-${agendaSection()}
-${speakersSection()}
+${programmeSection()}
 ${venueSection(ev)}
 ${hotelSection(ev)}
 ${faqSection()}
 ${citiesSection(ev)}
-${hostSection()}
 ${ctaSection(ev)}
 </main>` +
     footer()
@@ -1027,9 +1061,22 @@ function eventJsonLd(ev) {
 /* -------------------------------------------------------------- ICS files */
 
 const icsStamp = (iso) => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+const BUILD_STAMP = icsStamp(new Date().toISOString());
+
+/* RFC 5545 3.3.11: backslash, semicolon and comma must be escaped in a TEXT
+   value and newlines written as \n. Unescaped commas make strict parsers
+   truncate the value, so a delegate loses the street address. */
+const icsText = (v) =>
+  String(v == null ? '' : v)
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r\n|[\r\n]/g, '\\n');
 
 function icsFor(ev) {
-  const fold = (line) => line.match(/.{1,73}/g).join('\r\n ');
+  // replace() rather than match(): match() returns null for an empty string and
+  // "." skips newlines, which silently deleted them from the output.
+  const fold = (line) => line.replace(/(.{73})/g, '$1\r\n ');
   const body = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -1038,12 +1085,12 @@ function icsFor(ev) {
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
     `UID:cfaoc-${ev.slug}-${ev.date}@ongia.ca`,
-    `DTSTAMP:${icsStamp(startISO(ev))}`,
+    `DTSTAMP:${BUILD_STAMP}`,
     `DTSTART:${icsStamp(startISO(ev))}`,
     `DTEND:${icsStamp(endISO(ev))}`,
-    fold(`SUMMARY:${eventTitle(ev)}`),
-    fold(`DESCRIPTION:${SITE.tagline}. Free to attend. Details: ${eventUrl(ev)}`),
-    fold(`LOCATION:${[ev.venue.name, venueLine(ev.venue)].filter(Boolean).join(', ')}`),
+    fold(`SUMMARY:${icsText(eventTitle(ev))}`),
+    fold(`DESCRIPTION:${icsText(`${SITE.tagline}. Free to attend. Details: ${eventUrl(ev)}`)}`),
+    fold(`LOCATION:${icsText([ev.venue.name, venueLine(ev.venue)].filter(Boolean).join(', '))}`),
     `URL:${eventUrl(ev)}`,
     'END:VEVENT',
     'END:VCALENDAR',
@@ -1136,9 +1183,26 @@ function build() {
   fs.mkdirSync(OUT, { recursive: true });
   copyDir(SRC_STATIC, OUT);
 
+  if (HERO_ART) {
+    const css = path.join(OUT, 'styles.css');
+    fs.appendFileSync(
+      css,
+      `\n/* generated at build time from the detected hero artwork */\n` +
+        `.hero__lead { --hero-art: url("${HERO_ART}"); }\n`
+    );
+  }
+
   write('index.html', hubPage());
 
   const live = EVENTS.filter(isLive);
+
+  /* Copying an event block and forgetting to change the slug is the documented
+     way to add a city, and it silently overwrote the previous city's page. */
+  const slugs = live.map((e) => e.slug);
+  const dupes = [...new Set(slugs.filter((x, i) => slugs.indexOf(x) !== i))];
+  if (dupes.length) throw new Error(`Duplicate event slug(s): ${dupes.join(', ')}`);
+  const bad = slugs.filter((x) => !/^[a-z0-9-]+$/.test(x));
+  if (bad.length) throw new Error(`Slugs must be lowercase letters, digits and hyphens: ${bad.join(', ')}`);
   for (const ev of live) {
     write(`${ev.slug}/index.html`, eventPage(ev));
     if (ev.date) write(`${ev.slug}/${ev.slug}.ics`, icsFor(ev));
@@ -1152,7 +1216,7 @@ function build() {
     'sitemap.xml',
     `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${BASE}${u}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
+${urls.map((u) => `  <url><loc>${esc(BASE + u)}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
 </urlset>
 `
   );
