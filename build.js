@@ -342,9 +342,8 @@ ${imgMeta}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1b070a">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preload" href="/assets/fonts/oswald-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 ${jsonld ? `<script type="application/ld+json">${
   /* JSON.stringify escapes quotes but not angle brackets: a stray "</script>"

@@ -25,11 +25,11 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    # The site loads only its own CSS/JS/images plus Google Fonts. No inline
-    # scripts or styles are emitted, so both can be locked to 'self'.
+    # Fonts are self-hosted and no inline script or style is emitted, so the page
+    # loads nothing from any third party — the policy is 'self' throughout.
     # NOTE: turning on site.googleAnalyticsId emits an inline script and a
     # googletagmanager.com tag — both blocked until this policy is widened.
-    Content-Security-Policy = "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; upgrade-insecure-requests"
 
 # Asset filenames are stable (hero-artwork.png, hotel photos, og-default.png) and
 # the documented workflow is to replace them in place — so they must NOT be
