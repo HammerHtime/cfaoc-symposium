@@ -652,6 +652,63 @@ function hotelSection(ev) {
 </section>`;
 }
 
+/* Netlify picks this form up at deploy time from the rendered HTML: the
+   data-netlify attribute enables capture, the hidden form-name field makes the
+   POST match, and bot-field is a honeypot the real form hides. Submissions
+   land in the Netlify dashboard — no backend, no third party. */
+function hostSection() {
+  return `<section class="section section--alt" id="host">
+  <div class="wrap">
+    <div class="cols">
+      <div class="cols__side">
+        <p class="kicker">${num()} — Future cities</p>
+        <h2 class="h2">${esc(C.hostHeading)}</h2>
+        <p class="muted">${esc(C.hostIntro)}</p>
+      </div>
+      <div class="cols__main">
+        <form class="form" name="host-request" method="POST" action="/thanks/"
+              data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="host-request">
+          <p class="form__hp" hidden>
+            <label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="f-agency">Agency or organization</label>
+              <input id="f-agency" name="agency" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="f-city">City and province</label>
+              <input id="f-city" name="city" type="text" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-why">Why should the Forum come to your city?</label>
+            <textarea id="f-why" name="why" rows="5" required></textarea>
+          </div>
+
+          <p class="form__note">${esc(C.hostNote)}</p>
+          <button class="btn btn--primary" type="submit">${esc(C.hostButton)}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
 function citiesSection(current) {
   const cards = EVENTS.map((ev) => {
     const live = isLive(ev);
@@ -782,6 +839,7 @@ function hubPage() {
   const nav = [
     { href: '#about', label: 'About' },
     { href: '#cities', label: 'Cities' },
+    { href: '#host', label: 'Host it' },
     { href: '#themes', label: 'Topics' },
     { href: '#programme', label: 'Programme' },
     { href: '#venue', label: 'Venue' },
@@ -826,6 +884,7 @@ function hubPage() {
 ${factsBand(featured)}
 ${aboutSection()}
 ${citiesSection(null)}
+${hostSection()}
 ${themesSection()}
 ${audienceSection()}
 ${agendaSection()}
@@ -904,6 +963,7 @@ ${venueSection(ev)}
 ${hotelSection(ev)}
 ${faqSection()}
 ${citiesSection(ev)}
+${hostSection()}
 ${ctaSection(ev)}
 </main>` +
     footer()
@@ -1040,6 +1100,32 @@ function notFoundPage() {
   );
 }
 
+function thanksPage() {
+  return (
+    (resetSections(), head({
+      title: `${C.hostThanksTitle} — ${SITE.name}`,
+      description: C.hostThanksTitle,
+      canonical: `${BASE}/thanks/`,
+    })) +
+    navBar([{ href: '/', label: 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="/#cities">Register</a>`) +
+    `<main id="main">
+<section class="hero hero--mini">
+  <div class="hero__media">${fingerprint({ id: 'tx', rings: 34, seed: 77 })}</div>
+  <div class="wrap hero__inner">
+    <div class="lockup">
+      <p class="lockup__eyebrow">Thank you</p>
+      <h1 class="lockup__title"><span>Request</span><span>received</span></h1>
+      <hr class="lockup__rule">
+      ${(C.hostThanksBody || []).map((t) => `<p class="lockup__tagline">${esc(t)}</p>`).join('\n      ')}
+      <p class="hero__actions"><a class="btn btn--primary" href="/">Back to the Forum</a></p>
+    </div>
+  </div>
+</section>
+</main>` +
+    footer()
+  );
+}
+
 function build() {
   console.log(`\nBuilding ${SITE.name}`);
   console.log(HERO_ART ? `  hero artwork: ${HERO_ART}` : '  hero artwork: none found — using the vector whorl');
@@ -1057,6 +1143,7 @@ function build() {
   }
 
   write('404.html', notFoundPage());
+  write('thanks/index.html', thanksPage());
 
   const urls = ['/', ...live.map(eventPath)];
   write(

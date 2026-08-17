@@ -138,13 +138,22 @@
     "speakersHeading": "Speakers",
     "speakersBody": [
       "The speaker roster is being finalized.",
-      "Presenters are drawn from policing, border and transport partners, prosecution services and community organizations working the file directly. Names and sessions are posted here as they are confirmed."
+      "Presenters are drawn from policing, border and transport partners, prosecution services and community organizations working the file directly. Names and sessions are posted here as they are confirmed, and sent to registered delegates before the event."
     ],
-    "speakersContact": "Interested in supporting the Forum in one of the three cities? Write to us.",
+    "speakersContact": "",
     "agendaEmptyTitle": "Sessions to be confirmed",
     "agendaEmptyBody": [
       "Presenters and session topics for this Forum have not been set. Nothing is confirmed yet, so nothing is listed here.",
       "The day runs as a single track with breaks and lunch. The full running order goes up on this page once it is settled, and everyone who has registered gets it by email."
+    ],
+    "hostHeading": "Bring the Forum to your city",
+    "hostIntro": "The series runs in three cities, and we choose them based on where the need and the local support are. If your region should be on the list, tell us.",
+    "hostNote": "What you send reaches the ONGIA organizers and is used only to plan future events. We do not add you to a mailing list or pass your details to anyone else.",
+    "hostButton": "Send request",
+    "hostThanksTitle": "Request received",
+    "hostThanksBody": [
+      "Thank you — your request is with the ONGIA organizers.",
+      "We read every one. If we take the Forum to your region, we will be in touch about local support and a venue."
     ]
   },
   "events": [

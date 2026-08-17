@@ -1121,6 +1121,61 @@ summary:focus-visible,
 .lightbox__close:hover,
 .lightbox__nav:hover { background: rgba(255, 255, 255, 0.16); }
 
+/* ------------------------------------------------------------------ form */
+
+.form { max-width: 44rem; }
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem 1.25rem;
+}
+.field { margin-bottom: 1.15rem; }
+.field label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--red-label);
+  margin-bottom: 0.45rem;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0.8rem 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.field textarea { resize: vertical; min-height: 7.5rem; line-height: 1.55; }
+.field input:hover,
+.field textarea:hover { border-color: rgba(255, 255, 255, 0.32); }
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--red-label);
+  background: rgba(255, 255, 255, 0.07);
+}
+.field input:focus-visible,
+.field textarea:focus-visible { outline: 3px solid var(--red-label); outline-offset: 2px; }
+/* Only flag a field once the visitor has actually interacted with it.
+   :user-invalid is the right selector here — :invalid alone marks every
+   required field as wrong before anyone has typed a character. */
+.field input:user-invalid,
+.field textarea:user-invalid { border-color: #e5626a; }
+
+.form__note {
+  font-size: 0.87rem;
+  color: var(--text-2);
+  max-width: 54ch;
+  margin: 0.4rem 0 1.4rem;
+}
+.form__hp { position: absolute; left: -9999px; }
+
 /* ---------------------------------------------------------------- cities */
 
 /* The one light section on the site. It is introduced and closed by a fade to
