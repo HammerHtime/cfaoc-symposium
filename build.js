@@ -292,7 +292,7 @@ ${parts.map((p) => '    ' + p).join('\n')}
 
 /* ------------------------------------------------------------- components */
 
-function head({ title, description, canonical, jsonld, ogImage }) {
+function head({ title, description, canonical, jsonld, ogImage, noindex }) {
   const img = ogImage || (OG_IMAGE ? `${BASE}${OG_IMAGE}` : '');
   /* A square card is centre-cropped by the large-image players; declaring the
      real dimensions is what stops them guessing wrong. */
@@ -313,6 +313,7 @@ function head({ title, description, canonical, jsonld, ogImage }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${attr(description)}">
 <link rel="canonical" href="${attr(canonical)}">
+${noindex ? '<meta name="robots" content="noindex, follow">' : ''}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${attr(SITE.name)}">
 <meta property="og:title" content="${attr(title)}">
@@ -1106,6 +1107,7 @@ function thanksPage() {
       title: `${C.hostThanksTitle} — ${SITE.name}`,
       description: C.hostThanksTitle,
       canonical: `${BASE}/thanks/`,
+      noindex: true,
     })) +
     navBar([{ href: '/', label: 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="/#cities">Register</a>`) +
     `<main id="main">
