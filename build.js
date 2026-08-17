@@ -480,14 +480,19 @@ function aboutSection() {
    variant of the chapter grid so twelve and fourteen items fit in three
    columns instead of two, which is most of what made these two the tallest
    sections on the page. */
-function themesSection() {
+function regionPhrase(ev) {
+  if (!ev) return C.regionFallback || 'each host region';
+  return ev.regionPhrase || ev.regionLabel || C.regionFallback || 'each host region';
+}
+
+function themesSection(ev) {
   return `<section class="section section--alt section--tight" id="themes">
   <div class="wrap">
     <div class="cols cols--wide">
       <div class="cols__side">
         <p class="kicker">${num()} — Content</p>
         <h2 class="h2">${esc(C.themesHeading)}</h2>
-        <p class="muted">${esc(C.themesIntro)}</p>
+        <p class="muted">${esc(C.themesIntro.replace(/\{region\}/g, regionPhrase(ev)))}</p>
       </div>
       <div class="cols__main">
         <ul class="themes">
@@ -922,7 +927,7 @@ function hubPage() {
 ${factsBand(featured)}
 ${aboutSection()}
 ${citiesSection(null)}
-${themesSection()}
+${themesSection(null)}
 ${audienceSection()}
 ${programmeSection()}
 ${isLive(featured) ? venueSection(featured) : ''}
@@ -991,7 +996,7 @@ ${factsBand(ev)}
     </div>
   </div>
 </section>
-${themesSection()}
+${themesSection(ev)}
 ${audienceSection()}
 ${programmeSection()}
 ${venueSection(ev)}

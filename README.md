@@ -75,8 +75,8 @@ Each TBA city is already in `events.json` with `"status": "tba"`. Fill it in:
   "provinceName": "Nova Scotia",
   "regionLabel": "Atlantic Canada",
   "date": "2027-03-11",           ← YYYY-MM-DD
-  "utcOffset": "-04:00",          ← -08:00 Pacific, -07:00 Mountain,
-                                  ←  -06:00 Central, -05:00 Eastern, -04:00 Atlantic
+  "timezone": "America/Halifax",  ← IANA zone: America/Vancouver, /Edmonton,
+                                  ←  /Winnipeg, /Toronto, /Halifax, /St_Johns
   "timezoneLabel": "AT",
   "registerUrl": "https://…",     ← that city's own registration page
   "venue": { … },
@@ -88,9 +88,21 @@ Run `node build.js` and the city gets its own page, its own calendar file, a car
 on the hub, a sitemap entry and its own event listing for search engines. Nothing
 else needs touching.
 
-Watch `utcOffset`: it decides what time the calendar download lands in someone's
-calendar. November dates are on standard time; March-onward dates may be on
-daylight time (one hour less, e.g. `-03:00` Atlantic).
+`timezone` takes an IANA zone name, not an offset. The build works out the
+daylight-saving offset from the event's own date, so a May event and a November
+event in the same city both land correctly in delegates' calendars. Set the zone
+and forget it.
+
+### Regional wording
+
+The Topics intro contains a `{region}` placeholder. It is filled in per page:
+
+- on a city page, from that event's `regionPhrase` (falling back to `regionLabel`)
+- on the homepage, from `content.regionFallback` — currently "each host region",
+  because that section covers the whole series rather than one city
+
+So a new city only needs its own `regionPhrase` (e.g. `"the prairies"`) and the
+sentence reads correctly everywhere. Nothing else to edit.
 
 ### Hotel photos
 

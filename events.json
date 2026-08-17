@@ -22,7 +22,7 @@
       "The Forum runs in three cities. Each is a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria is confirmed. The Central Canada and Atlantic Canada events are being planned, and both are announced on this site once the city and date are set."
     ],
     "themesHeading": "What we'll cover",
-    "themesIntro": "Topics that will be covered could be any of the following, which have been presented at previous symposiums. Presentations for this event will be confirmed closer to the date and will include topics specific to the west coast of Canada.",
+    "themesIntro": "Topics that will be covered could be any of the following, which have been presented at previous symposiums. Presentations for this event will be confirmed closer to the date and will include topics specific to {region}.",
     "themes": [
       {
         "title": "Contraband tobacco and nicotine products",
@@ -154,7 +154,8 @@
     "hostThanksBody": [
       "Thank you — your request is with the ONGIA organizers.",
       "We read every one. If we take the Forum to your region, we will be in touch about local support and a venue."
-    ]
+    ],
+    "regionFallback": "each host region"
   },
   "events": [
     {
@@ -208,7 +209,8 @@
           "06-dining.jpg": "The dining room"
         }
       },
-      "timezone": "America/Vancouver"
+      "timezone": "America/Vancouver",
+      "regionPhrase": "the west coast of Canada"
     },
     {
       "slug": "",
@@ -237,7 +239,8 @@
         "website": ""
       },
       "hotel": null,
-      "timezone": "America/Toronto"
+      "timezone": "America/Toronto",
+      "regionPhrase": "central Canada"
     },
     {
       "slug": "",
@@ -266,7 +269,8 @@
         "website": ""
       },
       "hotel": null,
-      "timezone": "America/Halifax"
+      "timezone": "America/Halifax",
+      "regionPhrase": "Atlantic Canada"
     }
   ]
 }
