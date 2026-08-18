@@ -201,12 +201,10 @@
         ],
         "photoCredit": "Photos courtesy of Delta Hotels by Marriott Victoria Ocean Pointe Resort.",
         "captions": {
-          "01-exterior.jpg": "The hotel from the harbour side",
-          "02-room.jpg": "A guest room",
-          "03-harbour.jpg": "The harbour, seen from the property",
-          "04-lobby.jpg": "The lobby",
-          "05-pool.jpg": "The pool",
-          "06-dining.jpg": "The dining room"
+          "01-exterior.jpeg": "The resort at dusk, seen across the harbour",
+          "02-room.jpeg": "A guest room looking out over the water",
+          "03-harbour.jpeg": "Sunset over Victoria harbour",
+          "04-exterior-day.jpeg": "The resort on the harbour, with the floatplane terminal alongside"
         }
       },
       "timezone": "America/Vancouver",
