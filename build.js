@@ -480,6 +480,21 @@ function aboutSection() {
    variant of the chapter grid so twelve and fourteen items fit in three
    columns instead of two, which is most of what made these two the tallest
    sections on the page. */
+const NUM_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+const countWord = (n) => NUM_WORDS[n] || String(n);
+
+/* Fills {count} with the number of events in the series and {region} with the
+   relevant region, so neither can drift out of date in the copy. */
+const fill = (text, ev) => {
+  const n = countWord(EVENTS.length);
+  const Cap = n.charAt(0).toUpperCase() + n.slice(1);
+  return String(text == null ? '' : text)
+    // {Count} where the word opens a sentence, {count} mid-sentence.
+    .replace(/\{Count\}/g, Cap)
+    .replace(/\{count\}/g, n)
+    .replace(/\{region\}/g, regionPhrase(ev));
+};
+
 function regionPhrase(ev) {
   if (!ev) return C.regionFallback || 'each host region';
   return ev.regionPhrase || ev.regionLabel || C.regionFallback || 'each host region';
@@ -492,7 +507,7 @@ function themesSection(ev) {
       <div class="cols__side">
         <p class="kicker">${num()} — Content</p>
         <h2 class="h2">${esc(C.themesHeading)}</h2>
-        <p class="muted">${esc(C.themesIntro.replace(/\{region\}/g, regionPhrase(ev)))}</p>
+        <p class="muted">${esc(fill(C.themesIntro, ev))}</p>
       </div>
       <div class="cols__main">
         <ul class="themes">
@@ -710,7 +725,7 @@ function hostDisclosure() {
         <h3 class="hostask__h">${esc(C.hostHeading)}<span class="hostask__cue">Send a request</span></h3>
       </summary>
       <div class="hostask__body">
-        <p class="hostask__intro">${esc(C.hostIntro)}</p>
+        <p class="hostask__intro">${esc(fill(C.hostIntro, null))}</p>
         <form class="form" name="host-request" method="POST" action="/thanks/"
               data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="host-request">
@@ -761,7 +776,7 @@ function citiesSection(current) {
       ${
         dm
           ? `<p class="city__date"><span class="city__mon">${esc(dm.month)}</span> <span class="city__day">${esc(dm.day)}</span> <span class="city__yr">${esc(dm.year)}</span></p>`
-          : `<p class="city__date city__date--tba">Dates to be announced</p>`
+          : `<p class="city__date city__date--tba">${esc(ev.dateNote || 'Dates to be announced')}</p>`
       }
       <p class="city__blurb">${esc(ev.blurb)}</p>
       ${ev.venue && ev.venue.name ? `<p class="city__venue">${esc(ev.venue.name)}</p>` : ''}
@@ -776,8 +791,8 @@ function citiesSection(current) {
   <div class="wrap">
     <div class="section__head">
       <p class="kicker kicker--dark">Coast to coast</p>
-      <h2 class="h2">Three cities. One national problem.</h2>
-      <p class="muted muted--dark">The Forum runs as a series of free one-day events across the country. Each is registered separately.</p>
+      <h2 class="h2">${esc(fill(C.citiesHeading, null))}</h2>
+      <p class="muted muted--dark">${esc(fill(C.citiesIntro, null))}</p>
     </div>
     <div class="cities">
     ${cards}
@@ -900,7 +915,7 @@ function hubPage() {
   return (
     head({
       title: `${SITE.name} — ${SITE.tagline}`,
-      description: SITE.description,
+      description: fill(SITE.description, null),
       canonical: `${BASE}/`,
       jsonld,
     }) +
@@ -909,7 +924,7 @@ function hubPage() {
 <section class="hero${HERO_ART ? ' hero--art' : ''}">
   ${heroMedia()}
   <div class="wrap hero__inner">
-    ${heroLead(`<p class="lockup__meta">A free one-day symposium series · Three cities · ${dm ? esc(dm.year) : '2026'}</p>`)}
+    ${heroLead(`<p class="lockup__meta">A free one-day symposium · Three Forums a year · Coast to coast</p>`)}
     <div class="hero__next">
       <p class="hero__nextlabel">Next event</p>
       <p class="hero__nextcity">${esc(featured.city || featured.regionLabel)}${featured.province ? `, ${esc(featured.province)}` : ''}</p>
@@ -1130,7 +1145,7 @@ function notFoundPage() {
   return (
     (resetSections(), head({
       title: `Page not found — ${SITE.name}`,
-      description: SITE.description,
+      description: fill(SITE.description, null),
       canonical: `${BASE}/404`,
     })) +
     navBar([{ href: '/', label: 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="/#cities">Register</a>`) +

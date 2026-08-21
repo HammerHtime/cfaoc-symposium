@@ -6,7 +6,7 @@
     "seriesLabel": "National Symposium",
     "tagline": "Securing the Gateways and Borders Coast-to-Coast",
     "baseUrl": "https://cfaoc-symposium.ca",
-    "description": "A free one-day symposium on organized crime at Canada's ports, airports and land borders, for police, border and transport partners, prosecutors, corrections, analysts and community partners. Three cities, coast to coast.",
+    "description": "A free one-day symposium on organized crime at Canada's ports, airports and land borders, for police, border and transport partners, prosecutors, corrections, analysts and community partners. Three Forums a year, across the country.",
     "organizerName": "ONGIA — Ontario Gang Investigators Association",
     "organizerUrl": "https://www.ongia.org",
     "contactEmail": "president@ongia.ca",
@@ -19,7 +19,7 @@
     "aboutBody": [
       "The Canadian Forum Against Organized Crime is a one-day national symposium. It puts the people who work those gateways in the same room: police, border services and transport partners, port and airport authorities, prosecutors, corrections and probation staff, intelligence analysts, and the community organizations that see the downstream harm first.",
       "The programme is built around current, practical material: how criminal networks exploit Canadian entry points, and what enforcement and disruption look like now. Information sharing runs through the whole day, including where it breaks down between agencies and jurisdictions and what has worked to fix that. Sessions are pitched at people who will take the material back to their own caseloads.",
-      "The Forum runs in three cities. Each is a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria is confirmed. The Central Canada and Atlantic Canada events are being planned, and both are announced on this site once the city and date are set."
+      "The Forum runs three times a year in different regions, each a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria closes the 2026 series. Three more Forums follow in 2027, and each is announced on this site once the city and date are set."
     ],
     "themesHeading": "What we'll cover",
     "themesIntro": "Topics that will be covered could be any of the following, which have been presented at previous symposiums. Presentations for this event will be confirmed closer to the date and will include topics specific to {region}.",
@@ -147,7 +147,7 @@
       "The day runs as a single track with breaks and lunch. The full running order goes up on this page once it is settled, and everyone who has registered gets it by email."
     ],
     "hostHeading": "Bring the Forum to your city",
-    "hostIntro": "The series runs in three cities, and we choose them based on where the need and the local support are. If your region should be on the list, tell us.",
+    "hostIntro": "The Forum runs three times a year, and we choose the regions based on where the need and the local support are. If your region should be on the list, tell us.",
     "hostNote": "What you send goes to the ONGIA organizers and is added to our contact database so we can follow up with you about the Forum and future events. We will not sell your details. Submissions are handled by our website host, Netlify, on servers in the United States, and your IP address is recorded with them.",
     "hostButton": "Send request",
     "hostThanksTitle": "Request received",
@@ -155,7 +155,9 @@
       "Thank you — your request is with the ONGIA organizers.",
       "We read every one. If we take the Forum to your region, we will be in touch about local support and a venue."
     ],
-    "regionFallback": "each host region"
+    "regionFallback": "each host region",
+    "citiesHeading": "Three Forums a year. One national problem.",
+    "citiesIntro": "The Forum runs three times a year in different regions of the country. Each is a standalone one-day event, and each is registered separately."
   },
   "events": [
     {
@@ -216,6 +218,37 @@
       "city": "",
       "province": "",
       "provinceName": "",
+      "regionLabel": "West Coast",
+      "regionPhrase": "the west coast of Canada",
+      "date": "",
+      "dateNote": "Fall 2027",
+      "startTime": "08:30",
+      "endTime": "17:00",
+      "timezone": "America/Vancouver",
+      "timezoneLabel": "PT",
+      "cost": "Free",
+      "registerUrl": "",
+      "registerLabel": "Register — free",
+      "registerNote": "",
+      "blurb": "Planned focus: a second West Coast Forum, returning to the Pacific gateway with the ports, marine corridor and cross-border routes that feed it.",
+      "venue": {
+        "name": "",
+        "street": "",
+        "city": "",
+        "region": "",
+        "postalCode": "",
+        "country": "Canada",
+        "notes": "",
+        "website": ""
+      },
+      "hotel": null
+    },
+    {
+      "slug": "",
+      "status": "tba",
+      "city": "",
+      "province": "",
+      "provinceName": "",
       "regionLabel": "Central Canada",
       "date": "",
       "startTime": "08:30",
@@ -238,7 +271,8 @@
       },
       "hotel": null,
       "timezone": "America/Toronto",
-      "regionPhrase": "central Canada"
+      "regionPhrase": "central Canada",
+      "dateNote": "2027"
     },
     {
       "slug": "",
@@ -268,7 +302,8 @@
       },
       "hotel": null,
       "timezone": "America/Halifax",
-      "regionPhrase": "Atlantic Canada"
+      "regionPhrase": "Atlantic Canada",
+      "dateNote": "2027"
     }
   ]
 }
