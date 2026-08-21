@@ -18,7 +18,14 @@ const OUT = path.join(ROOT, 'dist');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'events.json'), 'utf8'));
 const SITE = data.site;
 const C = data.content;
-const EVENTS = data.events;
+/* Cards, the footer roster, the featured event and the structured data all read
+   from this list, so it is sorted chronologically once here rather than relying
+   on whatever order the file happens to be in. An event with no firm date sorts
+   by its sortDate (a YYYY-MM hint); anything with neither goes last. */
+const EVENTS = [...data.events].sort((a, b) => {
+  const key = (e) => e.date || (e.sortDate ? `${e.sortDate}-99` : '9999-99-99');
+  return key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0;
+});
 
 const BASE = SITE.baseUrl.replace(/\/+$/, '');
 

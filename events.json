@@ -245,7 +245,8 @@
         "notes": "",
         "website": ""
       },
-      "hotel": null
+      "hotel": null,
+      "sortDate": "2027-10"
     },
     {
       "slug": "",
@@ -276,7 +277,8 @@
       "hotel": null,
       "timezone": "America/Toronto",
       "regionPhrase": "central Canada",
-      "dateNote": "Spring 2027"
+      "dateNote": "Spring 2027",
+      "sortDate": "2027-04"
     },
     {
       "slug": "",
@@ -307,7 +309,8 @@
       "hotel": null,
       "timezone": "America/Halifax",
       "regionPhrase": "Atlantic Canada",
-      "dateNote": "Spring 2027"
+      "dateNote": "Spring 2027",
+      "sortDate": "2027-04"
     }
   ]
 }

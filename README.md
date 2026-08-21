@@ -93,6 +93,14 @@ daylight-saving offset from the event's own date, so a May event and a November
 event in the same city both land correctly in delegates' calendars. Set the zone
 and forget it.
 
+### Ordering
+
+Events are sorted chronologically at build time, so the order they sit in
+`events.json` does not matter. An event with a real `date` sorts on that; one
+still to be scheduled sorts on `sortDate`, a `YYYY-MM` hint (e.g. `"2027-04"`
+for a spring Forum). Anything with neither goes last. Set `sortDate` alongside
+`dateNote` and the card lands in the right place on its own.
+
 ### Regional wording
 
 The Topics intro contains a `{region}` placeholder. It is filled in per page:
