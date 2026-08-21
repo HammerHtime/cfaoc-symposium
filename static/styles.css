@@ -653,7 +653,16 @@ summary:focus-visible,
   background: var(--red);
   transform: rotate(45deg);
 }
-.hero__nextdate { font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+.hero__nextdate { font-weight: 600; color: var(--text); margin-bottom: 0.1rem; }
+/* Sits under the date as a continuation of it, so it takes the same indent but
+   no marker of its own — the diamond belongs to the date/venue rows. */
+.hero__nexttime {
+  margin: 0 0 0.4rem;
+  padding-left: 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
 .hero__nextvenue { color: var(--text-2); }
 .hero__actions {
   display: flex;

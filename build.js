@@ -1000,7 +1000,8 @@ function eventPage(ev) {
     <div class="hero__next">
       <p class="hero__nextlabel">${esc(ev.regionLabel)} edition</p>
       <p class="hero__nextcity">${esc(ev.city)}, ${esc(ev.province)}</p>
-      <p class="hero__nextdate">${esc(fmtLong(ev.date))} · ${esc(fmtTime(ev.startTime))} – ${esc(fmtTime(ev.endTime))} ${esc(ev.timezoneLabel || '')}</p>
+      <p class="hero__nextdate">${esc(fmtLong(ev.date))}</p>
+      <p class="hero__nexttime">${esc(fmtTime(ev.startTime))} – ${esc(fmtTime(ev.endTime))} ${esc(ev.timezoneLabel || '')}</p>
       <p class="hero__nextvenue">${esc(ev.venue.name)}</p>
       <div class="hero__actions">
         ${registerButton(ev)}
