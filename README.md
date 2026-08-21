@@ -93,6 +93,29 @@ daylight-saving offset from the event's own date, so a May event and a November
 event in the same city both land correctly in delegates' calendars. Set the zone
 and forget it.
 
+### Link preview images
+
+Each city has its own 1200x630 preview — the image people see when the link is
+shared in Teams, WhatsApp, LinkedIn or email. They live in
+`static/assets/og/` and are generated, not hand-made:
+
+```bash
+node build.js              # the generator reads the whorl from the built output
+node build.js --serve &    # it screenshots through the local server
+node scripts/make-og.js
+```
+
+Then commit the PNGs. It needs Chrome or Chromium (set `CHROME=/path/to/chrome`
+if it is not found automatically). Re-run it whenever you add a city, change a
+date or add a skyline photo.
+
+Deliberately not part of `node build.js`: it needs a real browser, and making
+every deploy depend on one is a good way to break deploys.
+
+To ghost a city's skyline into its card, add a `skylineImage` to that event
+pointing at an image in `static/assets/`, as Victoria does. Without one the card
+falls back to the plain maroon version, which still looks finished.
+
 ### Ordering
 
 Events are sorted chronologically at build time, so the order they sit in

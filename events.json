@@ -157,7 +157,18 @@
     ],
     "regionFallback": "each host region",
     "citiesHeading": "Three Forums a year. One national problem.",
-    "citiesIntro": "The Forum runs three times a year in different regions of the country. Each is a standalone one-day event, and each is registered separately."
+    "citiesIntro": "The Forum runs three times a year in different regions of the country. Each is a standalone one-day event, and each is registered separately.",
+    "notifyCta": "Get notified",
+    "notifyHeading": "Tell me when this is announced",
+    "notifyBody": "Leave your email and we will let you know as soon as the city and date are set.",
+    "notifyButton": "Notify me",
+    "notifyBack": "Back",
+    "notifyNote": "We will only use this to tell you about this Forum.",
+    "notifyThanksTitle": "You are on the list",
+    "notifyThanksBody": [
+      "Thanks — we will email you as soon as this Forum has a city and a date.",
+      "In the meantime, the Victoria Forum on 24 November 2026 is open for registration."
+    ]
   },
   "events": [
     {
@@ -210,7 +221,8 @@
         }
       },
       "timezone": "America/Vancouver",
-      "regionPhrase": "the west coast of Canada"
+      "regionPhrase": "the west coast of Canada",
+      "skylineImage": "/assets/hotel/victoria/03-harbour.jpeg"
     },
     {
       "slug": "",

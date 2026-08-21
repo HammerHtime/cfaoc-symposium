@@ -142,6 +142,14 @@ function heroArtwork() {
 }
 const HERO_ART = heroArtwork();
 
+const slugify = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const ogName = (ev) => ev.slug || slugify(ev.regionLabel) + (ev.sortDate ? '-' + ev.sortDate.slice(0, 4) : '');
+function ogFor(ev) {
+  if (!ev) return null;
+  const rel = `/assets/og/${ogName(ev)}.png`;
+  return fs.existsSync(path.join(SRC_STATIC, rel)) ? `${BASE}${rel}` : null;
+}
+
 /**
  * Intrinsic pixel size of a static asset. Used to reserve layout space for the
  * hero artwork and to declare the social card's dimensions — both of which
@@ -980,6 +988,7 @@ function eventPage(ev) {
       title: `${ev.city}, ${ev.province} · ${fmtShort(ev.date)} — ${SITE.name}`,
       description: desc,
       canonical: eventUrl(ev),
+      ogImage: ogFor(ev),
       jsonld: eventJsonLd(ev),
     }) +
     navBar(nav, registerButton(ev, { size: 'sm' }).replace('btn--primary', 'btn--primary nav__cta')) +
