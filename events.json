@@ -272,7 +272,7 @@
       "hotel": null,
       "timezone": "America/Toronto",
       "regionPhrase": "central Canada",
-      "dateNote": "2027"
+      "dateNote": "Spring 2027"
     },
     {
       "slug": "",
@@ -303,7 +303,7 @@
       "hotel": null,
       "timezone": "America/Halifax",
       "regionPhrase": "Atlantic Canada",
-      "dateNote": "2027"
+      "dateNote": "Spring 2027"
     }
   ]
 }
