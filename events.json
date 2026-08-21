@@ -9,7 +9,7 @@
     "description": "A free one-day symposium on organized crime at Canada's ports, airports and land borders, for police, border and transport partners, prosecutors, corrections, analysts and community partners. Three Forums a year, across the country.",
     "organizerName": "ONGIA — Ontario Gang Investigators Association",
     "organizerUrl": "https://www.ongia.org",
-    "contactEmail": "president@ongia.ca",
+    "contactEmail": "info@ongia.ca",
     "twitterHandle": "",
     "googleAnalyticsId": ""
   },
@@ -110,7 +110,7 @@
       },
       {
         "q": "Do I need to be a police officer to attend?",
-        "a": "No. The Forum is open to everyone listed under Who should attend. Some sessions may be restricted to law enforcement, and where that applies it is marked in the final programme. If you are not sure whether you can attend, email us at president@ongia.ca and we will let you know."
+        "a": "No. The Forum is open to everyone listed under Who should attend. Some sessions may be restricted to law enforcement, and where that applies it is marked in the final programme. If you are not sure whether you can attend, email us at info@ongia.ca and we will let you know."
       },
       {
         "q": "Will sessions be recorded or streamed?",
@@ -123,6 +123,10 @@
       {
         "q": "Is the venue accessible?",
         "a": "Tell us about accessibility or dietary requirements when you register and we will arrange what we can with the venue. If you have a specific question about the building, the rooms or getting around the site, write to us before you register and we will get an answer from the hotel."
+      },
+      {
+        "q": "Are translation services available?",
+        "a": "Yes. Translation services are available if required. Tell us what you need when you register and we will arrange it."
       },
       {
         "q": "Can media attend?",
