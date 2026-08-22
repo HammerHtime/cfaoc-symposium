@@ -18,7 +18,7 @@
     "aboutLead": "Organized crime does not stop at a provincial line. It moves through the gateways the country depends on: container terminals, airports, rail yards, land crossings and the highway corridors between them.",
     "aboutBody": [
       "The Canadian Forum Against Organized Crime is a one-day national symposium. It puts the people who work those gateways in the same room: police, border services and transport partners, port and airport authorities, prosecutors, corrections and probation staff, intelligence analysts, and the community organizations that see the downstream harm first.",
-      "The programme is built around current, practical material: how criminal networks exploit Canadian entry points, and what enforcement and disruption look like now. Information sharing runs through the whole day, including where it breaks down between agencies and jurisdictions and what has worked to fix that. Sessions are pitched at people who will take the material back to their own caseloads.",
+      "The program is built around current, practical material: how criminal networks exploit Canadian entry points, and what enforcement and disruption look like now. Information sharing runs through the whole day, including where it breaks down between agencies and jurisdictions and what has worked to fix that. Sessions are pitched at people who will take the material back to their own caseloads.",
       "The Forum runs three times a year in different regions, each a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria closes the 2026 series. Three more Forums follow in 2027, and each is announced on this site once the city and date are set."
     ],
     "themesHeading": "What we'll cover",
@@ -38,7 +38,7 @@
       },
       {
         "title": "Online monitoring and intelligence",
-        "body": "Running an online monitoring programme: current trends, what analysts are seeing, and where the work gets difficult."
+        "body": "Running an online monitoring program: current trends, what analysts are seeing, and where the work gets difficult."
       },
       {
         "title": "Gangs and organized crime",
@@ -83,8 +83,8 @@
       "Community organizations and Indigenous community partners",
       "Researchers and students working on organized crime"
     ],
-    "agendaHeading": "Programme",
-    "agendaNote": "The programme is being built now. Sessions and speakers are posted here as they are confirmed, and sent to registered delegates before the event.",
+    "agendaHeading": "Program",
+    "agendaNote": "The program is being built now. Sessions and speakers are posted here as they are confirmed, and sent to registered delegates before the event.",
     "agenda": [],
     "faqHeading": "Questions",
     "faq": [
@@ -102,7 +102,7 @@
       },
       {
         "q": "Do I need to be a police officer to attend?",
-        "a": "No. The Forum is open to everyone listed under Who should attend. Some sessions may be restricted to law enforcement, and where that applies it is marked in the final programme. If you are not sure whether you can attend, email us at info@ongia.ca and we will let you know."
+        "a": "No. The Forum is open to everyone listed under Who should attend. Some sessions may be restricted to law enforcement, and where that applies it is marked in the final program. If you are not sure whether you can attend, email us at info@ongia.ca and we will let you know."
       },
       {
         "q": "Will sessions be recorded or streamed?",
@@ -312,5 +312,262 @@
       "dateNote": "Spring 2027",
       "sortDate": "2027-04"
     }
-  ]
+  ],
+  "i18n": {
+    "fr": {
+      "site": {
+        "description": "Un symposium gratuit d'une journée sur le crime organisé dans les ports, aéroports et postes frontaliers du Canada, destiné aux services de police, aux partenaires frontaliers et du transport, aux procureurs, aux services correctionnels, aux analystes et aux organismes communautaires. Trois forums par année, partout au pays."
+      },
+      "content": {
+        "navHome": "Accueil",
+        "navRegister": "Inscription",
+        "backToForum": "Retour au Forum",
+        "chooseCity": "Choisissez votre ville",
+        "addToCalendar": "Ajouter au calendrier",
+        "aboutHeading": "À propos du Forum",
+        "aboutLead": "Le crime organisé ne s'arrête pas aux frontières provinciales. Il emprunte les mêmes portes d'entrée dont le pays dépend : terminaux à conteneurs, aéroports, gares de triage, postes frontaliers et corridors routiers qui les relient.",
+        "aboutBody": [
+          "Le Forum canadien contre le crime organisé est un symposium national d'une journée. Il réunit dans une même salle les personnes qui travaillent à ces portes d'entrée : services de police, Agence des services frontaliers du Canada et partenaires du transport, autorités portuaires et aéroportuaires, procureurs, personnel des services correctionnels et de probation, analystes du renseignement, et les organismes communautaires qui constatent les premiers les torts causés en aval.",
+          "Le programme repose sur du contenu concret et actuel : comment les réseaux criminels exploitent les points d'entrée canadiens, et à quoi ressemblent aujourd'hui l'application de la loi et les efforts de perturbation. Le partage de l'information traverse toute la journée, y compris là où il achoppe entre organismes et administrations, et ce qui a permis d'y remédier. Les séances s'adressent à des gens qui rapporteront la matière dans leurs propres dossiers.",
+          "Le Forum se tient trois fois par année dans différentes régions. Chaque édition est un événement autonome d'une journée, gratuit, qui pose un regard régional sur le même problème national. Victoria clôt la série de 2026. Trois autres forums suivront en 2027, et chacun sera annoncé sur ce site dès que la ville et la date seront fixées."
+        ],
+        "themesHeading": "Les sujets abordés",
+        "themesIntro": "Les sujets abordés pourraient être l'un ou l'autre des thèmes ci-dessous, déjà présentés lors de symposiums précédents. Les présentations de cette édition seront confirmées à l'approche de la date et porteront notamment sur des enjeux propres à {region}.",
+        "themes": [
+          {
+            "title": "Tabac et produits de nicotine de contrebande",
+            "body": "Le commerce illicite du tabac et de la gamme plus large des produits de nicotine, et comment les décisions réglementaires façonnent le marché que l'application de la loi doit ensuite encadrer."
+          },
+          {
+            "title": "Ventes illicites en ligne",
+            "body": "Comment les produits illicites circulent par les sites Web, les marchés en ligne et les plateformes sociales, et ce qui a permis de perturber les vendeurs qui s'en servent."
+          },
+          {
+            "title": "Interventions sur le Web ouvert",
+            "body": "Cibler les sites Web, les marchés en ligne et les comptes de médias sociaux : les leviers civils et réglementaires qui accompagnent l'application du droit criminel."
+          },
+          {
+            "title": "Surveillance et renseignement en ligne",
+            "body": "Gérer un programme de surveillance en ligne : tendances actuelles, ce que constatent les analystes, et là où le travail se complique."
+          },
+          {
+            "title": "Gangs et crime organisé",
+            "body": "Là où les gangs de rue et les groupes du crime organisé se recoupent, comment la relation fonctionne concrètement, et où vont les profits."
+          },
+          {
+            "title": "Portes d'entrée, ports et postes frontaliers",
+            "body": "Les points d'entrée régionaux qui permettent le mouvement de la contrebande, des produits et des personnes, et à quoi ressemble l'interception à chacun."
+          },
+          {
+            "title": "Produits de la criminalité",
+            "body": "Suivre l'argent derrière le commerce illicite, et la trace financière qui relie les groupes organisés d'une administration à l'autre."
+          },
+          {
+            "title": "Industrie et forces de l'ordre : travailler ensemble",
+            "body": "Ce que les enquêteurs du secteur privé, les équipes de protection des marques et les organismes de réglementation apportent à un dossier, et comment ces partenariats se mettent en place."
+          },
+          {
+            "title": "Signalement communautaire et Échec au crime",
+            "body": "Le signalement anonyme comme outil de sécurité publique, et ce qu'il apporte à la sécurité des collectivités et aux enquêtes."
+          },
+          {
+            "title": "Santé publique et sécurité publique",
+            "body": "Là où les activités d'application de la loi rejoignent les résultats en santé publique, et comment les deux secteurs peuvent travailler ensemble plutôt qu'en parallèle."
+          }
+        ],
+        "audienceHeading": "À qui s’adresse le Forum",
+        "audienceIntro": "Le Forum s'adresse aux professionnels de première ligne et aux partenaires qui travaillent à leurs côtés. L'inscription est ouverte à toutes les personnes figurant dans cette liste.",
+        "audience": [
+          "Services de police municipaux, régionaux, provinciaux, des Premières Nations et fédéraux, y compris la GRC",
+          "Agence des services frontaliers du Canada, autorités portuaires et aéroportuaires, et sécurité du transport",
+          "Personnel de sécurité maritime, ferroviaire, du camionnage et de la logistique",
+          "Analystes du renseignement et unités du renseignement criminel",
+          "Procureurs et autres conseillers juridiques",
+          "Agents des services correctionnels, de libération conditionnelle et de probation",
+          "Personnel de la criminalité financière, de la lutte au blanchiment d'argent et de la conformité",
+          "Enquêteurs de l'industrie, protection des marques et personnel de réglementation",
+          "Personnel de la santé publique et de la réduction des méfaits",
+          "Personnel des politiques municipales, provinciales et fédérales",
+          "Enseignants, directions d'école et agents de liaison scolaire",
+          "Travailleurs sociaux, intervenants jeunesse et personnel des services aux victimes",
+          "Organismes communautaires et partenaires des communautés autochtones",
+          "Chercheurs et étudiants qui travaillent sur le crime organisé"
+        ],
+        "agendaHeading": "Programme",
+        "agendaNote": "Provisoire seulement. Le programme est en cours d'élaboration. Aucune séance, aucun conférencier et aucun horaire de cette page ne sont confirmés. Le programme définitif sera publié ici et transmis aux personnes inscrites avant l'événement.",
+        "agendaEmptyTitle": "Séances à confirmer",
+        "agendaEmptyBody": [
+          "Les conférenciers et les sujets des séances de ce Forum ne sont pas arrêtés. Rien n'est confirmé pour l'instant, donc rien n'est indiqué ici.",
+          "La journée se déroule en une seule série de séances, avec des pauses et le dîner. L'horaire complet sera publié sur cette page une fois établi, et transmis par courriel à toutes les personnes inscrites."
+        ],
+        "speakersHeading": "Conférenciers",
+        "speakersBody": [
+          "La liste des conférenciers est en cours de finalisation.",
+          "Les présentateurs proviennent des services de police, des partenaires frontaliers et du transport, des services de poursuite et des organismes communautaires qui travaillent directement sur ces dossiers. Les noms et les séances seront publiés ici au fur et à mesure des confirmations, et transmis aux personnes inscrites avant l'événement."
+        ],
+        "speakersContact": "",
+        "faqHeading": "Questions",
+        "faq": [
+          {
+            "q": "Combien coûte la participation ?",
+            "a": "Rien. Toutes les éditions de la série sont gratuites, et le dîner et les rafraîchissements sont inclus. Le transport et l'hébergement sont à vos frais."
+          },
+          {
+            "q": "Comment s’inscrire ?",
+            "a": "Cliquez sur le bouton d'inscription de la ville qui vous intéresse et remplissez le formulaire. Un courriel de confirmation vous sera envoyé. Les places sont limitées et attribuées dans l'ordre de réception des inscriptions, alors inscrivez-vous tôt."
+          },
+          {
+            "q": "Puis-je assister à plus d’une ville ?",
+            "a": "Oui. Chaque édition fait l'objet d'une inscription distincte. Les thèmes sont communs; le contenu régional diffère."
+          },
+          {
+            "q": "Faut-il être policier pour participer ?",
+            "a": "Non. Le Forum est ouvert à toutes les personnes figurant dans la section À qui s'adresse le Forum. Certaines séances peuvent être réservées aux forces de l'ordre; le cas échéant, cela est indiqué au programme définitif. Si vous n'êtes pas certain de pouvoir participer, écrivez-nous à info@ongia.ca et nous vous répondrons."
+          },
+          {
+            "q": "Les séances seront-elles enregistrées ou diffusées ?",
+            "a": "Non. Le Forum se tient en personne seulement. Les séances ne sont pas diffusées et aucun enregistrement n'est prévu, afin que les présentateurs puissent s'exprimer franchement."
+          },
+          {
+            "q": "Y a-t-il une attestation ?",
+            "a": "Oui. Les participants reçoivent une attestation de réussite du cours."
+          },
+          {
+            "q": "Le lieu est-il accessible ?",
+            "a": "Indiquez-nous vos besoins en matière d'accessibilité ou d'alimentation au moment de l'inscription et nous ferons le nécessaire avec l'établissement. Si vous avez une question précise sur le bâtiment, les salles ou les déplacements sur place, écrivez-nous avant de vous inscrire et nous obtiendrons une réponse de l'hôtel."
+          },
+          {
+            "q": "Des services de traduction sont-ils offerts ?",
+            "a": "Oui. Des services de traduction sont offerts au besoin. Indiquez-nous ce dont vous avez besoin au moment de l'inscription et nous ferons le nécessaire."
+          },
+          {
+            "q": "Les médias peuvent-ils assister au Forum ?",
+            "a": "Communiquez avec les organisateurs à l'avance. Certaines séances peuvent être fermées aux médias, et l'accès est accordé au cas par cas."
+          }
+        ],
+        "ctaHeading": "Gratuit. Places limitées.",
+        "ctaBody": "L'inscription se fait sur le site d'événements d'ONGIA. Victoria est ouvert dès maintenant. Les autres villes seront annoncées ici au fur et à mesure des confirmations.",
+        "citiesHeading": "Trois forums par année. Un problème national.",
+        "citiesIntro": "Le Forum se tient trois fois par année dans différentes régions du pays. Chaque édition est un événement autonome d'une journée, et chacune fait l'objet d'une inscription distincte.",
+        "regionFallback": "chaque région hôte",
+        "hostHeading": "Accueillez le Forum dans votre ville",
+        "hostIntro": "Le Forum se tient trois fois par année, et nous choisissons les régions en fonction des besoins et de l'appui local. Si votre région devrait figurer sur la liste, faites-le-nous savoir.",
+        "hostNote": "Ce que vous nous transmettez est acheminé aux organisateurs d'ONGIA et versé à notre base de contacts afin que nous puissions faire un suivi avec vous au sujet du Forum et des éditions à venir. Nous ne vendrons pas vos coordonnées. Les envois sont traités par notre hébergeur Web, Netlify, sur des serveurs situés aux États-Unis, et votre adresse IP est consignée avec eux.",
+        "hostButton": "Envoyer la demande",
+        "hostThanksTitle": "Demande reçue",
+        "hostThanksBody": [
+          "Merci — votre demande est entre les mains des organisateurs d'ONGIA.",
+          "Nous les lisons toutes. Si nous tenons le Forum dans votre région, nous communiquerons avec vous au sujet de l'appui local et du lieu."
+        ],
+        "ui": {
+          "skip": "Passer au contenu",
+          "menu": "Menu",
+          "scroll": "Défiler",
+          "nextEvent": "Prochaine édition",
+          "eventDetails": "Détails de l’événement",
+          "seeProgramme": "Voir le programme",
+          "announcementSoon": "Annonce à venir",
+          "regSoon": "Inscriptions à venir",
+          "openMaps": "Ouvrir dans Maps",
+          "hotelSite": "Site de l’hôtel",
+          "venue": "Lieu",
+          "theHotel": "L’hôtel",
+          "roomBlock": "Bloc de chambres pour les participants, au lieu du Forum.",
+          "series": "La série",
+          "contact": "Nous joindre",
+          "sendRequest": "Envoyer une demande",
+          "fName": "Votre nom",
+          "fEmail": "Courriel",
+          "fAgency": "Organisme ou organisation",
+          "fCity": "Ville et province",
+          "fWhy": "Pourquoi le Forum devrait-il se tenir dans votre ville ?",
+          "notFound": "Cette page a été déplacée ou n’a jamais existé.",
+          "thankYou": "Merci",
+          "lblDate": "Date",
+          "lblTime": "Heure",
+          "lblLocation": "Lieu",
+          "lblCost": "Coût",
+          "tba": "À annoncer",
+          "cityTba": "Ville à annoncer",
+          "datesTba": "Dates à annoncer",
+          "speakers": "Conférenciers",
+          "programme": "Programme",
+          "kForum": "Le Forum",
+          "kContent": "Contenu",
+          "kDelegates": "Participants",
+          "kDay": "La journée",
+          "kGetting": "S’y rendre",
+          "kStaying": "Hébergement",
+          "kPractical": "Aspects pratiques",
+          "coastToCoast": "D’un océan à l’autre",
+          "days": "jours",
+          "hrs": "h",
+          "mins": "min",
+          "freeToAttend": "Gratuit",
+          "editionLabel": "Édition {region}",
+          "editionHeading": "L’édition {region}",
+          "icsDetails": "Détails",
+          "navSeries": "La série",
+          "navAbout": "À propos",
+          "navTopics": "Sujets",
+          "navCities": "Villes",
+          "navVenue": "Lieu",
+          "navHotel": "Hôtel",
+          "navFaq": "Questions"
+        }
+      },
+      "events": {
+        "victoria": {
+          "registerLabel": "Inscription — gratuit",
+          "registerNote": "L'inscription se fait sur le site d'événements d'ONGIA.",
+          "cost": "Gratuit",
+          "regionPhrase": "la côte ouest du Canada",
+          "blurb": "La porte d'entrée du Pacifique : terminaux à conteneurs, corridor maritime, mouvements transfrontaliers dans la mer des Salish, et les groupes actifs sur la côte ouest.",
+          "venue": {
+            "notes": "Sur le port, dans Vic West, de l'autre côté du pont de la rue Johnson depuis le centre-ville de Victoria. Communiquez directement avec l'hôtel au sujet du stationnement et des tarifs."
+          },
+          "hotel": {
+            "rateUnit": "par nuit",
+            "rateNote": "Plus les taxes et frais applicables, et sous réserve de disponibilité. Confirmez la date limite de réservation auprès de l'hôtel.",
+            "bookingLabel": "Réserver au tarif des participants",
+            "intro": "Le Forum se tient au Delta Ocean Pointe, et un bloc de chambres y est réservé à un tarif préférentiel pour les personnes venant de l'extérieur. Réservez au moyen du lien ci-dessous, rattaché au bloc de chambres du Forum.",
+            "highlights": [
+              "Le Forum se déroule dans le même établissement : aucun déplacement le jour même",
+              "De l'autre côté du pont de la rue Johnson depuis le centre-ville de Victoria, sur le port",
+              "L'aéroport international de Victoria (YYJ) se trouve bien au nord du centre-ville, sur la péninsule Saanich : prévoyez du temps de déplacement",
+              "Les terminaux du Coho et du Victoria Clipper sont sur la rue Belleville, de l'autre côté du port",
+              "Renseignez-vous auprès de l'hôtel sur le stationnement, l'accessibilité et les installations au moment de réserver"
+            ],
+            "photoCredit": "Photos gracieuseté du Delta Hotels by Marriott Victoria Ocean Pointe Resort.",
+            "captions": {
+              "01-exterior.jpeg": "L'hôtel au crépuscule, vu depuis l'autre rive du port",
+              "02-room.jpeg": "Une chambre donnant sur l'eau",
+              "03-harbour.jpeg": "Coucher de soleil sur le port de Victoria",
+              "04-exterior-day.jpeg": "L'hôtel sur le port, avec le terminal d'hydravions à côté"
+            }
+          },
+          "regionLabel": "Côte ouest",
+          "provinceName": "Colombie-Britannique"
+        },
+        "central-canada": {
+          "regionLabel": "Centre du Canada",
+          "regionPhrase": "le centre du Canada",
+          "dateNote": "Printemps 2027",
+          "blurb": "Objectif envisagé : le corridor frontalier et routier — postes frontaliers, transport ferroviaire, fret aérien, et les routes de trafic qui traversent le centre du pays."
+        },
+        "atlantic-canada": {
+          "regionLabel": "Canada atlantique",
+          "regionPhrase": "le Canada atlantique",
+          "dateNote": "Printemps 2027",
+          "blurb": "Objectif envisagé : la porte d'entrée de l'Atlantique — ports de la côte est, approche maritime, et l'acheminement des produits vers l'intérieur du pays."
+        },
+        "west-coast": {
+          "regionLabel": "Côte ouest",
+          "regionPhrase": "la côte ouest du Canada",
+          "dateNote": "Automne 2027",
+          "blurb": "Objectif envisagé : un deuxième Forum sur la côte ouest, de retour à la porte d'entrée du Pacifique, avec les ports, le corridor maritime et les routes transfrontalières qui l'alimentent."
+        }
+      }
+    }
+  }
 }

@@ -16,18 +16,54 @@ const SRC_STATIC = path.join(ROOT, 'static');
 const OUT = path.join(ROOT, 'dist');
 
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'events.json'), 'utf8'));
-const SITE = data.site;
-const C = data.content;
+
+/* ---------------------------------------------------------------- language */
+/* English is the source of truth. A language pack in data.i18n supplies only
+   the strings it has translated; anything missing falls back to English, so a
+   half-finished translation degrades to a readable page rather than a blank
+   one. Switching language rebinds SITE/C/EVENTS and every page builder below
+   reads them as before. */
+const LANGS = [
+  { code: 'en', prefix: '', label: 'English', short: 'EN', locale: 'en-CA' },
+  { code: 'fr', prefix: '/fr', label: 'Français', short: 'FR', locale: 'fr-CA' },
+];
+
+const deepMerge = (base, over) => {
+  if (over === undefined || over === null) return base;
+  if (Array.isArray(base) || Array.isArray(over) || typeof over !== 'object') return over;
+  // base may be absent entirely — a language pack can introduce keys, such as
+  // the ui block, that the English content has no counterpart for.
+  const src = base && typeof base === 'object' && !Array.isArray(base) ? base : {};
+  const out = { ...src };
+  for (const k of Object.keys(over)) out[k] = deepMerge(src[k], over[k]);
+  return out;
+};
+
+let LANG = LANGS[0];
+let SITE = data.site;
+let C = data.content;
+let EVENTS = [];
+
+function setLang(code) {
+  LANG = LANGS.find((l) => l.code === code) || LANGS[0];
+  const pack = (data.i18n && data.i18n[code]) || {};
+  SITE = deepMerge(data.site, pack.site);
+  C = deepMerge(data.content, pack.content);
+  const evOver = pack.events || {};
+  EVENTS = sortEvents(
+    data.events.map((ev) => deepMerge(ev, evOver[ev.slug || slugify(ev.regionLabel)]))
+  );
+}
 /* Cards, the footer roster, the featured event and the structured data all read
-   from this list, so it is sorted chronologically once here rather than relying
-   on whatever order the file happens to be in. An event with no firm date sorts
-   by its sortDate (a YYYY-MM hint); anything with neither goes last. */
-const EVENTS = [...data.events].sort((a, b) => {
+   from this list, so it is sorted chronologically rather than relying on
+   whatever order the file happens to be in. An event with no firm date sorts by
+   its sortDate (a YYYY-MM hint); anything with neither goes last. */
+const sortEvents = (list) => [...list].sort((a, b) => {
   const key = (e) => e.date || (e.sortDate ? `${e.sortDate}-99` : '9999-99-99');
   return key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0;
 });
 
-const BASE = SITE.baseUrl.replace(/\/+$/, '');
+const BASE = data.site.baseUrl.replace(/\/+$/, '');
 
 /* ---------------------------------------------------------------- helpers */
 
@@ -46,7 +82,7 @@ const dateOf = (iso) => (iso ? new Date(`${iso}T12:00:00Z`) : null);
 const fmtLong = (iso) => {
   const d = dateOf(iso);
   if (!d) return '';
-  return d.toLocaleDateString('en-CA', {
+  return d.toLocaleDateString(LANG.locale, {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
   });
 };
@@ -54,7 +90,7 @@ const fmtLong = (iso) => {
 const fmtShort = (iso) => {
   const d = dateOf(iso);
   if (!d) return '';
-  return d.toLocaleDateString('en-CA', {
+  return d.toLocaleDateString(LANG.locale, {
     year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC',
   });
 };
@@ -63,7 +99,7 @@ const fmtDayMonth = (iso) => {
   const d = dateOf(iso);
   if (!d) return '';
   return {
-    month: d.toLocaleDateString('en-CA', { month: 'short', timeZone: 'UTC' }).toUpperCase().replace('.', ''),
+    month: d.toLocaleDateString(LANG.locale, { month: 'short', timeZone: 'UTC' }).toUpperCase().replace('.', ''),
     day: String(d.getUTCDate()),
     year: String(d.getUTCFullYear()),
   };
@@ -73,6 +109,7 @@ const fmtDayMonth = (iso) => {
 const fmtTime = (t) => {
   if (!t) return '';
   const [hRaw, m] = t.split(':').map(Number);
+  if (LANG.code === 'fr') return m ? `${hRaw} h ${String(m).padStart(2, '0')}` : `${hRaw} h`;
   const suffix = hRaw < 12 ? 'a.m.' : 'p.m.';
   const h = hRaw % 12 === 0 ? 12 : hRaw % 12;
   return `${h}:${String(m).padStart(2, '0')} ${suffix}`;
@@ -82,7 +119,13 @@ const isLive = (ev) => ev.status !== 'tba' && !!ev.slug;
 const hasRegistration = (ev) => !!(ev.registerUrl && ev.registerUrl.trim());
 
 const eventTitle = (ev) => `${SITE.name} — ${ev.city || ev.regionLabel}`;
-const eventPath = (ev) => (isLive(ev) ? `/${ev.slug}/` : '/');
+const U = (k, fallback) => (C.ui && C.ui[k]) || fallback;
+const home = () => `${LANG.prefix}/`;
+const eventPath = (ev) => (isLive(ev) ? `${LANG.prefix}/${ev.slug}/` : home());
+const inLang = (code, relPath) => {
+  const l = LANGS.find((x) => x.code === code);
+  return `${l.prefix}${relPath}`;
+};
 const eventUrl = (ev) => `${BASE}${eventPath(ev)}`;
 
 /* A hardcoded utcOffset silently goes an hour wrong the moment an event lands on
@@ -326,7 +369,7 @@ ${parts.map((p) => '    ' + p).join('\n')}
 
 /* ------------------------------------------------------------- components */
 
-function head({ title, description, canonical, jsonld, ogImage, noindex }) {
+function head({ title, description, canonical, jsonld, ogImage, noindex, altPath }) {
   const img = ogImage || (OG_IMAGE ? `${BASE}${OG_IMAGE}` : '');
   /* A square card is centre-cropped by the large-image players; declaring the
      real dimensions is what stops them guessing wrong. */
@@ -340,13 +383,15 @@ function head({ title, description, canonical, jsonld, ogImage, noindex }) {
           : ''
       }`;
   return `<!doctype html>
-<html lang="en-CA">
+<html lang="${LANG.locale}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${attr(description)}">
 <link rel="canonical" href="${attr(canonical)}">
+${altPath ? LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}-CA" href="${attr(BASE + l.prefix + altPath)}">`).join('\n') +
+  `\n<link rel="alternate" hreflang="x-default" href="${attr(BASE + altPath)}">` : ''}
 ${noindex ? '<meta name="robots" content="noindex, follow">' : ''}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${attr(SITE.name)}">
@@ -370,13 +415,26 @@ ${SITE.googleAnalyticsId ? `<script async src="https://www.googletagmanager.com/
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(SITE.googleAnalyticsId).replace(/</g, '\\u003c')});</script>` : ''}
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>`;
+<a class="skip" href="#main">${esc(U("skip","Skip to content"))}</a>`;
 }
 
-function navBar(links, cta) {
+/* Sits in the nav next to the register button. Marked with lang/hreflang so a
+   screen reader announces "Français" in French, not in English. */
+function langToggle(altPath) {
+  if (!altPath) return '';
+  return `<ul class="langs" aria-label="Language">
+        ${LANGS.map((l) =>
+          l.code === LANG.code
+            ? `<li><span class="langs__on" lang="${l.code}-CA" aria-current="true">${esc(l.short)}</span></li>`
+            : `<li><a lang="${l.code}-CA" hreflang="${l.code}-CA" href="${attr(l.prefix + altPath)}">${esc(l.short)}</a></li>`
+        ).join('\n        ')}
+      </ul>`;
+}
+
+function navBar(links, cta, altPath) {
   return `<header class="masthead" data-masthead>
   <div class="wrap masthead__inner">
-    <a class="brand" href="/">
+    <a class="brand" href="${attr(home())}">
       <span class="brand__mark" aria-hidden="true"></span>
       <span class="brand__text">
         <span class="brand__name">CFAOC</span>
@@ -385,12 +443,13 @@ function navBar(links, cta) {
     </a>
     <button class="navtoggle" data-navtoggle aria-expanded="false" aria-controls="sitenav">
       <span class="navtoggle__bars" aria-hidden="true"></span>
-      <span class="navtoggle__label">Menu</span>
+      <span class="navtoggle__label">${esc(U("menu","Menu"))}</span>
     </button>
     <nav class="nav" id="sitenav" data-nav aria-label="Main">
       <ul class="nav__list">
         ${links.map((l) => `<li><a href="${attr(l.href)}">${esc(l.label)}</a></li>`).join('\n        ')}
       </ul>
+      ${langToggle(altPath)}
       ${cta}
     </nav>
   </div>
@@ -401,7 +460,7 @@ function navBar(links, cta) {
 function registerButton(ev, { size = '', block = false } = {}) {
   const cls = `btn btn--primary${size ? ' btn--' + size : ''}${block ? ' btn--block' : ''}`;
   if (!hasRegistration(ev)) {
-    return `<span class="${cls} btn--pending" role="note">Registration opening soon</span>`;
+    return `<span class="${cls} btn--pending" role="note">${esc(U("regSoon","Registration opening soon"))}</span>`;
   }
   return `<a class="${cls}" href="${attr(ev.registerUrl)}" target="_blank" rel="noopener">
     ${esc(ev.registerLabel || 'Register — free')}
@@ -427,7 +486,7 @@ function titleLockup(sub) {
 /** Bottom-left scroll cue, aligned to the same gutter as the lockup. */
 function scrollCue() {
   return `<div class="hero__foot" aria-hidden="true">
-    <div class="wrap"><p class="hero__scroll">Scroll<i></i></p></div>
+    <div class="wrap"><p class="hero__scroll">${esc(U("scroll","Scroll"))}<i></i></p></div>
   </div>`;
 }
 
@@ -462,13 +521,13 @@ function heroLead(sub) {
 function factsStrip(ev) {
   const items = [];
   if (ev.date) {
-    items.push(['Date', fmtLong(ev.date)]);
-    items.push(['Time', `${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}`.trim()]);
+    items.push([U("lblDate","Date"), fmtLong(ev.date)]);
+    items.push([U("lblTime","Time"), `${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}`.trim()]);
   } else {
-    items.push(['Date', 'To be announced']);
+    items.push([U("lblDate","Date"), U("tba","To be announced")]);
   }
-  items.push(['Location', ev.city ? `${ev.city}, ${ev.province}` : `${ev.regionLabel} — city to be announced`]);
-  items.push(['Cost', `${ev.cost || 'Free'} to attend`]);
+  items.push([U("lblLocation","Location"), ev.city ? `${ev.city}, ${ev.province}` : `${ev.regionLabel} — city to be announced`]);
+  items.push([U("lblCost","Cost"), U("freeToAttend","Free to attend")]);
   return `<ul class="facts">
     ${items.map(([k, v]) => `<li><span class="facts__k">${esc(k)}</span><span class="facts__v">${esc(v)}</span></li>`).join('\n    ')}
   </ul>`;
@@ -479,7 +538,7 @@ function aboutSection() {
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
-        <p class="kicker">${num()} — The Forum</p>
+        <p class="kicker">${num()} — ${esc(U("kForum","The Forum"))}</p>
         <h2 class="h2">${esc(C.aboutHeading)}</h2>
       </div>
       <div class="cols__main">
@@ -520,7 +579,7 @@ function themesSection(ev) {
   <div class="wrap">
     <div class="cols cols--wide">
       <div class="cols__side">
-        <p class="kicker">${num()} — Content</p>
+        <p class="kicker">${num()} — ${esc(U("kContent","Content"))}</p>
         <h2 class="h2">${esc(C.themesHeading)}</h2>
         <p class="muted">${esc(fill(C.themesIntro, ev))}</p>
       </div>
@@ -546,7 +605,7 @@ function audienceSection() {
   <div class="wrap">
     <div class="cols cols--wide">
       <div class="cols__side">
-        <p class="kicker">${num()} — Delegates</p>
+        <p class="kicker">${num()} — ${esc(U("kDelegates","Delegates"))}</p>
         <h2 class="h2">${esc(C.audienceHeading)}</h2>
         <p class="muted">${esc(C.audienceIntro)}</p>
       </div>
@@ -561,7 +620,7 @@ function audienceSection() {
 }
 
 /**
- * Programme and speakers, in one chapter.
+ * Program and speakers, in one chapter.
  *
  * They used to be two adjacent sections, and while nothing is confirmed both
  * of them said "to be announced" — two full screens of the same non-news, with
@@ -596,14 +655,14 @@ function programmeSection() {
     : `<div class="tbd">
           <p class="tbd__mark">TBD</p>
           <div class="tbd__body">
-            <h3 class="tbd__title">${esc(C.agendaEmptyTitle || 'Programme to be announced')}</h3>
+            <h3 class="tbd__title">${esc(C.agendaEmptyTitle || 'Program to be announced')}</h3>
             ${(C.agendaEmptyBody || []).map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
           </div>
         </div>`;
 
   const speakerBlock = speakers.length
     ? `<div class="subsec" id="speakers">
-          <h3 class="subsec__h">${esc(C.speakersHeading || 'Speakers')}</h3>
+          <h3 class="subsec__h">${esc(C.speakersHeading || U("speakers","Speakers"))}</h3>
           <div class="subsec__body">
             ${speakers.map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
             ${C.speakersContact
@@ -617,7 +676,7 @@ function programmeSection() {
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
-        <p class="kicker">${num()} — The day</p>
+        <p class="kicker">${num()} — ${esc(U("kDay","The day"))}</p>
         <h2 class="h2">${esc(C.agendaHeading)}</h2>
         <p class="muted">${esc(C.agendaNote)}</p>
       </div>
@@ -637,8 +696,8 @@ function venueSection(ev) {
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
-        <p class="kicker">${num()} — Getting there</p>
-        <h2 class="h2">Venue</h2>
+        <p class="kicker">${num()} — ${esc(U("kGetting","Getting there"))}</p>
+        <h2 class="h2">${esc(U("venue","Venue"))}</h2>
       </div>
       <div class="cols__main">
         <div class="venue">
@@ -646,9 +705,9 @@ function venueSection(ev) {
           <address class="venue__addr">${esc(venueLine(v))}</address>
           ${v.notes ? `<p>${esc(v.notes)}</p>` : ''}
           <p class="venue__links">
-            <a class="btn btn--ghost" href="${attr(mapsUrl(v))}" target="_blank" rel="noopener">Open in Maps</a>
-            ${v.website ? `<a class="btn btn--ghost" href="${attr(v.website)}" target="_blank" rel="noopener">Hotel website</a>` : ''}
-            ${ev.date ? `<a class="btn btn--ghost" href="/${attr(ev.slug)}/${attr(ev.slug)}.ics" download>Add to calendar</a>` : ''}
+            <a class="btn btn--ghost" href="${attr(mapsUrl(v))}" target="_blank" rel="noopener">${esc(U("openMaps","Open in Maps"))}</a>
+            ${v.website ? `<a class="btn btn--ghost" href="${attr(v.website)}" target="_blank" rel="noopener">${esc(U("hotelSite","Hotel website"))}</a>` : ''}
+            ${ev.date ? `<a class="btn btn--ghost" href="${attr(LANG.prefix)}/${attr(ev.slug)}/${attr(ev.slug)}.ics" download>${esc(C.addToCalendar || 'Add to calendar')}</a>` : ''}
           </p>
           ${ev.hotel && ev.hotel.rate ? `<p class="venue__hotel">Staying over? A delegate room block is held here at <strong>${esc(ev.hotel.rate)} ${esc(ev.hotel.rateUnit || 'per night')}</strong> — <a href="#hotel">see the hotel section</a>.</p>` : ''}
         </div>
@@ -685,9 +744,9 @@ function hotelSection(ev) {
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
-        <p class="kicker">${num()} — Staying over</p>
-        <h2 class="h2">The hotel</h2>
-        <p class="muted">Delegate room block at the Forum venue.</p>
+        <p class="kicker">${num()} — ${esc(U("kStaying","Staying over"))}</p>
+        <h2 class="h2">${esc(U("theHotel","The hotel"))}</h2>
+        <p class="muted">${esc(U("roomBlock","Delegate room block at the Forum venue."))}</p>
       </div>
       <div class="cols__main">
         <div class="rate">
@@ -731,17 +790,17 @@ function hotelSection(ev) {
  * Netlify picks the form up at deploy time from the rendered HTML, collapsed
  * or not: the data-netlify attribute enables capture, the hidden form-name
  * field makes the POST match, and bot-field is a honeypot the real form hides.
- * Those attributes, the field names and action="/thanks/" are the contract —
+ * Those attributes, the field names and action="${attr(LANG.prefix)}/thanks/" are the contract —
  * do not change them. Submissions land in the Netlify dashboard.
  */
 function hostDisclosure() {
   return `<details class="hostask" id="host">
       <summary class="hostask__sum">
-        <h3 class="hostask__h">${esc(C.hostHeading)}<span class="hostask__cue">Send a request</span></h3>
+        <h3 class="hostask__h">${esc(C.hostHeading)}<span class="hostask__cue">${esc(U("sendRequest","Send a request"))}</span></h3>
       </summary>
       <div class="hostask__body">
         <p class="hostask__intro">${esc(fill(C.hostIntro, null))}</p>
-        <form class="form" name="host-request" method="POST" action="/thanks/"
+        <form class="form" name="host-request" method="POST" action="${attr(LANG.prefix)}/thanks/"
               data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="host-request">
           <p class="form__hp" hidden>
@@ -750,23 +809,23 @@ function hostDisclosure() {
 
           <div class="form__grid">
             <div class="field">
-              <label for="f-name">Your name</label>
+              <label for="f-name">${esc(U("fName","Your name"))}</label>
               <input id="f-name" name="name" type="text" maxlength="120" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="f-email">Email</label>
+              <label for="f-email">${esc(U("fEmail","Email"))}</label>
               <input id="f-email" name="email" type="email" maxlength="200" autocomplete="email" required>
             </div>
             <div class="field">
-              <label for="f-agency">Agency or organization</label>
+              <label for="f-agency">${esc(U("fAgency","Agency or organization"))}</label>
               <input id="f-agency" name="agency" type="text" maxlength="120" autocomplete="organization" required>
             </div>
             <div class="field">
-              <label for="f-city">City and province</label>
+              <label for="f-city">${esc(U("fCity","City and province"))}</label>
               <input id="f-city" name="city" type="text" maxlength="120" required>
             </div>
             <div class="field field--wide">
-              <label for="f-why">Why should the Forum come to your city?</label>
+              <label for="f-why">${esc(U("fWhy","Why should the Forum come to your city?"))}</label>
               <textarea id="f-why" name="why" rows="3" maxlength="2000" required></textarea>
             </div>
           </div>
@@ -787,17 +846,17 @@ function citiesSection(current) {
     const isCurrent = current && ev.slug && ev.slug === current.slug;
     return `<article class="city${live ? '' : ' city--tba'}${isCurrent ? ' city--current' : ''}" data-reveal>
       <p class="city__region">${esc(ev.regionLabel)}</p>
-      <h3 class="city__name">${esc(ev.city || 'City to be announced')}${ev.province ? `<span class="city__prov">${esc(ev.province)}</span>` : ''}</h3>
+      <h3 class="city__name">${esc(ev.city || U("cityTba","City to be announced"))}${ev.province ? `<span class="city__prov">${esc(ev.province)}</span>` : ''}</h3>
       ${
         dm
           ? `<p class="city__date"><span class="city__mon">${esc(dm.month)}</span> <span class="city__day">${esc(dm.day)}</span> <span class="city__yr">${esc(dm.year)}</span></p>`
-          : `<p class="city__date city__date--tba">${esc(ev.dateNote || 'Dates to be announced')}</p>`
+          : `<p class="city__date city__date--tba">${esc(ev.dateNote || U("datesTba","Dates to be announced"))}</p>`
       }
       <p class="city__blurb">${esc(ev.blurb)}</p>
       ${ev.venue && ev.venue.name ? `<p class="city__venue">${esc(ev.venue.name)}</p>` : ''}
       <p class="city__actions">
-        ${live ? `<a class="btn btn--ghost" href="${attr(eventPath(ev))}">Event details</a>` : ''}
-        ${live ? registerButton(ev, { size: 'sm' }) : `<span class="tag">Announcement soon</span>`}
+        ${live ? `<a class="btn btn--ghost" href="${attr(eventPath(ev))}">${esc(U("eventDetails","Event details"))}</a>` : ''}
+        ${live ? registerButton(ev, { size: 'sm' }) : `<span class="tag">${esc(U("announcementSoon","Announcement soon"))}</span>`}
       </p>
     </article>`;
   }).join('\n    ');
@@ -805,7 +864,7 @@ function citiesSection(current) {
   return `<section class="section section--paper" id="cities">
   <div class="wrap">
     <div class="section__head">
-      <p class="kicker kicker--dark">Coast to coast</p>
+      <p class="kicker kicker--dark">${esc(U("coastToCoast","Coast to coast"))}</p>
       <h2 class="h2">${esc(fill(C.citiesHeading, null))}</h2>
       <p class="muted muted--dark">${esc(fill(C.citiesIntro, null))}</p>
     </div>
@@ -822,7 +881,7 @@ function faqSection() {
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
-        <p class="kicker">${num()} — Practicalities</p>
+        <p class="kicker">${num()} — ${esc(U("kPractical","Practicalities"))}</p>
         <h2 class="h2">${esc(C.faqHeading)}</h2>
       </div>
       <div class="cols__main">
@@ -851,7 +910,7 @@ function ctaSection(ev) {
       ${ev && ev.registerNote && hasRegistration(ev) ? `<p class="cta__note">${esc(ev.registerNote)}</p>` : ''}
     </div>
     <div class="cta__action">
-      ${ev ? registerButton(ev, { size: 'lg' }) : `<a class="btn btn--primary btn--lg" href="/#cities">Choose your city</a>`}
+      ${ev ? registerButton(ev, { size: 'lg' }) : `<a class="btn btn--primary btn--lg" href="${attr(home())}#cities">${esc(C.chooseCity || 'Choose your city')}</a>`}
       ${ev && ev.date ? `<p class="cta__meta">${esc(fmtLong(ev.date))} · ${esc(ev.city ? ev.city + ', ' + ev.province : ev.regionLabel)}</p>` : ''}
     </div>
   </div>
@@ -867,7 +926,7 @@ function footer() {
       <p class="foot__tag">${esc(SITE.tagline)}</p>
     </div>
     <div class="foot__col">
-      <p class="foot__h">Series</p>
+      <p class="foot__h">${esc(U("series","Series"))}</p>
       <ul>
         ${EVENTS.map((ev) =>
           isLive(ev)
@@ -877,11 +936,11 @@ function footer() {
       </ul>
     </div>
     <div class="foot__col">
-      <p class="foot__h">Contact</p>
+      <p class="foot__h">${esc(U("contact","Contact"))}</p>
       <ul>
         <li><a href="mailto:${attr(SITE.contactEmail)}">${esc(SITE.contactEmail)}</a></li>
         ${SITE.organizerUrl ? `<li><a href="${attr(SITE.organizerUrl)}" target="_blank" rel="noopener">${esc(SITE.organizerName)}</a></li>` : ''}
-        <li><a href="/#faq">Questions</a></li>
+        <li><a href="${attr(home())}#faq">${esc(C.faqHeading)}</a></li>
       </ul>
     </div>
   </div>
@@ -911,13 +970,13 @@ function hubPage() {
   /* "Host it" came out: the request form now lives inside #cities, which is
      where the question arises, and one fewer nav item is one fewer decision. */
   const nav = [
-    { href: '#about', label: 'About' },
-    { href: '#cities', label: 'Cities' },
-    { href: '#themes', label: 'Topics' },
-    { href: '#programme', label: 'Programme' },
-    { href: '#venue', label: 'Venue' },
-    { href: '#hotel', label: 'Hotel' },
-    { href: '#faq', label: 'FAQ' },
+    { href: '#about', label: U("navAbout","About") },
+    { href: '#cities', label: U("navCities","Cities") },
+    { href: '#themes', label: U("navTopics","Topics") },
+    { href: '#programme', label: U("programme","Program") },
+    { href: '#venue', label: U("navVenue","Venue") },
+    { href: '#hotel', label: U("navHotel","Hotel") },
+    { href: '#faq', label: U("navFaq","FAQ") },
   ];
 
   const jsonld = {
@@ -931,23 +990,24 @@ function hubPage() {
     head({
       title: `${SITE.name} — ${SITE.tagline}`,
       description: fill(SITE.description, null),
-      canonical: `${BASE}/`,
+      canonical: `${BASE}${home()}`,
+      altPath: '/',
       jsonld,
     }) +
-    navBar(nav, `<a class="btn btn--primary btn--sm nav__cta" href="#cities">Register</a>`) +
+    navBar(nav, `<a class="btn btn--primary btn--sm nav__cta" href="#cities">${esc(C.navRegister || 'Register')}</a>`, '/') +
     `<main id="main">
 <section class="hero${HERO_ART ? ' hero--art' : ''}">
   ${heroMedia()}
   <div class="wrap hero__inner">
     ${heroLead(`<p class="lockup__meta">A free one-day symposium · Three Forums a year · Coast to coast</p>`)}
     <div class="hero__next">
-      <p class="hero__nextlabel">Next event</p>
+      <p class="hero__nextlabel">${esc(U("nextEvent","Next event"))}</p>
       <p class="hero__nextcity">${esc(featured.city || featured.regionLabel)}${featured.province ? `, ${esc(featured.province)}` : ''}</p>
       <p class="hero__nextdate">${esc(featured.date ? fmtLong(featured.date) : 'Date to be announced')}</p>
       ${featured.venue && featured.venue.name ? `<p class="hero__nextvenue">${esc(featured.venue.name)}</p>` : ''}
       <div class="hero__actions">
         ${registerButton(featured)}
-        ${isLive(featured) ? `<a class="btn btn--ghost" href="${attr(eventPath(featured))}">Event details</a>` : ''}
+        ${isLive(featured) ? `<a class="btn btn--ghost" href="${attr(eventPath(featured))}">${esc(U("eventDetails","Event details"))}</a>` : ''}
       </div>
       ${featured.date ? countdown(featured) : ''}
     </div>
@@ -972,13 +1032,13 @@ ${ctaSection(isLive(featured) ? featured : null)}
 function eventPage(ev) {
   resetSections();
   const nav = [
-    { href: '/', label: 'Series' },
-    { href: '#intro', label: 'About' },
-    { href: '#themes', label: 'Topics' },
-    { href: '#programme', label: 'Programme' },
-    { href: '#venue', label: 'Venue' },
-    { href: '#hotel', label: 'Hotel' },
-    { href: '#faq', label: 'FAQ' },
+    { href: home(), label: U("navSeries","Series") },
+    { href: '#intro', label: U("navAbout","About") },
+    { href: '#themes', label: U("navTopics","Topics") },
+    { href: '#programme', label: U("programme","Program") },
+    { href: '#venue', label: U("navVenue","Venue") },
+    { href: '#hotel', label: U("navHotel","Hotel") },
+    { href: '#faq', label: U("navFaq","FAQ") },
   ];
 
   const desc = `${SITE.name}: a free one-day symposium in ${ev.city}, ${ev.province} on ${fmtLong(ev.date)} at ${ev.venue.name}. ${SITE.tagline}.`;
@@ -988,24 +1048,25 @@ function eventPage(ev) {
       title: `${ev.city}, ${ev.province} · ${fmtShort(ev.date)} — ${SITE.name}`,
       description: desc,
       canonical: eventUrl(ev),
+      altPath: `/${ev.slug}/`,
       ogImage: ogFor(ev),
       jsonld: eventJsonLd(ev),
     }) +
-    navBar(nav, registerButton(ev, { size: 'sm' }).replace('btn--primary', 'btn--primary nav__cta')) +
+    navBar(nav, registerButton(ev, { size: 'sm' }).replace('btn--primary', 'btn--primary nav__cta'), `/${ev.slug}/`) +
     `<main id="main">
 <section class="hero hero--event${HERO_ART ? ' hero--art' : ''}">
   ${heroMedia()}
   <div class="wrap hero__inner">
     ${heroLead(`<p class="lockup__meta">${esc(ev.city)}, ${esc(ev.provinceName || ev.province)} · ${esc(fmtLong(ev.date))}</p>`)}
     <div class="hero__next">
-      <p class="hero__nextlabel">${esc(ev.regionLabel)} edition</p>
+      <p class="hero__nextlabel">${esc(U("editionLabel","{region} edition").replace('{region}', ev.regionLabel))}</p>
       <p class="hero__nextcity">${esc(ev.city)}, ${esc(ev.province)}</p>
       <p class="hero__nextdate">${esc(fmtLong(ev.date))}</p>
       <p class="hero__nexttime">${esc(fmtTime(ev.startTime))} – ${esc(fmtTime(ev.endTime))} ${esc(ev.timezoneLabel || '')}</p>
       <p class="hero__nextvenue">${esc(ev.venue.name)}</p>
       <div class="hero__actions">
         ${registerButton(ev)}
-        <a class="btn btn--ghost" href="#programme">See the programme</a>
+        <a class="btn btn--ghost" href="#programme">${esc(U("seeProgramme","See the program"))}</a>
       </div>
       ${countdown(ev)}
     </div>
@@ -1018,7 +1079,7 @@ ${factsBand(ev)}
     <div class="cols">
       <div class="cols__side">
         <p class="kicker">${esc(ev.city)}</p>
-        <h2 class="h2">The ${esc(ev.regionLabel)} edition</h2>
+        <h2 class="h2">${esc(U("editionHeading","The {region} edition").replace('{region}', ev.regionLabel))}</h2>
       </div>
       <div class="cols__main">
         <p class="lead">${esc(ev.blurb)}</p>
@@ -1044,9 +1105,9 @@ ${ctaSection(ev)}
 function countdown(ev) {
   return `<div class="countdown" data-countdown="${attr(startISO(ev))}" role="group"
       aria-label="Time remaining until the ${attr(ev.city || ev.regionLabel)} Forum" hidden>
-      <p class="countdown__unit"><span data-cd="days">–</span><small>days</small></p>
-      <p class="countdown__unit"><span data-cd="hours">–</span><small>hrs</small></p>
-      <p class="countdown__unit"><span data-cd="mins">–</span><small>min</small></p>
+      <p class="countdown__unit"><span data-cd="days">–</span><small>${esc(U("days","days"))}</small></p>
+      <p class="countdown__unit"><span data-cd="hours">–</span><small>${esc(U("hrs","hrs"))}</small></p>
+      <p class="countdown__unit"><span data-cd="mins">–</span><small>${esc(U("mins","min"))}</small></p>
     </div>`;
 }
 
@@ -1125,7 +1186,7 @@ function icsFor(ev) {
     `DTSTART:${icsStamp(startISO(ev))}`,
     `DTEND:${icsStamp(endISO(ev))}`,
     fold(`SUMMARY:${icsText(eventTitle(ev))}`),
-    fold(`DESCRIPTION:${icsText(`${SITE.tagline}. Free to attend. Details: ${eventUrl(ev)}`)}`),
+    fold(`DESCRIPTION:${icsText(`${SITE.tagline}. ${U("freeToAttend","Free to attend")}. ${U("icsDetails","Details")}: ${eventUrl(ev)}`)}`),
     fold(`LOCATION:${icsText([ev.venue.name, venueLine(ev.venue)].filter(Boolean).join(', '))}`),
     `URL:${eventUrl(ev)}`,
     'END:VEVENT',
@@ -1163,9 +1224,10 @@ function notFoundPage() {
     (resetSections(), head({
       title: `Page not found — ${SITE.name}`,
       description: fill(SITE.description, null),
-      canonical: `${BASE}/404`,
+      canonical: `${BASE}${LANG.prefix}/404`,
+      altPath: '/404',
     })) +
-    navBar([{ href: '/', label: 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="/#cities">Register</a>`) +
+    navBar([{ href: home(), label: C.navHome || 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="${attr(home())}#cities">${esc(C.navRegister || 'Register')}</a>`, '/') +
     `<main id="main">
 <section class="hero hero--mini">
   <div class="hero__media">${fingerprint({ id: 'nf', rings: 34, seed: 404 })}</div>
@@ -1174,8 +1236,8 @@ function notFoundPage() {
       <p class="lockup__eyebrow">404</p>
       <h1 class="lockup__title"><span>Page not</span><span>found</span></h1>
       <hr class="lockup__rule">
-      <p class="lockup__tagline">That page has moved or never existed.</p>
-      <p class="hero__actions"><a class="btn btn--primary" href="/">Back to the Forum</a></p>
+      <p class="lockup__tagline">${esc(U("notFound","That page has moved or never existed."))}</p>
+      <p class="hero__actions"><a class="btn btn--primary" href="${attr(home())}">${esc(C.backToForum || 'Back to the Forum')}</a></p>
     </div>
   </div>
 </section>
@@ -1189,20 +1251,21 @@ function thanksPage() {
     (resetSections(), head({
       title: `${C.hostThanksTitle} — ${SITE.name}`,
       description: C.hostThanksTitle,
-      canonical: `${BASE}/thanks/`,
+      canonical: `${BASE}${LANG.prefix}/thanks/`,
+      altPath: '/thanks/',
       noindex: true,
     })) +
-    navBar([{ href: '/', label: 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="/#cities">Register</a>`) +
+    navBar([{ href: home(), label: C.navHome || 'Home' }], `<a class="btn btn--primary btn--sm nav__cta" href="${attr(home())}#cities">${esc(C.navRegister || 'Register')}</a>`, '/') +
     `<main id="main">
 <section class="hero hero--mini">
   <div class="hero__media">${fingerprint({ id: 'tx', rings: 34, seed: 77 })}</div>
   <div class="wrap hero__inner">
     <div class="lockup">
-      <p class="lockup__eyebrow">Thank you</p>
+      <p class="lockup__eyebrow">${esc(U("thankYou","Thank you"))}</p>
       <h1 class="lockup__title"><span>Request</span><span>received</span></h1>
       <hr class="lockup__rule">
       ${(C.hostThanksBody || []).map((t) => `<p class="lockup__tagline">${esc(t)}</p>`).join('\n      ')}
-      <p class="hero__actions"><a class="btn btn--primary" href="/">Back to the Forum</a></p>
+      <p class="hero__actions"><a class="btn btn--primary" href="${attr(home())}">${esc(C.backToForum || 'Back to the Forum')}</a></p>
     </div>
   </div>
 </section>
@@ -1212,6 +1275,7 @@ function thanksPage() {
 }
 
 function build() {
+  setLang('en');
   console.log(`\nBuilding ${SITE.name}`);
   console.log(HERO_ART ? `  hero artwork: ${HERO_ART}` : '  hero artwork: none found — using the vector whorl');
 
@@ -1228,38 +1292,51 @@ function build() {
     );
   }
 
-  write('index.html', hubPage());
+  const sitemap = [];
 
-  const live = EVENTS.filter(isLive);
+  for (const lang of LANGS) {
+    setLang(lang.code);
+    const dir = lang.prefix.replace(/^\//, '');           // '' for English, 'fr' for French
+    const at = (rel) => (dir ? `${dir}/${rel}` : rel);
+    console.log(`\n  [${lang.short}] ${lang.label}`);
 
-  /* Copying an event block and forgetting to change the slug is the documented
-     way to add a city, and it silently overwrote the previous city's page. */
-  const slugs = live.map((e) => e.slug);
-  const dupes = [...new Set(slugs.filter((x, i) => slugs.indexOf(x) !== i))];
-  if (dupes.length) throw new Error(`Duplicate event slug(s): ${dupes.join(', ')}`);
-  const bad = slugs.filter((x) => !/^[a-z0-9-]+$/.test(x));
-  if (bad.length) throw new Error(`Slugs must be lowercase letters, digits and hyphens: ${bad.join(', ')}`);
-  for (const ev of live) {
-    write(`${ev.slug}/index.html`, eventPage(ev));
-    if (ev.date) write(`${ev.slug}/${ev.slug}.ics`, icsFor(ev));
+    write(at('index.html'), hubPage());
+
+    const live = EVENTS.filter(isLive);
+
+    /* Copying an event block and forgetting to change the slug is the documented
+       way to add a city, and it silently overwrote the previous city's page. */
+    const slugs = live.map((e) => e.slug);
+    const dupes = [...new Set(slugs.filter((x, i) => slugs.indexOf(x) !== i))];
+    if (dupes.length) throw new Error(`Duplicate event slug(s): ${dupes.join(', ')}`);
+    const bad = slugs.filter((x) => !/^[a-z0-9-]+$/.test(x));
+    if (bad.length) throw new Error(`Slugs must be lowercase letters, digits and hyphens: ${bad.join(', ')}`);
+
+    for (const ev of live) {
+      write(at(`${ev.slug}/index.html`), eventPage(ev));
+      if (ev.date) write(at(`${ev.slug}/${ev.slug}.ics`), icsFor(ev));
+    }
+
+    write(at('thanks/index.html'), thanksPage());
+    if (!dir) write('404.html', notFoundPage());        // Netlify serves one 404
+    else write(at('404.html'), notFoundPage());
+
+    sitemap.push(...['/', ...live.map((e) => `/${e.slug}/`)].map((u) => lang.prefix + u));
   }
 
-  write('404.html', notFoundPage());
-  write('thanks/index.html', thanksPage());
-
-  const urls = ['/', ...live.map(eventPath)];
+  setLang('en');
   write(
     'sitemap.xml',
     `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${esc(BASE + u)}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
+${sitemap.map((u) => `  <url><loc>${esc(BASE + u)}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
 </urlset>
 `
   );
 
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${BASE}/sitemap.xml\n`);
 
-  console.log(`\nDone — ${live.length} event page(s) + hub in ./dist\n`);
+  console.log(`\nDone — ${LANGS.length} language(s) in ./dist\n`);
 }
 
 build();

@@ -93,6 +93,29 @@ daylight-saving offset from the event's own date, so a May event and a November
 event in the same city both land correctly in delegates' calendars. Set the zone
 and forget it.
 
+### French
+
+The site builds in English at `/` and French at `/fr/`, with an EN | FR toggle in
+the nav and `hreflang` tags so search engines pair the two.
+
+English is the source of truth. `i18n.fr` in `events.json` holds only the
+strings that differ; anything it does not define falls back to English, so a
+missing translation shows readable English rather than a blank. To change French
+wording, edit `i18n.fr` — the structure mirrors the English `content` and `site`
+blocks, plus a `ui` block for interface labels (nav, buttons, field names) and an
+`events` block keyed by slug, or by the slugified region for a city not yet
+announced.
+
+Dates and times follow the language: "Tuesday, November 24, 2026 · 8:30 a.m."
+in English, "mardi 24 novembre 2026 · 8 h 30" in French.
+
+Note "program" is the Canadian spelling in English; French correctly uses
+"programme".
+
+**The French was written by an AI and needs a francophone review before it is
+promoted.** It is accurate and idiomatic as far as that goes, but a public page
+aimed at police services in Quebec and New Brunswick deserves a human check.
+
 ### Link preview images
 
 Each city has its own 1200x630 preview — the image people see when the link is
