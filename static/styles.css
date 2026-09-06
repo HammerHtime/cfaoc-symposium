@@ -697,6 +697,7 @@ summary:focus-visible,
   font-weight: 600;
   color: var(--text-2);
 }
+.hero__nextextra { color: var(--text-2); font-weight: 500; }
 .hero__nextvenue { color: var(--text-2); }
 .hero__actions {
   display: flex;

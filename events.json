@@ -136,7 +136,7 @@
     "agendaEmptyTitle": "Sessions to be confirmed",
     "agendaEmptyBody": [
       "Presenters and session topics for this Forum have not been set. Nothing is confirmed yet, so nothing is listed here.",
-      "The day runs as a single track with breaks and lunch. The full running order goes up on this page once it is settled, and everyone who has registered gets it by email."
+      "The day runs as a single track with breaks and lunch, followed by a networking reception. The full running order goes up on this page once it is settled, and everyone who has registered gets it by email."
     ],
     "hostHeading": "Bring the Forum to your city",
     "hostIntro": "The Forum runs three times a year, and we choose the regions based on where the need and the local support are. If your region should be on the list, tell us.",
@@ -171,8 +171,8 @@
       "provinceName": "British Columbia",
       "regionLabel": "West Coast",
       "date": "2026-11-24",
-      "startTime": "08:30",
-      "endTime": "17:00",
+      "startTime": "09:00",
+      "endTime": "16:00",
       "timezoneLabel": "PT",
       "cost": "Free",
       "registerUrl": "https://www.ongia.org/event-details/canadian-forum-against-organized-crime-national-symposium",
@@ -214,7 +214,9 @@
       },
       "timezone": "America/Vancouver",
       "regionPhrase": "the west coast of Canada",
-      "skylineImage": "/assets/hotel/victoria/03-harbour.jpeg"
+      "skylineImage": "/assets/hotel/victoria/03-harbour.jpeg",
+      "networkingStart": "16:00",
+      "networkingEnd": "18:00"
     },
     {
       "slug": "",
@@ -226,8 +228,8 @@
       "regionPhrase": "the west coast of Canada",
       "date": "",
       "dateNote": "Fall 2027",
-      "startTime": "08:30",
-      "endTime": "17:00",
+      "startTime": "09:00",
+      "endTime": "16:00",
       "timezone": "America/Vancouver",
       "timezoneLabel": "PT",
       "cost": "Free",
@@ -246,7 +248,9 @@
         "website": ""
       },
       "hotel": null,
-      "sortDate": "2027-10"
+      "sortDate": "2027-10",
+      "networkingStart": "16:00",
+      "networkingEnd": "18:00"
     },
     {
       "slug": "",
@@ -256,8 +260,8 @@
       "provinceName": "",
       "regionLabel": "Central Canada",
       "date": "",
-      "startTime": "08:30",
-      "endTime": "17:00",
+      "startTime": "09:00",
+      "endTime": "16:00",
       "timezoneLabel": "ET",
       "cost": "Free",
       "registerUrl": "",
@@ -278,7 +282,9 @@
       "timezone": "America/Toronto",
       "regionPhrase": "central Canada",
       "dateNote": "Spring 2027",
-      "sortDate": "2027-04"
+      "sortDate": "2027-04",
+      "networkingStart": "16:00",
+      "networkingEnd": "18:00"
     },
     {
       "slug": "",
@@ -288,8 +294,8 @@
       "provinceName": "",
       "regionLabel": "Atlantic Canada",
       "date": "",
-      "startTime": "08:30",
-      "endTime": "17:00",
+      "startTime": "09:00",
+      "endTime": "16:00",
       "timezoneLabel": "AT",
       "cost": "Free",
       "registerUrl": "",
@@ -310,7 +316,9 @@
       "timezone": "America/Halifax",
       "regionPhrase": "Atlantic Canada",
       "dateNote": "Spring 2027",
-      "sortDate": "2027-04"
+      "sortDate": "2027-04",
+      "networkingStart": "16:00",
+      "networkingEnd": "18:00"
     }
   ],
   "i18n": {
@@ -398,7 +406,7 @@
         "agendaEmptyTitle": "Séances à confirmer",
         "agendaEmptyBody": [
           "Les conférenciers et les sujets des séances de ce Forum ne sont pas arrêtés. Rien n'est confirmé pour l'instant, donc rien n'est indiqué ici.",
-          "La journée se déroule en une seule série de séances, avec des pauses et le dîner. L'horaire complet sera publié sur cette page une fois établi, et transmis par courriel à toutes les personnes inscrites."
+          "La journée se déroule en une seule série de séances, avec des pauses et le dîner, suivie d’une activité de réseautage. L’horaire complet sera publié sur cette page une fois établi, et transmis par courriel à toutes les personnes inscrites."
         ],
         "speakersHeading": "Conférenciers",
         "speakersBody": [
@@ -513,7 +521,8 @@
           "navCities": "Villes",
           "navVenue": "Lieu",
           "navHotel": "Hôtel",
-          "navFaq": "Questions"
+          "navFaq": "Questions",
+          "networking": "Réseautage"
         }
       },
       "events": {

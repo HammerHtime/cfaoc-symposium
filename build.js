@@ -115,6 +115,13 @@ const fmtTime = (t) => {
   return `${h}:${String(m).padStart(2, '0')} ${suffix}`;
 };
 
+const timeLine = (ev) =>
+  `${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}`.trim();
+const networkingLine = (ev) =>
+  ev.networkingStart && ev.networkingEnd
+    ? `${U('networking', 'Networking')} ${fmtTime(ev.networkingStart)} – ${fmtTime(ev.networkingEnd)}`
+    : '';
+
 const isLive = (ev) => ev.status !== 'tba' && !!ev.slug;
 const hasRegistration = (ev) => !!(ev.registerUrl && ev.registerUrl.trim());
 
@@ -148,7 +155,8 @@ const offsetOf = (ev) =>
   ev.utcOffset || (ev.timezone ? offsetFor(ev.date, ev.startTime || '08:00', ev.timezone) : '-05:00');
 
 const startISO = (ev) => (ev.date ? `${ev.date}T${ev.startTime || '08:00'}:00${offsetOf(ev)}` : '');
-const endISO = (ev) => (ev.date ? `${ev.date}T${ev.endTime || '16:30'}:00${offsetOf(ev)}` : '');
+const endISO = (ev) =>
+  ev.date ? `${ev.date}T${ev.networkingEnd || ev.endTime || '16:30'}:00${offsetOf(ev)}` : '';
 
 const venueLine = (v) =>
   [v.street, v.city, [v.region, v.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ');
@@ -522,7 +530,7 @@ function factsStrip(ev) {
   const items = [];
   if (ev.date) {
     items.push([U("lblDate","Date"), fmtLong(ev.date)]);
-    items.push([U("lblTime","Time"), `${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}`.trim()]);
+    items.push([U("lblTime","Time"), timeLine(ev)]);
   } else {
     items.push([U("lblDate","Date"), U("tba","To be announced")]);
   }
@@ -1062,7 +1070,8 @@ function eventPage(ev) {
       <p class="hero__nextlabel">${esc(U("editionLabel","{region} edition").replace('{region}', ev.regionLabel))}</p>
       <p class="hero__nextcity">${esc(ev.city)}, ${esc(ev.province)}</p>
       <p class="hero__nextdate">${esc(fmtLong(ev.date))}</p>
-      <p class="hero__nexttime">${esc(fmtTime(ev.startTime))} – ${esc(fmtTime(ev.endTime))} ${esc(ev.timezoneLabel || '')}</p>
+      <p class="hero__nexttime">${esc(timeLine(ev))}</p>
+      ${networkingLine(ev) ? `<p class="hero__nexttime hero__nextextra">${esc(networkingLine(ev))}</p>` : ''}
       <p class="hero__nextvenue">${esc(ev.venue.name)}</p>
       <div class="hero__actions">
         ${registerButton(ev)}

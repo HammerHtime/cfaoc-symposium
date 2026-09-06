@@ -42,8 +42,11 @@ const HERO = fs.readdirSync(path.join(ROOT, 'static', 'assets'))
 
 function page(ev) {
   const topics = data.content.themes.slice(0, 6).map((t) => t.title);
+  const net = ev.networkingStart && ev.networkingEnd
+    ? `<br><span style="color:#b6a9a7">Networking ${fmtTime(ev.networkingStart)} – ${fmtTime(ev.networkingEnd)}</span>`
+    : '';
   const when = ev.date
-    ? `${fmtDate(ev.date)}<br>${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}`
+    ? `${fmtDate(ev.date)}<br>${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}${net}`
     : (ev.dateNote || 'Date to be announced');
   const where = ev.venue && ev.venue.name
     ? `${ev.venue.name}<br>${[ev.venue.street, ev.venue.city, ev.venue.region].filter(Boolean).join(', ')}`
