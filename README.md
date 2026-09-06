@@ -139,6 +139,18 @@ To ghost a city's skyline into its card, add a `skylineImage` to that event
 pointing at an image in `static/assets/`, as Victoria does. Without one the card
 falls back to the plain maroon version, which still looks finished.
 
+### Promotional graphic
+
+`static/assets/promo/<slug>-promo.png` — the image to paste into an email or post
+to LinkedIn. It carries the whole pitch (when, where, cost, who, topics, register
+URL), because plenty of recipients never click through. Regenerate the same way
+as the link previews:
+
+```bash
+node build.js && node build.js --serve &
+node scripts/make-promo.js
+```
+
 ### Ordering
 
 Events are sorted chronologically at build time, so the order they sit in
