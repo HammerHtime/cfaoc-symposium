@@ -657,21 +657,28 @@ function audienceSection() {
  * #speakers stays addressable as the sub-block's own id so any existing deep
  * link keeps landing on the right words.
  */
-function programmeSection(ev) {
-  const hasAgenda = C.agenda && C.agenda.length;
+function programmeSection(ev, opts) {
+  /* Two readings of the same section.
+     series: the shape of the day, which every Forum shares — times, breaks,
+       lunch, panels — with no presenters, because those are set city by city.
+     event: that city's real program, its presenters named, falling back to the
+       series shape until its own sessions are booked. */
+  const series = !!(opts && opts.series);
+  const agenda = (!series && ev && ev.agenda && ev.agenda.length) ? ev.agenda : C.agenda;
+  const hasAgenda = agenda && agenda.length;
   /* Named presenters belong to an event, not the series. With none confirmed
      the generic "roster is being finalized" copy stands in. */
-  const roster = (ev && ev.speakers) || [];
-  const speakers = (C.speakersBody || []).filter(Boolean);
+  const roster = (!series && ev && ev.speakers) || [];
+  const speakers = series ? [] : (C.speakersBody || []).filter(Boolean);
 
   const agendaBody = hasAgenda
     ? `<ol class="agenda">
-          ${C.agenda
+          ${agenda
             .map(
               (s) => `<li class="agenda__row">
             <span class="agenda__time">${esc(fmtRange(s.time, s.end))}</span>
             <span class="agenda__body">
-              <span class="agenda__title">${esc(s.title)}</span>
+              <span class="agenda__title${s.variable ? ' agenda__title--open' : ''}">${esc(s.title)}</span>
               ${s.detail ? `<span class="agenda__detail">${esc(s.detail)}</span>` : ''}
             </span>
           </li>`
@@ -734,16 +741,26 @@ function programmeSection(ev) {
         </div>`
     : '';
 
+  /* The series view is deliberately nameless, so point at the page that does
+     carry the presenters rather than leaving the reader at a dead end. */
+  const shapeLink =
+    series && ev && isLive(ev) && C.agendaShapeLink
+      ? `<p class="agenda__more"><a class="tlink" href="${attr(eventPath(ev))}#programme">${esc(
+          C.agendaShapeLink.replace('{city}', ev.city || ev.regionLabel)
+        )}</a></p>`
+      : '';
+
   return `<section class="section section--alt section--tight" id="programme">
   <div class="wrap">
     <div class="cols">
       <div class="cols__side">
         <p class="kicker">${num()} — ${esc(U("kDay","The day"))}</p>
-        <h2 class="h2">${esc(C.agendaHeading)}</h2>
-        <p class="muted">${esc(C.agendaNote)}</p>
+        <h2 class="h2">${esc(series ? (C.agendaShapeHeading || C.agendaHeading) : C.agendaHeading)}</h2>
+        <p class="muted">${esc(series ? (C.agendaShapeNote || '') : C.agendaNote)}</p>
       </div>
       <div class="cols__main">
         ${agendaBody}
+        ${shapeLink}
         ${speakerBlock}
       </div>
     </div>
@@ -1035,9 +1052,9 @@ function hubPage() {
     { href: '#about', label: U("navAbout","About") },
     { href: '#cities', label: U("navCities","Cities") },
     { href: '#themes', label: U("navTopics","Topics") },
-    { href: '#programme', label: U("programme","Program") },
-    { href: '#venue', label: U("navVenue","Venue") },
-    { href: '#hotel', label: U("navHotel","Hotel") },
+    /* Venue and hotel are per-city and live on the event pages now, so the
+       hub's program entry points at the shape of the day instead. */
+    { href: '#programme', label: U("navDay","The day") },
     { href: '#faq', label: U("navFaq","FAQ") },
   ];
 
@@ -1081,9 +1098,7 @@ ${aboutSection()}
 ${citiesSection(null)}
 ${themesSection(null)}
 ${audienceSection()}
-${programmeSection(featured)}
-${isLive(featured) ? venueSection(featured) : ''}
-${isLive(featured) ? hotelSection(featured) : ''}
+${programmeSection(featured, { series: true })}
 ${faqSection()}
 ${ctaSection(isLive(featured) ? featured : null)}
 </main>` +
