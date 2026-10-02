@@ -935,7 +935,17 @@ function citiesSection(current) {
       ${ev.venue && ev.venue.name ? `<p class="city__venue">${esc(ev.venue.name)}</p>` : ''}
       <p class="city__actions">
         ${live ? `<a class="btn btn--ghost" href="${attr(eventPath(ev))}">${esc(U("eventDetails","Event details"))}</a>` : ''}
-        ${live ? registerButton(ev, { size: 'sm' }) : `<span class="tag">${esc(U("announcementSoon","Announcement soon"))}</span>`}
+        ${
+          live
+            ? registerButton(ev, { size: 'sm' })
+            /* A dated city is announced already; what is still coming is the
+               venue and the registration link. Say the accurate thing. */
+            : `<span class="tag">${esc(
+                ev.date
+                  ? U("detailsSoon", "Details to come")
+                  : U("announcementSoon", "Announcement soon")
+              )}</span>`
+        }
       </p>
     </article>`;
   }).join('\n    ');

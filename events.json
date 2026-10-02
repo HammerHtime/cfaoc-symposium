@@ -472,11 +472,11 @@
     {
       "slug": "",
       "status": "tba",
-      "city": "",
-      "province": "",
+      "city": "Toronto",
+      "province": "ON",
       "provinceName": "",
       "regionLabel": "Central Canada",
-      "date": "",
+      "date": "2027-03-23",
       "startTime": "09:00",
       "endTime": "16:00",
       "timezoneLabel": "ET",
@@ -498,19 +498,17 @@
       "hotel": null,
       "timezone": "America/Toronto",
       "regionPhrase": "central Canada",
-      "dateNote": "Spring 2027",
-      "sortDate": "2027-04",
       "networkingStart": "16:00",
       "networkingEnd": "18:00"
     },
     {
       "slug": "",
       "status": "tba",
-      "city": "",
-      "province": "",
+      "city": "Moncton",
+      "province": "NB",
       "provinceName": "",
       "regionLabel": "Atlantic Canada",
-      "date": "",
+      "date": "2027-03-30",
       "startTime": "09:00",
       "endTime": "16:00",
       "timezoneLabel": "AT",
@@ -532,8 +530,6 @@
       "hotel": null,
       "timezone": "America/Halifax",
       "regionPhrase": "Atlantic Canada",
-      "dateNote": "Spring 2027",
-      "sortDate": "2027-04",
       "networkingStart": "16:00",
       "networkingEnd": "18:00"
     }
@@ -741,7 +737,8 @@
           "navFaq": "Questions",
           "networking": "Réseautage",
           "readBio": "Lire la biographie",
-          "navDay": "La journée"
+          "navDay": "La journée",
+          "detailsSoon": "Détails à venir"
         },
         "speakersMore": "D’autres conférenciers sont en voie d’être confirmés et seront ajoutés ici.",
         "agenda": [
@@ -955,13 +952,11 @@
         "central-canada": {
           "regionLabel": "Centre du Canada",
           "regionPhrase": "le centre du Canada",
-          "dateNote": "Printemps 2027",
           "blurb": "Objectif envisagé : le corridor frontalier et routier — postes frontaliers, transport ferroviaire, fret aérien, et les routes de trafic qui traversent le centre du pays."
         },
         "atlantic-canada": {
           "regionLabel": "Canada atlantique",
           "regionPhrase": "le Canada atlantique",
-          "dateNote": "Printemps 2027",
           "blurb": "Objectif envisagé : la porte d'entrée de l'Atlantique — ports de la côte est, approche maritime, et l'acheminement des produits vers l'intérieur du pays."
         },
         "west-coast": {
