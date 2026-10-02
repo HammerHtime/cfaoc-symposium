@@ -160,7 +160,8 @@
     "notifyThanksBody": [
       "Thanks — we will email you as soon as this Forum has a city and a date.",
       "In the meantime, the Victoria Forum on 24 November 2026 is open for registration."
-    ]
+    ],
+    "speakersMore": "More presenters are being confirmed and will be added here."
   },
   "events": [
     {
@@ -216,7 +217,37 @@
       "regionPhrase": "the west coast of Canada",
       "skylineImage": "/assets/hotel/victoria/03-harbour.jpeg",
       "networkingStart": "16:00",
-      "networkingEnd": "18:00"
+      "networkingEnd": "18:00",
+      "speakers": [
+        {
+          "name": "Jenny Tsang",
+          "title": "Supervisory Criminal Intelligence Analyst",
+          "org": "CFSEU-BC",
+          "bio": [
+            "Jenny Tsang has 22 years of law enforcement service and is currently a Supervisory Criminal Intelligence Analyst with the Combined Forces Special Enforcement Unit of BC (CFSEU-BC), the province’s anti-gang enforcement agency and the largest integrated policing unit in Canada. She has spent the majority of her analytical career specializing in gangs and organized crime groups across British Columbia.",
+            "Since 2017, Jenny has worked with the CFSEU-BC Outlaw Motorcycle Gang (OMG) Unit and has supported OMG investigations and intelligence operations across the country. In 2019, she became the first intelligence analyst in Canada to be qualified in court as a civilian expert on BC outlaw motorcycle gangs. She is the current Chair of the National OMG Analytical Working Group and of the BC Gang Conflict Joint Analytical Working Group, and she serves as Vice President of the Western Canada Chapter of the International Association of Law Enforcement Intelligence Analysts (IALEIA).",
+            "Jenny has provided training to the local and international policing community, and continues to share her subject matter expertise at gang conferences and expert symposiums in Canada, Europe and the United States."
+          ]
+        },
+        {
+          "name": "Lloyd Plomp",
+          "title": "Supervisor, Tobacco Enforcement Unit",
+          "org": "Alberta Gaming, Liquor and Cannabis Commission",
+          "bio": [
+            "Lloyd Plomp is Supervisor of the Tobacco Enforcement Unit with the Alberta Gaming, Liquor and Cannabis Commission, where he has worked since 2021.",
+            "Before that he spent 29 years with the Calgary Police Service, working drugs, gangs, vice, organized crime, CFSEU, ALERT, and guns and gangs, including time with the service’s agent handling team."
+          ]
+        },
+        {
+          "name": "Cpl. Sandra Lloyd",
+          "title": "Federal Policing, Pacific Region — Vancouver Island",
+          "org": "RCMP",
+          "bio": [
+            "Corporal Sandra Lloyd began her policing career in Port Alberni, BC in 2001. She joined Federal Policing in 2008 and has been posted to Prince Rupert and Nanaimo.",
+            "She instructs on RCMP courses, is a court-qualified drug expert and an Accredited Team Commander, and has overseen large-scale international organized crime investigations for the past 13 years."
+          ]
+        }
+      ]
     },
     {
       "slug": "",
@@ -523,7 +554,8 @@
           "navHotel": "Hôtel",
           "navFaq": "Questions",
           "networking": "Réseautage"
-        }
+        },
+        "speakersMore": "D’autres conférenciers sont en voie d’être confirmés et seront ajoutés ici."
       },
       "events": {
         "victoria": {

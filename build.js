@@ -640,8 +640,11 @@ function audienceSection() {
  * #speakers stays addressable as the sub-block's own id so any existing deep
  * link keeps landing on the right words.
  */
-function programmeSection() {
+function programmeSection(ev) {
   const hasAgenda = C.agenda && C.agenda.length;
+  /* Named presenters belong to an event, not the series. With none confirmed
+     the generic "roster is being finalized" copy stands in. */
+  const roster = (ev && ev.speakers) || [];
   const speakers = (C.speakersBody || []).filter(Boolean);
 
   const agendaBody = hasAgenda
@@ -668,14 +671,30 @@ function programmeSection() {
           </div>
         </div>`;
 
-  const speakerBlock = speakers.length
+  const speakerBlock = roster.length
+    ? `<div class="subsec" id="speakers">
+          <h3 class="subsec__h">${esc(C.speakersHeading || U("speakers","Speakers"))}</h3>
+          <div class="subsec__body">
+            <ul class="bios">
+              ${roster.map((sp) => `<li class="bio">
+                ${sp.photo ? `<img class="bio__photo" src="${attr(sp.photo)}" alt="" width="200" height="200" loading="lazy" decoding="async">` : ''}
+                <div class="bio__text">
+                  <h4 class="bio__name">${esc(sp.name)}</h4>
+                  ${sp.title ? `<p class="bio__role">${esc(sp.title)}</p>` : ''}
+                  ${sp.org ? `<p class="bio__org">${esc(sp.org)}</p>` : ''}
+                  ${(Array.isArray(sp.bio) ? sp.bio : [sp.bio]).filter(Boolean)
+                    .map((t) => `<p class="bio__p">${esc(t)}</p>`).join('\n                  ')}
+                </div>
+              </li>`).join('\n              ')}
+            </ul>
+            ${C.speakersMore ? `<p class="muted bios__more">${esc(C.speakersMore)}</p>` : ''}
+          </div>
+        </div>`
+    : speakers.length
     ? `<div class="subsec" id="speakers">
           <h3 class="subsec__h">${esc(C.speakersHeading || U("speakers","Speakers"))}</h3>
           <div class="subsec__body">
             ${speakers.map((t) => `<p>${esc(t)}</p>`).join('\n            ')}
-            ${C.speakersContact
-              ? `<p class="muted">${esc(C.speakersContact)} <a href="mailto:${attr(SITE.contactEmail)}">${esc(SITE.contactEmail)}</a></p>`
-              : ''}
           </div>
         </div>`
     : '';
@@ -1027,7 +1046,7 @@ ${aboutSection()}
 ${citiesSection(null)}
 ${themesSection(null)}
 ${audienceSection()}
-${programmeSection()}
+${programmeSection(featured)}
 ${isLive(featured) ? venueSection(featured) : ''}
 ${isLive(featured) ? hotelSection(featured) : ''}
 ${faqSection()}
@@ -1100,7 +1119,7 @@ ${factsBand(ev)}
 </section>
 ${themesSection(ev)}
 ${audienceSection()}
-${programmeSection()}
+${programmeSection(ev)}
 ${venueSection(ev)}
 ${hotelSection(ev)}
 ${faqSection()}
