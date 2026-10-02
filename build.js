@@ -599,6 +599,11 @@ function regionPhrase(ev) {
   return ev.regionPhrase || ev.regionLabel || C.regionFallback || 'each host region';
 }
 
+/* True once a city has booked its own sessions. Until then an event page
+   borrows the series' "might be covered" topics; after, the real program sits
+   on the same page and saying both would contradict itself. */
+const hasOwnProgramme = (ev) => !!(ev && ev.agenda && ev.agenda.length);
+
 function themesSection(ev) {
   return `<section class="section section--alt section--tight" id="themes">
   <div class="wrap">
@@ -1121,7 +1126,7 @@ function eventPage(ev) {
   const nav = [
     { href: home(), label: U("navSeries","Series") },
     { href: '#intro', label: U("navAbout","About") },
-    { href: '#themes', label: U("navTopics","Topics") },
+    ...(hasOwnProgramme(ev) ? [] : [{ href: '#themes', label: U("navTopics","Topics") }]),
     { href: '#programme', label: U("programme","Program") },
     { href: '#venue', label: U("navVenue","Venue") },
     { href: '#hotel', label: U("navHotel","Hotel") },
@@ -1177,7 +1182,7 @@ ${factsBand(ev)}
     </div>
   </div>
 </section>
-${themesSection(ev)}
+${hasOwnProgramme(ev) ? '' : themesSection(ev)}
 ${audienceSection()}
 ${programmeSection(ev)}
 ${venueSection(ev)}

@@ -21,8 +21,8 @@
       "The program is built around current, practical material: how criminal networks exploit Canadian entry points, and what enforcement and disruption look like now. Information sharing runs through the whole day, including where it breaks down between agencies and jurisdictions and what has worked to fix that. Sessions are pitched at people who will take the material back to their own caseloads.",
       "The Forum runs three times a year in different regions, each a standalone one-day event, free to attend, with a regional view of the same national problem. Victoria closes the 2026 series. Three more Forums follow in 2027, and each is announced on this site once the city and date are set."
     ],
-    "themesHeading": "What we'll cover",
-    "themesIntro": "Topics that will be covered could be any of the following, which have been presented at previous symposiums. Presentations for this event will be confirmed closer to the date and will include topics specific to {region}.",
+    "themesHeading": "Topics that might be covered",
+    "themesIntro": "Every one of these has been presented at a previous symposium. Each Forum draws its program from them, confirmed closer to the date, with sessions specific to {region}. A city's confirmed program is posted on its own event page.",
     "themes": [
       {
         "title": "Contraband tobacco and nicotine products",
@@ -552,8 +552,8 @@
           "Le programme repose sur du contenu concret et actuel : comment les réseaux criminels exploitent les points d'entrée canadiens, et à quoi ressemblent aujourd'hui l'application de la loi et les efforts de perturbation. Le partage de l'information traverse toute la journée, y compris là où il achoppe entre organismes et administrations, et ce qui a permis d'y remédier. Les séances s'adressent à des gens qui rapporteront la matière dans leurs propres dossiers.",
           "Le Forum se tient trois fois par année dans différentes régions. Chaque édition est un événement autonome d'une journée, gratuit, qui pose un regard régional sur le même problème national. Victoria clôt la série de 2026. Trois autres forums suivront en 2027, et chacun sera annoncé sur ce site dès que la ville et la date seront fixées."
         ],
-        "themesHeading": "Les sujets abordés",
-        "themesIntro": "Les sujets abordés pourraient être l'un ou l'autre des thèmes ci-dessous, déjà présentés lors de symposiums précédents. Les présentations de cette édition seront confirmées à l'approche de la date et porteront notamment sur des enjeux propres à {region}.",
+        "themesHeading": "Sujets susceptibles d'être abordés",
+        "themesIntro": "Chacun de ces thèmes a déjà été présenté lors d'un symposium précédent. Chaque Forum y puise son programme, confirmé à l'approche de la date, avec des séances propres à {region}. Le programme confirmé de chaque ville est publié sur sa propre page d'événement.",
         "themes": [
           {
             "title": "Tabac et produits de nicotine de contrebande",
