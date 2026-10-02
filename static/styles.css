@@ -1019,7 +1019,8 @@ summary:focus-visible,
 .agenda { list-style: none; margin: 0; padding: 0; }
 .agenda__row {
   display: grid;
-  grid-template-columns: 8.5rem minmax(0, 1fr);
+  /* Wide enough for a full range ("10:15 – 11:00 a.m.") on one line. */
+  grid-template-columns: 11rem minmax(0, 1fr);
   gap: 1.5rem;
   padding: 1.05rem 0;
   border-bottom: 1px solid var(--line);
@@ -1094,56 +1095,89 @@ summary:focus-visible,
 }
 
 /* ------------------------------------------------------------------ bios */
-/* Photo optional: without one the text simply runs full width, so a roster can
-   go up before headshots arrive. */
-.bios { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.75rem; }
-.bio {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1.4rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--line);
+/* Name and role always visible; the bio opens on demand. Photo optional, so a
+   roster can go up before headshots arrive. */
+.bios { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.bios > li { border-bottom: 1px solid var(--line); }
+
+.bio__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 0;
+  cursor: pointer;
+  list-style: none;
 }
-.bio:first-child { padding-top: 0; border-top: 0; }
+.bio__head::-webkit-details-marker { display: none; }
+/* A presenter whose bio has not arrived yet: same row, nothing to open. */
+.bio--plain .bio__head { cursor: default; }
+
 .bio__photo {
-  width: 108px;
-  height: 108px;
+  width: 54px;
+  height: 54px;
+  flex: none;
   object-fit: cover;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
 }
-.bio__text { min-width: 0; }
+.bio__id { min-width: 0; display: block; }
 .bio__name {
+  display: block;
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.35rem;
-  line-height: 1.1;
+  font-size: 1.22rem;
+  line-height: 1.12;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: #fff;
-  margin: 0 0 0.3rem;
 }
-.bio__role {
-  margin: 0;
-  font-size: 0.97rem;
-  font-weight: 600;
-  color: var(--text);
-}
+.bio__role { display: block; font-size: 0.93rem; color: var(--text); margin-top: 0.12rem; }
 .bio__org {
-  margin: 0 0 0.8rem;
-  font-size: 0.72rem;
+  display: block;
+  font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--red-label);
+  margin-top: 0.28rem;
 }
-.bio__p { margin: 0 0 0.7rem; font-size: 0.97rem; color: var(--text-2); line-height: 1.6; }
+
+.bio__cue {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.bio__cue::after {
+  content: '+';
+  font-size: 1.05rem;
+  line-height: 0;
+  color: var(--red-label);
+}
+.bio__head:hover .bio__cue { color: #fff; border-color: #fff; }
+.bio[open] .bio__cue::after { content: '–'; }
+
+.bio__text { padding: 0 0 1.35rem; max-width: 62ch; }
+.bio__p { margin: 0 0 0.75rem; font-size: 0.97rem; color: var(--text-2); line-height: 1.62; }
 .bio__p:last-child { margin-bottom: 0; }
-.bios__more { margin-top: 1.5rem; }
+.bios__more { margin-top: 1.4rem; }
 
 @media (max-width: 620px) {
-  .bio { grid-template-columns: 1fr; gap: 0.9rem; }
-  .bio__photo { width: 88px; height: 88px; }
+  .bio__head { flex-wrap: wrap; gap: 0.75rem; }
+  .bio__cue { margin-left: 0; width: 100%; justify-content: center; }
+  .bio__photo { width: 46px; height: 46px; }
 }
 
 /* ----------------------------------------------------------------- venue */
@@ -1892,8 +1926,9 @@ summary:focus-visible,
   .facts li { padding: 0.7rem 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .facts li:nth-last-child(-n + 2) { border-bottom: 0; }
   .facts__v { font-size: 0.92rem; }
-  .agenda__row { grid-template-columns: 5.75rem minmax(0, 1fr); gap: 0.9rem; }
-  .agenda__time { font-size: 0.9rem; }
+  /* Too narrow for a range side by side: time sits above its session. */
+  .agenda__row { grid-template-columns: 1fr; gap: 0.3rem; }
+  .agenda__time { font-size: 0.85rem; padding-top: 0; }
   .rate { grid-template-columns: 1fr; }
   .rate__price { flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 0.7rem; padding: 1.1rem 1.3rem; text-align: left; }
   .rate__amount { font-size: 2.1rem; }

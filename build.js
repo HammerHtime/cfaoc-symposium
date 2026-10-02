@@ -115,6 +115,23 @@ const fmtTime = (t) => {
   return `${h}:${String(m).padStart(2, '0')} ${suffix}`;
 };
 
+/* Agenda rows carry a start and an end. Printing "8:00 a.m. – 8:30 a.m." twice
+   over in a narrow column is noise, so the meridiem is dropped from the start
+   when both ends share it. French has no meridiem to collapse. */
+const fmtRange = (start, end) => {
+  if (!start) return 'TBD';
+  if (!end) return fmtTime(start);
+  const a = fmtTime(start);
+  const b = fmtTime(end);
+  if (LANG.code !== 'fr') {
+    const sfx = a.slice(-4);
+    if ((sfx === 'a.m.' || sfx === 'p.m.') && b.endsWith(sfx)) {
+      return `${a.slice(0, -5)} – ${b}`;
+    }
+  }
+  return `${a} – ${b}`;
+};
+
 const timeLine = (ev) =>
   `${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)} ${ev.timezoneLabel || ''}`.trim();
 const networkingLine = (ev) =>
@@ -652,7 +669,7 @@ function programmeSection(ev) {
           ${C.agenda
             .map(
               (s) => `<li class="agenda__row">
-            <span class="agenda__time">${esc(s.time ? fmtTime(s.time) : 'TBD')}</span>
+            <span class="agenda__time">${esc(fmtRange(s.time, s.end))}</span>
             <span class="agenda__body">
               <span class="agenda__title">${esc(s.title)}</span>
               ${s.detail ? `<span class="agenda__detail">${esc(s.detail)}</span>` : ''}
@@ -671,21 +688,39 @@ function programmeSection(ev) {
           </div>
         </div>`;
 
+  /* Collapsed by default: a roster of six full bios buries everything below it.
+     <details> keeps it keyboard-operable with no JS, and the print stylesheet
+     already opens every <details> before printing. */
   const speakerBlock = roster.length
     ? `<div class="subsec" id="speakers">
           <h3 class="subsec__h">${esc(C.speakersHeading || U("speakers","Speakers"))}</h3>
           <div class="subsec__body">
             <ul class="bios">
-              ${roster.map((sp) => `<li class="bio">
-                ${sp.photo ? `<img class="bio__photo" src="${attr(sp.photo)}" alt="" width="200" height="200" loading="lazy" decoding="async">` : ''}
-                <div class="bio__text">
-                  <h4 class="bio__name">${esc(sp.name)}</h4>
-                  ${sp.title ? `<p class="bio__role">${esc(sp.title)}</p>` : ''}
-                  ${sp.org ? `<p class="bio__org">${esc(sp.org)}</p>` : ''}
-                  ${(Array.isArray(sp.bio) ? sp.bio : [sp.bio]).filter(Boolean)
-                    .map((t) => `<p class="bio__p">${esc(t)}</p>`).join('\n                  ')}
-                </div>
-              </li>`).join('\n              ')}
+              ${roster.map((sp) => {
+                const paras = (Array.isArray(sp.bio) ? sp.bio : [sp.bio]).filter(Boolean);
+                const head = `${sp.photo ? `<img class="bio__photo" src="${attr(sp.photo)}" alt="" width="200" height="200" loading="lazy" decoding="async">` : ''}
+                    <span class="bio__id">
+                      <span class="bio__name">${esc(sp.name)}</span>
+                      ${sp.title ? `<span class="bio__role">${esc(sp.title)}</span>` : ''}
+                      ${sp.org ? `<span class="bio__org">${esc(sp.org)}</span>` : ''}
+                    </span>`;
+                /* No bio on file yet: show the name row on its own. An empty
+                   <details> would offer a "Read bio" button that opens nothing. */
+                if (!paras.length) {
+                  return `<li><div class="bio bio--plain"><div class="bio__head">${head}</div></div></li>`;
+                }
+                return `<li>
+                <details class="bio">
+                  <summary class="bio__head">
+                    ${head}
+                    <span class="bio__cue">${esc(U("readBio","Read bio"))}</span>
+                  </summary>
+                  <div class="bio__text">
+                    ${paras.map((t) => `<p class="bio__p">${esc(t)}</p>`).join('\n                    ')}
+                  </div>
+                </details>
+              </li>`;
+              }).join('\n              ')}
             </ul>
             ${C.speakersMore ? `<p class="muted bios__more">${esc(C.speakersMore)}</p>` : ''}
           </div>

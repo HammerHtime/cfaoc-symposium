@@ -84,8 +84,95 @@
       "Researchers and students working on organized crime"
     ],
     "agendaHeading": "Program",
-    "agendaNote": "The program is being built now. Sessions and speakers are posted here as they are confirmed, and sent to registered delegates before the event.",
-    "agenda": [],
+    "agendaNote": "Draft program. One afternoon session is still being confirmed, and times may shift slightly. The final program is posted here and sent to registered delegates before the event.",
+    "agenda": [
+      {
+        "time": "08:00",
+        "end": "08:30",
+        "title": "Coffee service and pastries",
+        "detail": "Oceanview Suite 3-4"
+      },
+      {
+        "time": "08:30",
+        "end": "08:35",
+        "title": "Welcome remarks",
+        "detail": "Oceanview Suite 1-2"
+      },
+      {
+        "time": "08:35",
+        "end": "09:15",
+        "title": "Contraband tobacco: investigations, case studies and the road ahead",
+        "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission"
+      },
+      {
+        "time": "09:15",
+        "end": "10:00",
+        "title": "Lessons from two major tobacco distribution investigations",
+        "detail": "Cpl. Sandra Lloyd, RCMP — Projects EPOETRY (2021–2023) and EPINKY (2024)"
+      },
+      {
+        "time": "10:00",
+        "end": "10:15",
+        "title": "Coffee break",
+        "detail": "Oceanview Suite 3-4"
+      },
+      {
+        "time": "10:15",
+        "end": "11:00",
+        "title": "From tobacco to meth: lessons from Project Roc-Pile",
+        "detail": "Claudio Belfiglio and Sean Kirby-Peloquin, Winnipeg Police Service — a November 2024 to March 2025 investigation into organized crime across BC, Manitoba and Ontario"
+      },
+      {
+        "time": "11:00",
+        "end": "12:00",
+        "title": "Discussion panel"
+      },
+      {
+        "time": "12:00",
+        "end": "13:00",
+        "title": "Lunch",
+        "detail": "Oceanview Suite 3-4"
+      },
+      {
+        "time": "13:00",
+        "end": "13:45",
+        "title": "BC gangs and organized crime: the playbook of power, expansion and influence",
+        "detail": "Jenny Tsang, CFSEU-BC"
+      },
+      {
+        "time": "13:45",
+        "end": "14:15",
+        "title": "Session to be confirmed"
+      },
+      {
+        "time": "14:15",
+        "end": "15:00",
+        "title": "Websites and online interdiction: a complement to law enforcement efforts",
+        "detail": "Danny Fournier, Rothmans, Benson & Hedges"
+      },
+      {
+        "time": "15:00",
+        "end": "15:20",
+        "title": "Coffee break",
+        "detail": "Oceanview Suite 3-4"
+      },
+      {
+        "time": "15:20",
+        "end": "16:20",
+        "title": "Discussion panel"
+      },
+      {
+        "time": "16:20",
+        "end": "16:30",
+        "title": "Closing remarks"
+      },
+      {
+        "time": "16:30",
+        "end": "18:30",
+        "title": "Networking social",
+        "detail": "Oceanview Suite 3-4"
+      }
+    ],
     "faqHeading": "Questions",
     "faq": [
       {
@@ -172,8 +259,8 @@
       "provinceName": "British Columbia",
       "regionLabel": "West Coast",
       "date": "2026-11-24",
-      "startTime": "09:00",
-      "endTime": "16:00",
+      "startTime": "08:00",
+      "endTime": "16:30",
       "timezoneLabel": "PT",
       "cost": "Free",
       "registerUrl": "https://www.ongia.org/event-details/canadian-forum-against-organized-crime-national-symposium",
@@ -216,8 +303,8 @@
       "timezone": "America/Vancouver",
       "regionPhrase": "the west coast of Canada",
       "skylineImage": "/assets/hotel/victoria/03-harbour.jpeg",
-      "networkingStart": "16:00",
-      "networkingEnd": "18:00",
+      "networkingStart": "16:30",
+      "networkingEnd": "18:30",
       "speakers": [
         {
           "name": "Jenny Tsang",
@@ -246,6 +333,18 @@
             "Corporal Sandra Lloyd began her policing career in Port Alberni, BC in 2001. She joined Federal Policing in 2008 and has been posted to Prince Rupert and Nanaimo.",
             "She instructs on RCMP courses, is a court-qualified drug expert and an Accredited Team Commander, and has overseen large-scale international organized crime investigations for the past 13 years."
           ]
+        },
+        {
+          "name": "Claudio Belfiglio",
+          "org": "Winnipeg Police Service"
+        },
+        {
+          "name": "Sean Kirby-Peloquin",
+          "org": "Winnipeg Police Service"
+        },
+        {
+          "name": "Danny Fournier",
+          "org": "Rothmans, Benson & Hedges"
         }
       ]
     },
@@ -433,7 +532,7 @@
           "Chercheurs et étudiants qui travaillent sur le crime organisé"
         ],
         "agendaHeading": "Programme",
-        "agendaNote": "Provisoire seulement. Le programme est en cours d'élaboration. Aucune séance, aucun conférencier et aucun horaire de cette page ne sont confirmés. Le programme définitif sera publié ici et transmis aux personnes inscrites avant l'événement.",
+        "agendaNote": "Programme provisoire. Une séance de l'après-midi reste à confirmer et les heures peuvent changer légèrement. Le programme définitif sera publié ici et transmis aux personnes inscrites avant l'événement.",
         "agendaEmptyTitle": "Séances à confirmer",
         "agendaEmptyBody": [
           "Les conférenciers et les sujets des séances de ce Forum ne sont pas arrêtés. Rien n'est confirmé pour l'instant, donc rien n'est indiqué ici.",
@@ -553,9 +652,98 @@
           "navVenue": "Lieu",
           "navHotel": "Hôtel",
           "navFaq": "Questions",
-          "networking": "Réseautage"
+          "networking": "Réseautage",
+          "readBio": "Lire la biographie"
         },
-        "speakersMore": "D’autres conférenciers sont en voie d’être confirmés et seront ajoutés ici."
+        "speakersMore": "D’autres conférenciers sont en voie d’être confirmés et seront ajoutés ici.",
+        "agenda": [
+          {
+            "time": "08:00",
+            "end": "08:30",
+            "title": "Café et viennoiseries",
+            "detail": "Suite Oceanview 3-4"
+          },
+          {
+            "time": "08:30",
+            "end": "08:35",
+            "title": "Mot de bienvenue",
+            "detail": "Suite Oceanview 1-2"
+          },
+          {
+            "time": "08:35",
+            "end": "09:15",
+            "title": "Tabac de contrebande : enquêtes, études de cas et perspectives",
+            "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission"
+          },
+          {
+            "time": "09:15",
+            "end": "10:00",
+            "title": "Leçons tirées de deux grandes enquêtes sur la distribution de tabac",
+            "detail": "Cap. Sandra Lloyd, GRC — projets EPOETRY (2021-2023) et EPINKY (2024)"
+          },
+          {
+            "time": "10:00",
+            "end": "10:15",
+            "title": "Pause-café",
+            "detail": "Suite Oceanview 3-4"
+          },
+          {
+            "time": "10:15",
+            "end": "11:00",
+            "title": "Du tabac à la méthamphétamine : les leçons du projet Roc-Pile",
+            "detail": "Claudio Belfiglio et Sean Kirby-Peloquin, Service de police de Winnipeg — une enquête menée de novembre 2024 à mars 2025 sur le crime organisé en Colombie-Britannique, au Manitoba et en Ontario"
+          },
+          {
+            "time": "11:00",
+            "end": "12:00",
+            "title": "Table ronde"
+          },
+          {
+            "time": "12:00",
+            "end": "13:00",
+            "title": "Dîner",
+            "detail": "Suite Oceanview 3-4"
+          },
+          {
+            "time": "13:00",
+            "end": "13:45",
+            "title": "Gangs et crime organisé en Colombie-Britannique : le pouvoir, l’expansion et l’influence",
+            "detail": "Jenny Tsang, CFSEU-BC"
+          },
+          {
+            "time": "13:45",
+            "end": "14:15",
+            "title": "Séance à confirmer"
+          },
+          {
+            "time": "14:15",
+            "end": "15:00",
+            "title": "Sites Web et interdiction en ligne : un complément au travail policier",
+            "detail": "Danny Fournier, Rothmans, Benson & Hedges"
+          },
+          {
+            "time": "15:00",
+            "end": "15:20",
+            "title": "Pause-café",
+            "detail": "Suite Oceanview 3-4"
+          },
+          {
+            "time": "15:20",
+            "end": "16:20",
+            "title": "Table ronde"
+          },
+          {
+            "time": "16:20",
+            "end": "16:30",
+            "title": "Mot de la fin"
+          },
+          {
+            "time": "16:30",
+            "end": "18:30",
+            "title": "Activité de réseautage",
+            "detail": "Suite Oceanview 3-4"
+          }
+        ]
       },
       "events": {
         "victoria": {
