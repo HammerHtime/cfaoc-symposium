@@ -84,7 +84,7 @@
       "Researchers and students working on organized crime"
     ],
     "agendaHeading": "Program",
-    "agendaNote": "Draft program. One afternoon session is still being confirmed, and times may shift slightly. The final program is posted here and sent to registered delegates before the event.",
+    "agendaNote": "Draft program. Times may shift slightly. The final program is posted here and sent to registered delegates before the event.",
     "agenda": [
       {
         "time": "08:00",
@@ -351,13 +351,12 @@
           "time": "08:00",
           "end": "08:30",
           "title": "Coffee service and pastries",
-          "detail": "Oceanview Suite 3-4"
+          "detail": "Harbour Room"
         },
         {
           "time": "08:30",
           "end": "08:35",
-          "title": "Welcome remarks",
-          "detail": "Oceanview Suite 1-2"
+          "title": "Welcome remarks"
         },
         {
           "time": "08:35",
@@ -375,24 +374,25 @@
           "time": "10:00",
           "end": "10:15",
           "title": "Coffee break",
-          "detail": "Oceanview Suite 3-4"
+          "detail": "Harbour Room"
         },
         {
           "time": "10:15",
           "end": "11:00",
           "title": "From tobacco to meth: lessons from Project Roc-Pile",
-          "detail": "Claudio Belfiglio and Sean Kirby-Peloquin, Winnipeg Police Service — a November 2024 to March 2025 investigation into organized crime across BC, Manitoba and Ontario"
+          "detail": "Sean Kirby-Peloquin, Winnipeg Police Service — a November 2024 to March 2025 investigation into organized crime across BC, Manitoba and Ontario"
         },
         {
           "time": "11:00",
           "end": "12:00",
-          "title": "Discussion panel"
+          "title": "BC tobacco",
+          "detail": "Marco Greco, Government of British Columbia"
         },
         {
           "time": "12:00",
           "end": "13:00",
           "title": "Lunch",
-          "detail": "Oceanview Suite 3-4"
+          "detail": "Harbour Room"
         },
         {
           "time": "13:00",
@@ -402,36 +402,31 @@
         },
         {
           "time": "13:45",
-          "end": "14:15",
-          "title": "Session to be confirmed"
-        },
-        {
-          "time": "14:15",
-          "end": "15:00",
+          "end": "14:30",
           "title": "Websites and online interdiction: a complement to law enforcement efforts",
           "detail": "Danny Fournier, Rothmans, Benson & Hedges"
         },
         {
-          "time": "15:00",
-          "end": "15:20",
+          "time": "14:30",
+          "end": "15:00",
           "title": "Coffee break",
-          "detail": "Oceanview Suite 3-4"
+          "detail": "Harbour Room"
         },
         {
-          "time": "15:20",
-          "end": "16:20",
+          "time": "15:00",
+          "end": "16:00",
           "title": "Discussion panel"
         },
         {
-          "time": "16:20",
-          "end": "16:30",
+          "time": "16:00",
+          "end": "16:20",
           "title": "Closing remarks"
         },
         {
           "time": "16:30",
           "end": "18:30",
           "title": "Networking social",
-          "detail": "Oceanview Suite 3-4"
+          "detail": "Harbour Foyer"
         }
       ]
     },
@@ -615,7 +610,7 @@
           "Chercheurs et étudiants qui travaillent sur le crime organisé"
         ],
         "agendaHeading": "Programme",
-        "agendaNote": "Programme provisoire. Une séance de l'après-midi reste à confirmer et les heures peuvent changer légèrement. Le programme définitif sera publié ici et transmis aux personnes inscrites avant l'événement.",
+        "agendaNote": "Programme provisoire. Les heures peuvent changer légèrement. Le programme définitif sera publié ici et transmis aux personnes inscrites avant l'événement.",
         "agendaEmptyTitle": "Séances à confirmer",
         "agendaEmptyBody": [
           "Les conférenciers et les sujets des séances de ce Forum ne sont pas arrêtés. Rien n'est confirmé pour l'instant, donc rien n'est indiqué ici.",
@@ -865,13 +860,12 @@
               "time": "08:00",
               "end": "08:30",
               "title": "Café et viennoiseries",
-              "detail": "Suite Oceanview 3-4"
+              "detail": "Salle Harbour"
             },
             {
               "time": "08:30",
               "end": "08:35",
-              "title": "Mot de bienvenue",
-              "detail": "Suite Oceanview 1-2"
+              "title": "Mot de bienvenue"
             },
             {
               "time": "08:35",
@@ -889,24 +883,25 @@
               "time": "10:00",
               "end": "10:15",
               "title": "Pause-café",
-              "detail": "Suite Oceanview 3-4"
+              "detail": "Salle Harbour"
             },
             {
               "time": "10:15",
               "end": "11:00",
               "title": "Du tabac à la méthamphétamine : les leçons du projet Roc-Pile",
-              "detail": "Claudio Belfiglio et Sean Kirby-Peloquin, Service de police de Winnipeg — une enquête menée de novembre 2024 à mars 2025 sur le crime organisé en Colombie-Britannique, au Manitoba et en Ontario"
+              "detail": "Sean Kirby-Peloquin, Service de police de Winnipeg — une enquête menée de novembre 2024 à mars 2025 sur le crime organisé en Colombie-Britannique, au Manitoba et en Ontario"
             },
             {
               "time": "11:00",
               "end": "12:00",
-              "title": "Table ronde"
+              "title": "Le tabac en Colombie-Britannique",
+              "detail": "Marco Greco, gouvernement de la Colombie-Britannique"
             },
             {
               "time": "12:00",
               "end": "13:00",
               "title": "Dîner",
-              "detail": "Suite Oceanview 3-4"
+              "detail": "Salle Harbour"
             },
             {
               "time": "13:00",
@@ -916,36 +911,31 @@
             },
             {
               "time": "13:45",
-              "end": "14:15",
-              "title": "Séance à confirmer"
-            },
-            {
-              "time": "14:15",
-              "end": "15:00",
+              "end": "14:30",
               "title": "Sites Web et interdiction en ligne : un complément au travail policier",
               "detail": "Danny Fournier, Rothmans, Benson & Hedges"
             },
             {
-              "time": "15:00",
-              "end": "15:20",
+              "time": "14:30",
+              "end": "15:00",
               "title": "Pause-café",
-              "detail": "Suite Oceanview 3-4"
+              "detail": "Salle Harbour"
             },
             {
-              "time": "15:20",
-              "end": "16:20",
+              "time": "15:00",
+              "end": "16:00",
               "title": "Table ronde"
             },
             {
-              "time": "16:20",
-              "end": "16:30",
+              "time": "16:00",
+              "end": "16:20",
               "title": "Mot de la fin"
             },
             {
               "time": "16:30",
               "end": "18:30",
               "title": "Activité de réseautage",
-              "detail": "Suite Oceanview 3-4"
+              "detail": "Foyer Harbour"
             }
           ]
         },
