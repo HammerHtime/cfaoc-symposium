@@ -342,6 +342,10 @@
           "org": "Winnipeg Police Service"
         },
         {
+          "name": "Marco Greco",
+          "org": "Government of British Columbia"
+        },
+        {
           "name": "Danny Fournier",
           "org": "Rothmans, Benson & Hedges"
         }
@@ -379,14 +383,14 @@
         {
           "time": "10:15",
           "end": "11:00",
-          "title": "From tobacco to meth: lessons from Project Roc-Pile",
-          "detail": "Sean Kirby-Peloquin, Winnipeg Police Service — a November 2024 to March 2025 investigation into organized crime across BC, Manitoba and Ontario"
+          "title": "Project Puma",
+          "detail": "Sean Kirby-Peloquin, Winnipeg Police Service"
         },
         {
           "time": "11:00",
           "end": "12:00",
-          "title": "BC tobacco",
-          "detail": "Marco Greco, Government of British Columbia"
+          "title": "BC tobacco update",
+          "detail": "Marco Greco, Government of British Columbia — the lay of the land and how the Province can help"
         },
         {
           "time": "12:00",
@@ -888,14 +892,14 @@
             {
               "time": "10:15",
               "end": "11:00",
-              "title": "Du tabac à la méthamphétamine : les leçons du projet Roc-Pile",
-              "detail": "Sean Kirby-Peloquin, Service de police de Winnipeg — une enquête menée de novembre 2024 à mars 2025 sur le crime organisé en Colombie-Britannique, au Manitoba et en Ontario"
+              "title": "Projet Puma",
+              "detail": "Sean Kirby-Peloquin, Service de police de Winnipeg"
             },
             {
               "time": "11:00",
               "end": "12:00",
-              "title": "Le tabac en Colombie-Britannique",
-              "detail": "Marco Greco, gouvernement de la Colombie-Britannique"
+              "title": "Le point sur le tabac en Colombie-Britannique",
+              "detail": "Marco Greco, gouvernement de la Colombie-Britannique — l’état des lieux et comment la Province peut aider"
             },
             {
               "time": "12:00",
