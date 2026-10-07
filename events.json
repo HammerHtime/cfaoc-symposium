@@ -334,10 +334,6 @@
           ]
         },
         {
-          "name": "Claudio Belfiglio",
-          "org": "Winnipeg Police Service"
-        },
-        {
           "name": "Sean Kirby-Peloquin",
           "org": "Winnipeg Police Service"
         },
@@ -347,7 +343,12 @@
         },
         {
           "name": "Danny Fournier",
-          "org": "Rothmans, Benson & Hedges"
+          "title": "Senior Manager, Illicit Trade Prevention, RBH Canada",
+          "org": "Rothmans, Benson & Hedges",
+          "bio": [
+            "Danny Fournier, recipient of the Governor General’s Police Exemplary Service Medal, brings over 25 years of law enforcement experience, including leading drug and contraband tobacco enforcement with the Sûreté du Québec. Canada’s only civilian expert witness on contraband tobacco and organized crime, he has testified in 70 cases since 2010.",
+            "As Senior Manager of Illicit Trade Prevention at RBH Canada (Philip Morris International), Danny implemented Canada’s first online monitoring system to combat illicit sales. He authored “Occupy the Space: A Way for Brands to Fight Unauthorized Consumer Sales” (Global Legal Post, 2024), featured at the Anti-Counterfeiting World Law Summit in 2025. Under his leadership, RBH ITP conducts investigations, awareness initiatives, and law enforcement training — training over 2,000 officers and officials in 2024 alone."
+          ]
         }
       ],
       "agenda": [
