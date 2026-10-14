@@ -1054,6 +1054,19 @@ summary:focus-visible,
   max-width: 60ch;
 }
 
+/* The presenter's own outline of a session. Set under the byline behind a rule,
+   so a row that has one still scans as one row. */
+.agenda__abstract {
+  display: block;
+  margin-top: 0.65rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--line-strong);
+  max-width: 62ch;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 /* ------------------------------------------------------------------- tbd */
 /* Used where a section has nothing confirmed yet. Deliberately looks finished
    rather than empty — an unstyled gap reads as a broken page. */

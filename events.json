@@ -325,12 +325,25 @@
           ]
         },
         {
-          "name": "Cpl. Sandra Lloyd",
-          "title": "Federal Policing, Pacific Region — Vancouver Island",
-          "org": "RCMP",
+          "name": "Cpl. Sandy Lloyd",
+          "title": "Supervisor and Accredited Team Commander",
+          "org": "RCMP Federal Policing Pacific Region — Drugs and Organized Crime, Nanaimo",
           "bio": [
-            "Corporal Sandra Lloyd began her policing career in Port Alberni, BC in 2001. She joined Federal Policing in 2008 and has been posted to Prince Rupert and Nanaimo.",
-            "She instructs on RCMP courses, is a court-qualified drug expert and an Accredited Team Commander, and has overseen large-scale international organized crime investigations for the past 13 years."
+            "Sandy Lloyd is a Corporal, Supervisor and Accredited Team Commander with Federal Policing Pacific Region — Drugs and Organized Crime Group 5 in Nanaimo. She has over 25 years of service, 18 of them dedicated to Federal Policing, and has been a court-qualified drug expert since 2008.",
+            "Her team is responsible for large-scale, project-based investigations into high-level drug trafficking, import and export, and organized crime groups.",
+            "In 2024 and 2025 she expanded her expertise into contraband tobacco, when two of the unit’s investigations disrupted extensive contraband cigarette distribution networks throughout BC and Alberta. She has received advanced training from Rothmans, Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, along with continual training and development in the area, and is recognized within E Division as a subject matter expert in contraband tobacco.",
+            "She shares this knowledge across BC and nationally, presenting at forums including the Canadian Police College Organized Crime Course, the Canadian Forum Against Organized Crime, and the Counter-Illicit Finance Alliance of BC Symposium."
+          ]
+        },
+        {
+          "name": "Cst. Jason Ebert",
+          "title": "",
+          "org": "RCMP Federal Policing Pacific Region — Drugs and Organized Crime, Nanaimo",
+          "bio": [
+            "Jason Ebert is a Constable with Federal Policing Pacific Region — Drugs and Organized Crime in Nanaimo. He has been a member of the RCMP for over 22 years, 17 of them with Federal Policing.",
+            "His team is responsible for large-scale, project-based investigations into high-level drug trafficking, import and export, and organized crime groups.",
+            "In 2024 and 2025 he expanded his expertise into contraband tobacco, when two of the unit’s investigations disrupted extensive contraband cigarette distribution networks throughout BC and Alberta. He has received advanced training from Rothmans, Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, along with continual training and development in the area, and is recognized within E Division as a subject matter expert in contraband tobacco.",
+            "He shares this knowledge across BC and nationally, presenting at forums including the Canadian Police College Organized Crime Course, the Canadian Forum Against Organized Crime, and the Counter-Illicit Finance Alliance of BC Symposium."
           ]
         },
         {
@@ -372,8 +385,9 @@
         {
           "time": "09:15",
           "end": "10:00",
-          "title": "Lessons from two major tobacco distribution investigations",
-          "detail": "Cpl. Sandra Lloyd, RCMP — Projects EPOETRY (2021–2023) and EPINKY (2024)"
+          "title": "Contraband tobacco in Western Canada: distribution, organized crime and two case studies",
+          "detail": "Cpl. Sandy Lloyd and Cst. Jason Ebert, RCMP Federal Policing Pacific Region",
+          "abstract": "An overview of the current landscape and emerging trends in the distribution of contraband tobacco in Western Canada, with a focus on how the commodity is exploited by organized crime groups. The session will help investigators identify contraband tobacco and understand the police powers available to combat a growing trend. Two recent case studies on the distribution of contraband cigarettes and their links to outlaw motorcycle gangs will be highlighted."
         },
         {
           "time": "10:00",
@@ -881,8 +895,9 @@
             {
               "time": "09:15",
               "end": "10:00",
-              "title": "Leçons tirées de deux grandes enquêtes sur la distribution de tabac",
-              "detail": "Cap. Sandra Lloyd, GRC — projets EPOETRY (2021-2023) et EPINKY (2024)"
+              "title": "Le tabac de contrebande dans l'Ouest canadien : distribution, crime organisé et deux études de cas",
+              "detail": "Cap. Sandy Lloyd et gend. Jason Ebert, Police fédérale de la GRC, région du Pacifique",
+              "abstract": "Un portrait de la situation actuelle et des tendances émergentes dans la distribution du tabac de contrebande dans l'Ouest canadien, et de la façon dont les groupes du crime organisé exploitent ce produit. La séance aidera les enquêteurs à reconnaître le tabac de contrebande et à connaître les pouvoirs policiers dont ils disposent pour contrer cette tendance croissante. Deux études de cas récentes sur la distribution de cigarettes de contrebande et ses liens avec les bandes de motards criminalisées seront présentées."
             },
             {
               "time": "10:00",

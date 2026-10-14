@@ -685,6 +685,7 @@ function programmeSection(ev, opts) {
             <span class="agenda__body">
               <span class="agenda__title${s.variable ? ' agenda__title--open' : ''}">${esc(s.title)}</span>
               ${s.detail ? `<span class="agenda__detail">${esc(s.detail)}</span>` : ''}
+              ${s.abstract ? `<span class="agenda__abstract">${esc(s.abstract)}</span>` : ''}
             </span>
           </li>`
             )
