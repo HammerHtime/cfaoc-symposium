@@ -39,6 +39,38 @@ const deepMerge = (base, over) => {
   return out;
 };
 
+/* ---------------------------------------------------------------- the desk */
+/* The ONGIA events desk (events.ongia.org) keeps each city's date, times,
+   venue, hotel, presenters and program, and writes them here with its
+   "Update website" button: one file per city, desk/<page>.json, one commit per
+   press. Each file lays over the event in events.json with the same page name
+   (matched by slug, or by region for a city whose page is not open yet) — the
+   desk's fields win, everything else here stays — or adds a new city when
+   there is none. Its "fr" block lays over that city's French the same way.
+   Don't edit desk/*.json by hand: the next update from the desk replaces it.
+   To undo an update, revert its commit. */
+const DESK_DIR = path.join(ROOT, 'desk');
+const NEW_CITY = { status: 'open', cost: 'Free', registerLabel: 'Register — free', registerNote: "Registration is handled on ONGIA's events site.", venue: { country: 'Canada' }, hotel: null };
+const NEW_CITY_FR = { cost: 'Gratuit', registerLabel: 'Inscription — gratuit', registerNote: "L'inscription se fait sur le site d'événements d'ONGIA." };
+function applyDesk(d) {
+  if (!fs.existsSync(DESK_DIR)) return;
+  const key = (ev) => ev.slug || String(ev.regionLabel || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  for (const file of fs.readdirSync(DESK_DIR).filter((f) => f.endsWith('.json')).sort()) {
+    const desk = JSON.parse(fs.readFileSync(path.join(DESK_DIR, file), 'utf8'));
+    const page = desk.event && desk.event.slug;
+    if (!page) continue;
+    const i = d.events.findIndex((ev) => key(ev) === page);
+    const had = i >= 0 ? d.events[i] : null;
+    const merged = deepMerge(had || NEW_CITY, desk.event);
+    if (i >= 0) d.events[i] = merged; else d.events.push(merged);
+    // The French pack is keyed by the page name; a city that had no page yet was keyed by its region.
+    d.i18n = d.i18n || {}; d.i18n.fr = d.i18n.fr || {}; const fr = (d.i18n.fr.events = d.i18n.fr.events || {});
+    const was = fr[page] || (had && fr[key(had)]) || (had ? {} : NEW_CITY_FR);
+    fr[page] = deepMerge(was, desk.fr);
+  }
+}
+applyDesk(data);
+
 let LANG = LANGS[0];
 let SITE = data.site;
 let C = data.content;
@@ -851,6 +883,7 @@ function hotelSection(ev) {
           <div class="rate__body">
             <h3 class="rate__name">${esc(h.name)}</h3>
             ${h.intro ? `<p>${esc(h.intro)}</p>` : ''}
+            ${h.groupCode || h.bookBy ? `<p class="rate__code">${[h.groupCode ? `${esc(U("groupCode", "Group code"))}: <strong>${esc(h.groupCode)}</strong>` : '', h.bookBy ? `${esc(U("bookBy", "Book by"))} <strong>${esc(fmtLong(h.bookBy))}</strong>` : ''].filter(Boolean).join(' · ')}</p>` : ''}
             ${h.bookingUrl ? `<p><a class="btn btn--primary" href="${attr(h.bookingUrl)}" target="_blank" rel="noopener">${esc(h.bookingLabel || 'Book your room')}<svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>` : ''}
             ${h.rateNote ? `<p class="rate__note">${esc(h.rateNote)}</p>` : ''}
           </div>

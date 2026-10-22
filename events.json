@@ -688,6 +688,8 @@
           "Nous les lisons toutes. Si nous tenons le Forum dans votre région, nous communiquerons avec vous au sujet de l'appui local et du lieu."
         ],
         "ui": {
+          "groupCode": "Code de groupe",
+          "bookBy": "Réservez avant le",
           "skip": "Passer au contenu",
           "menu": "Menu",
           "scroll": "Défiler",
