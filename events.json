@@ -451,8 +451,8 @@
       "regionPhrase": "the west coast of Canada",
       "date": "",
       "dateNote": "Fall 2027",
-      "startTime": "09:00",
-      "endTime": "16:00",
+      "startTime": "08:00",
+      "endTime": "16:30",
       "timezone": "America/Vancouver",
       "timezoneLabel": "PT",
       "cost": "Free",
@@ -472,8 +472,8 @@
       },
       "hotel": null,
       "sortDate": "2027-10",
-      "networkingStart": "16:00",
-      "networkingEnd": "18:00"
+      "networkingStart": "16:30",
+      "networkingEnd": "18:30"
     },
     {
       "slug": "",
@@ -483,8 +483,8 @@
       "provinceName": "",
       "regionLabel": "Central Canada",
       "date": "2027-03-23",
-      "startTime": "09:00",
-      "endTime": "16:00",
+      "startTime": "08:00",
+      "endTime": "16:30",
       "timezoneLabel": "ET",
       "cost": "Free",
       "registerUrl": "",
@@ -504,8 +504,8 @@
       "hotel": null,
       "timezone": "America/Toronto",
       "regionPhrase": "central Canada",
-      "networkingStart": "16:00",
-      "networkingEnd": "18:00"
+      "networkingStart": "16:30",
+      "networkingEnd": "18:30"
     },
     {
       "slug": "",
@@ -515,8 +515,8 @@
       "provinceName": "",
       "regionLabel": "Atlantic Canada",
       "date": "2027-03-30",
-      "startTime": "09:00",
-      "endTime": "16:00",
+      "startTime": "08:00",
+      "endTime": "16:30",
       "timezoneLabel": "AT",
       "cost": "Free",
       "registerUrl": "",
@@ -536,8 +536,8 @@
       "hotel": null,
       "timezone": "America/Halifax",
       "regionPhrase": "Atlantic Canada",
-      "networkingStart": "16:00",
-      "networkingEnd": "18:00"
+      "networkingStart": "16:30",
+      "networkingEnd": "18:30"
     }
   ],
   "i18n": {
