@@ -306,49 +306,38 @@
       "networkingEnd": "18:30",
       "speakers": [
         {
-          "name": "Jenny Tsang",
-          "title": "Supervisory Criminal Intelligence Analyst",
-          "org": "CFSEU-BC",
-          "bio": [
-            "Jenny Tsang has 22 years of law enforcement service and is currently a Supervisory Criminal Intelligence Analyst with the Combined Forces Special Enforcement Unit of BC (CFSEU-BC), the province’s anti-gang enforcement agency and the largest integrated policing unit in Canada. She has spent the majority of her analytical career specializing in gangs and organized crime groups across British Columbia.",
-            "Since 2017, Jenny has worked with the CFSEU-BC Outlaw Motorcycle Gang (OMG) Unit and has supported OMG investigations and intelligence operations across the country. In 2019, she became the first intelligence analyst in Canada to be qualified in court as a civilian expert on BC outlaw motorcycle gangs. She is the current Chair of the National OMG Analytical Working Group and of the BC Gang Conflict Joint Analytical Working Group, and she serves as Vice President of the Western Canada Chapter of the International Association of Law Enforcement Intelligence Analysts (IALEIA).",
-            "Jenny has provided training to the local and international policing community, and continues to share her subject matter expertise at gang conferences and expert symposiums in Canada, Europe and the United States."
-          ]
+          "name": "Luc Seguin"
         },
         {
           "name": "Lloyd Plomp",
           "title": "Supervisor, Tobacco Enforcement Unit",
           "org": "Alberta Gaming, Liquor and Cannabis Commission",
           "bio": [
-            "Lloyd Plomp is Supervisor of the Tobacco Enforcement Unit with the Alberta Gaming, Liquor and Cannabis Commission, where he has worked since 2021.",
-            "Before that he spent 29 years with the Calgary Police Service, working drugs, gangs, vice, organized crime, CFSEU, ALERT, and guns and gangs, including time with the service’s agent handling team."
+            "Lloyd Plomp spent twenty-nine years with the Calgary Police Service, in patrol, the drug undercover unit, gangs, CFSEU and ALERT, targeted enforcement, guns and gangs, vice, and agent handling.",
+            "He has been with the Alberta Gaming, Liquor and Cannabis Commission since 2021, in the Tobacco Enforcement Unit."
           ]
         },
         {
-          "name": "Cpl. Sandy Lloyd",
+          "name": "Sandra Lloyd",
           "title": "Supervisor and Accredited Team Commander",
           "org": "RCMP Federal Policing Pacific Region — Drugs and Organized Crime, Nanaimo",
           "bio": [
-            "Sandy Lloyd is a Corporal, Supervisor and Accredited Team Commander with Federal Policing Pacific Region — Drugs and Organized Crime Group 5 in Nanaimo. She has over 25 years of service, 18 of them dedicated to Federal Policing, and has been a court-qualified drug expert since 2008.",
+            "Sandra Lloyd is a Corporal, Supervisor and Accredited Team Commander with Federal Policing Pacific Region — Drugs and Organized Crime Group 5 in Nanaimo. She has over 25 years of service, 18 of them dedicated to Federal Policing, and has been a court-qualified drug expert since 2008.",
             "Her team is responsible for large-scale, project-based investigations into high-level drug trafficking, import and export, and organized crime groups.",
             "In 2024 and 2025 she expanded her expertise into contraband tobacco, when two of the unit’s investigations disrupted extensive contraband cigarette distribution networks throughout BC and Alberta. She has received advanced training from Rothmans, Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, along with continual training and development in the area, and is recognized within E Division as a subject matter expert in contraband tobacco.",
             "She shares this knowledge across BC and nationally, presenting at forums including the Canadian Police College Organized Crime Course, the Canadian Forum Against Organized Crime, and the Counter-Illicit Finance Alliance of BC Symposium."
           ]
         },
         {
-          "name": "Cst. Jason Ebert",
-          "title": "",
-          "org": "RCMP Federal Policing Pacific Region — Drugs and Organized Crime, Nanaimo",
+          "name": "Sean Kirby",
+          "org": "Winnipeg Police Service",
+          "title": "Detective, Organized Crime Unit",
+          "photo": "/assets/speakers/sean-kirby.jpg",
           "bio": [
-            "Jason Ebert is a Constable with Federal Policing Pacific Region — Drugs and Organized Crime in Nanaimo. He has been a member of the RCMP for over 22 years, 17 of them with Federal Policing.",
-            "His team is responsible for large-scale, project-based investigations into high-level drug trafficking, import and export, and organized crime groups.",
-            "In 2024 and 2025 he expanded his expertise into contraband tobacco, when two of the unit’s investigations disrupted extensive contraband cigarette distribution networks throughout BC and Alberta. He has received advanced training from Rothmans, Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, along with continual training and development in the area, and is recognized within E Division as a subject matter expert in contraband tobacco.",
-            "He shares this knowledge across BC and nationally, presenting at forums including the Canadian Police College Organized Crime Course, the Canadian Forum Against Organized Crime, and the Counter-Illicit Finance Alliance of BC Symposium."
+            "Sean Kirby has been a member of the Winnipeg Police Service for the past 13 years and is currently a Detective assigned to the Organized Crime Unit, where he was a lead investigator and source handler for WPS Project Puma. Prior to his current assignment Sean worked in General Patrol, the Community Support Unit, and the Guns and Gangs Unit.",
+            "Sean has been with the Organized Crime Unit for five years, routinely investigating criminal organizations and involved in a number of successful long-term inter-provincial projects.",
+            "Sean is currently a member of the WPS Gang Expert Program, assigned a portfolio in non-traditional organized crime groups. Sean is also a facilitator and instructor in confidential human source handling for the WPS."
           ]
-        },
-        {
-          "name": "Sean Kirby-Peloquin",
-          "org": "Winnipeg Police Service"
         },
         {
           "name": "Marco Greco",
@@ -379,14 +368,15 @@
         {
           "time": "08:35",
           "end": "09:15",
-          "title": "Contraband tobacco: investigations, case studies and the road ahead",
-          "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission"
+          "title": "The emergence of contraband nicotine in tobacco investigations",
+          "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission",
+          "abstract": "The growing trend of contraband nicotine in tobacco investigations, and its growth outside of tobacco. A new approach to contraband, and working with numerous partners to combat this new illegal market."
         },
         {
           "time": "09:15",
           "end": "10:00",
-          "title": "Contraband tobacco in Western Canada: distribution, organized crime and two case studies",
-          "detail": "Cpl. Sandy Lloyd and Cst. Jason Ebert, RCMP Federal Policing Pacific Region",
+          "title": "Combatting the distribution of contraband tobacco",
+          "detail": "Sandra Lloyd, RCMP Federal Policing Pacific Region",
           "abstract": "An overview of the current landscape and emerging trends in the distribution of contraband tobacco in Western Canada, with a focus on how the commodity is exploited by organized crime groups. The session will help investigators identify contraband tobacco and understand the police powers available to combat a growing trend. Two recent case studies on the distribution of contraband cigarettes and their links to outlaw motorcycle gangs will be highlighted."
         },
         {
@@ -398,8 +388,9 @@
         {
           "time": "10:15",
           "end": "11:00",
-          "title": "Project Puma",
-          "detail": "Sean Kirby-Peloquin, Winnipeg Police Service"
+          "title": "Project Puma: a case study",
+          "detail": "Sean Kirby, Winnipeg Police Service",
+          "abstract": "A case study of Project Puma. The criminal organizations investigated within Manitoba and their links to the Hells Angels, the Wolfpack and Asian organized crime; the illicit tobacco and the individuals linked to Project Puma; and the file management and disclosure system used during the investigation."
         },
         {
           "time": "11:00",
@@ -416,8 +407,8 @@
         {
           "time": "13:00",
           "end": "13:45",
-          "title": "BC gangs and organized crime: the playbook of power, expansion and influence",
-          "detail": "Jenny Tsang, CFSEU-BC"
+          "title": "Session to be confirmed",
+          "detail": "Luc Seguin"
         },
         {
           "time": "13:45",
@@ -447,7 +438,8 @@
           "title": "Networking social",
           "detail": "Harbour Foyer"
         }
-      ]
+      ],
+      "seriesLabel": "Western Symposium"
     },
     {
       "slug": "",
@@ -551,7 +543,8 @@
   "i18n": {
     "fr": {
       "site": {
-        "description": "Un symposium gratuit d'une journée sur le crime organisé dans les ports, aéroports et postes frontaliers du Canada, destiné aux services de police, aux partenaires frontaliers et du transport, aux procureurs, aux services correctionnels, aux analystes et aux organismes communautaires. Trois forums par année, partout au pays."
+        "description": "Un symposium gratuit d'une journée sur le crime organisé dans les ports, aéroports et postes frontaliers du Canada, destiné aux services de police, aux partenaires frontaliers et du transport, aux procureurs, aux services correctionnels, aux analystes et aux organismes communautaires. Trois forums par année, partout au pays.",
+        "seriesLabel": "Symposium national"
       },
       "content": {
         "navHome": "Accueil",
@@ -889,14 +882,15 @@
             {
               "time": "08:35",
               "end": "09:15",
-              "title": "Tabac de contrebande : enquêtes, études de cas et perspectives",
-              "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission"
+              "title": "L'émergence de la nicotine de contrebande dans les enquêtes sur le tabac",
+              "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission",
+              "abstract": "La tendance croissante de la nicotine de contrebande dans les enquêtes sur le tabac et son expansion au-delà du tabac. Une nouvelle approche de la contrebande et la collaboration avec de nombreux partenaires pour contrer ce nouveau marché illégal."
             },
             {
               "time": "09:15",
               "end": "10:00",
-              "title": "Le tabac de contrebande dans l'Ouest canadien : distribution, crime organisé et deux études de cas",
-              "detail": "Cap. Sandy Lloyd et gend. Jason Ebert, Police fédérale de la GRC, région du Pacifique",
+              "title": "Lutter contre la distribution du tabac de contrebande",
+              "detail": "Sandra Lloyd, Police fédérale de la GRC, région du Pacifique",
               "abstract": "Un portrait de la situation actuelle et des tendances émergentes dans la distribution du tabac de contrebande dans l'Ouest canadien, et de la façon dont les groupes du crime organisé exploitent ce produit. La séance aidera les enquêteurs à reconnaître le tabac de contrebande et à connaître les pouvoirs policiers dont ils disposent pour contrer cette tendance croissante. Deux études de cas récentes sur la distribution de cigarettes de contrebande et ses liens avec les bandes de motards criminalisées seront présentées."
             },
             {
@@ -908,8 +902,9 @@
             {
               "time": "10:15",
               "end": "11:00",
-              "title": "Projet Puma",
-              "detail": "Sean Kirby-Peloquin, Service de police de Winnipeg"
+              "title": "Projet Puma : étude de cas",
+              "detail": "Sean Kirby, Service de police de Winnipeg",
+              "abstract": "Une étude de cas du projet Puma. Les organisations criminelles visées par l'enquête au Manitoba et leurs liens avec les Hells Angels, le Wolfpack et le crime organisé asiatique; le tabac illicite et les individus liés au projet Puma; ainsi que le système de gestion des dossiers et de divulgation utilisé pendant l'enquête."
             },
             {
               "time": "11:00",
@@ -926,8 +921,8 @@
             {
               "time": "13:00",
               "end": "13:45",
-              "title": "Gangs et crime organisé en Colombie-Britannique : le pouvoir, l’expansion et l’influence",
-              "detail": "Jenny Tsang, CFSEU-BC"
+              "title": "Séance à confirmer",
+              "detail": "Luc Seguin"
             },
             {
               "time": "13:45",
@@ -957,7 +952,57 @@
               "title": "Activité de réseautage",
               "detail": "Foyer Harbour"
             }
-          ]
+          ],
+          "speakers": [
+            {
+              "name": "Luc Seguin"
+            },
+            {
+              "name": "Lloyd Plomp",
+              "title": "Superviseur, unité d'application de la loi sur le tabac",
+              "org": "Alberta Gaming, Liquor and Cannabis Commission",
+              "bio": [
+                "Lloyd Plomp a fait carrière pendant vingt-neuf ans au Service de police de Calgary, en patrouille, à l'unité antidrogue d'infiltration, aux gangs, au CFSEU et à l'ALERT, à l'application ciblée, aux armes et gangs, aux mœurs et à la gestion d'agents sources.",
+                "Il est à l'Alberta Gaming, Liquor and Cannabis Commission depuis 2021, au sein de l'unité d'application de la loi sur le tabac."
+              ]
+            },
+            {
+              "name": "Sandra Lloyd",
+              "title": "Superviseure et commandante d'équipe accréditée",
+              "org": "Police fédérale de la GRC, région du Pacifique — Drogues et crime organisé, Nanaimo",
+              "bio": [
+                "Sandra Lloyd is a Corporal, Supervisor and Accredited Team Commander with Federal Policing Pacific Region — Drugs and Organized Crime Group 5 in Nanaimo. She has over 25 years of service, 18 of them dedicated to Federal Policing, and has been a court-qualified drug expert since 2008.",
+                "Her team is responsible for large-scale, project-based investigations into high-level drug trafficking, import and export, and organized crime groups.",
+                "In 2024 and 2025 she expanded her expertise into contraband tobacco, when two of the unit’s investigations disrupted extensive contraband cigarette distribution networks throughout BC and Alberta. She has received advanced training from Rothmans, Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, along with continual training and development in the area, and is recognized within E Division as a subject matter expert in contraband tobacco.",
+                "She shares this knowledge across BC and nationally, presenting at forums including the Canadian Police College Organized Crime Course, the Canadian Forum Against Organized Crime, and the Counter-Illicit Finance Alliance of BC Symposium."
+              ]
+            },
+            {
+              "name": "Sean Kirby",
+              "title": "Détective, unité du crime organisé",
+              "org": "Service de police de Winnipeg",
+              "photo": "/assets/speakers/sean-kirby.jpg",
+              "bio": [
+                "Sean Kirby est membre du Service de police de Winnipeg depuis 13 ans. Il est actuellement détective à l'unité du crime organisé, où il a été enquêteur principal et responsable de sources pour le projet Puma du SPW. Avant cette affectation, il a travaillé à la patrouille générale, à l'unité de soutien communautaire et à l'unité des armes et des gangs.",
+                "Il est à l'unité du crime organisé depuis cinq ans, où il enquête régulièrement sur des organisations criminelles et a pris part à plusieurs projets interprovinciaux de longue haleine menés à bien.",
+                "Il fait partie du programme d'experts en gangs du SPW, avec un portefeuille consacré aux groupes du crime organisé non traditionnels. Il est également formateur en gestion de sources humaines confidentielles pour le SPW."
+              ]
+            },
+            {
+              "name": "Marco Greco",
+              "org": "Gouvernement de la Colombie-Britannique"
+            },
+            {
+              "name": "Danny Fournier",
+              "title": "Senior Manager, Illicit Trade Prevention, RBH Canada",
+              "org": "Rothmans, Benson & Hedges",
+              "bio": [
+                "Danny Fournier, recipient of the Governor General’s Police Exemplary Service Medal, brings over 25 years of law enforcement experience, including leading drug and contraband tobacco enforcement with the Sûreté du Québec. Canada’s only civilian expert witness on contraband tobacco and organized crime, he has testified in 70 cases since 2010.",
+                "As Senior Manager of Illicit Trade Prevention at RBH Canada (Philip Morris International), Danny implemented Canada’s first online monitoring system to combat illicit sales. He authored “Occupy the Space: A Way for Brands to Fight Unauthorized Consumer Sales” (Global Legal Post, 2024), featured at the Anti-Counterfeiting World Law Summit in 2025. Under his leadership, RBH ITP conducts investigations, awareness initiatives, and law enforcement training — training over 2,000 officers and officials in 2024 alone."
+              ]
+            }
+          ],
+          "seriesLabel": "Symposium de l’Ouest"
         },
         "central-canada": {
           "regionLabel": "Centre du Canada",

@@ -185,6 +185,15 @@ const mapsUrl = (v) =>
 
 /** Section numbers run in document order, so they stay right whatever a page includes. */
 let secNo = 0;
+/* Each city's Forum carries its own symposium name (Victoria is the Western
+   Symposium); the hub shows the series label. Set per page beside the section
+   counter, so the masthead and the title lockup can read it without every
+   caller having to thread the event through. */
+let PAGE_EV = null;
+const setPageEvent = (ev) => { PAGE_EV = ev || null; };
+const seriesLabel = () =>
+  (PAGE_EV && PAGE_EV.seriesLabel) || SITE.seriesLabel || 'National Symposium';
+
 const resetSections = () => { secNo = 0; };
 const num = () => String(++secNo).padStart(2, '0');
 
@@ -463,7 +472,7 @@ function navBar(links, cta, altPath) {
       <span class="brand__mark" aria-hidden="true"></span>
       <span class="brand__text">
         <span class="brand__name">CFAOC</span>
-        <span class="brand__sub">National Symposium</span>
+        <span class="brand__sub">${esc(seriesLabel())}</span>
       </span>
     </a>
     <button class="navtoggle" data-navtoggle aria-expanded="false" aria-controls="sitenav">
@@ -500,7 +509,7 @@ function titleLockup(sub) {
   <div class="lockup__head">
     <p class="lockup__eyebrow">Canadian Forum Against</p>
     <h1 class="lockup__title"><span>Organized</span><span>Crime</span></h1>
-    <p class="lockup__series">National Symposium</p>
+    <p class="lockup__series">${esc(seriesLabel())}</p>
     <hr class="lockup__rule">
   </div>
   <p class="lockup__tagline">${esc(SITE.tagline)}</p>
@@ -1061,6 +1070,7 @@ function footer() {
 
 function hubPage() {
   resetSections();
+  setPageEvent(null);
   const featured = EVENTS.find((e) => isLive(e)) || EVENTS[0];
   /* "Host it" came out: the request form now lives inside #cities, which is
      where the question arises, and one fewer nav item is one fewer decision. */
@@ -1124,6 +1134,7 @@ ${ctaSection(isLive(featured) ? featured : null)}
 
 function eventPage(ev) {
   resetSections();
+  setPageEvent(ev);
   const nav = [
     { href: home(), label: U("navSeries","Series") },
     { href: '#intro', label: U("navAbout","About") },
