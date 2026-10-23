@@ -54,15 +54,15 @@ address.
 Each city's date, times, venue, hotel, presenters and program are kept in the
 ONGIA events desk (events.ongia.org), on the event's **Settings → Website**
 card. Its **Update website** button shows what would change, then commits
-`desk/<page>.json` (and the presenters' photos under
-`static/assets/speakers/<page>/`) to `main`, and Netlify rebuilds.
+`desk/<page>.json` to `main`, and Netlify rebuilds. No headshots go on the
+site from the desk.
 
 - `build.js` lays each desk file over the event of the same page name in
   `events.json`; the desk's fields win, everything else (hotel photos and
   highlights, FAQ, themes, wording) stays here. A page name the site does not
   have yet becomes a new city.
 - Only presenters who signed their agreement and agreed to public use are ever
-  in a desk file; a photo only with a yes to public photos.
+  in a desk file.
 - Don't edit `desk/*.json` by hand: the next update from the desk replaces it.
   Change it in the desk instead.
 - To undo an update, revert its commit on GitHub.
