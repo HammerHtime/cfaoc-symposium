@@ -61,7 +61,13 @@ function page(ev) {
     ? `${fmtDate(ev.date)} · ${fmtTime(ev.startTime)} – ${fmtTime(ev.endTime)}`
     : (ev.dateNote || 'Date to be announced');
   const city = ev.city ? `${ev.city}, ${ev.province}` : ev.regionLabel;
-  const sub = ev.venue && ev.venue.name ? ev.venue.name : 'City and venue to be announced';
+  /* A city can be settled before its room is. Only say the city is unknown
+     when it actually is, or the caption contradicts the headline above it. */
+  const sub = ev.venue && ev.venue.name
+    ? ev.venue.name
+    : ev.city
+      ? 'Venue to be announced'
+      : 'City and venue to be announced';
   const sky = ev.skylineImage
     ? `background:url('${ev.skylineImage}') center 38% / cover no-repeat;` +
       `filter:grayscale(1) contrast(1.15) brightness(1.05);mix-blend-mode:screen;opacity:.20;`
