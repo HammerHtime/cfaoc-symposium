@@ -1,0 +1,270 @@
+{
+  "_comment": "Written by the ONGIA events desk for Canadian Forum Against Organized Crime - Western Symposium. Change it in the desk (Settings, Website), not here: the next update from the desk replaces this file.",
+  "event": {
+    "slug": "victoria",
+    "status": "open",
+    "city": "Victoria",
+    "province": "BC",
+    "provinceName": "British Columbia",
+    "timezone": "America/Vancouver",
+    "timezoneLabel": "PT",
+    "regionLabel": "West Coast",
+    "date": "2026-11-24",
+    "startTime": "08:00",
+    "endTime": "16:30",
+    "registerUrl": "https://www.ongia.org/event-details/canadian-forum-against-organized-crime-national-symposium",
+    "blurb": "The Pacific gateway: container terminals, the marine corridor, cross-border movement through the Salish Sea, and the groups working the West Coast.",
+    "venue": {
+      "name": "Delta Hotels by Marriott Victoria Ocean Pointe Resort",
+      "street": "100 Harbour Road",
+      "city": "Victoria",
+      "region": "BC",
+      "postalCode": "V9A 0G1",
+      "country": "Canada"
+    },
+    "hotel": {
+      "name": "Delta Hotels by Marriott Victoria Ocean Pointe Resort",
+      "rate": "$249",
+      "bookingUrl": "https://www.marriott.com/event-reservations/reservation-link.mi?id=1786044245922&key=GRP&app=resvlink&_branch_match_id=1591319704557417213&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXTywo0MtNLCrKzC8p0UvOz9UvSi0uy0wtN7IHytiCODmZedlqmSm2huYWZgYmJkYmppZGRmrZqZW27kEBanVFqWmpQO156fFJRfnlxalFtsGJaYlFmQAwwBYRYQAAAA%3D%3D",
+      "bookBy": "2026-10-23"
+    },
+    "speakers": [
+      {
+        "name": "Jason Ebert",
+        "org": "RCMP  FPPR-DOC"
+      },
+      {
+        "name": "Sean Kirby",
+        "title": "Detective, Organized Crime Unit",
+        "org": "Winnipeg Police Service",
+        "bio": [
+          "Sean Kirby has been a member of the Winnipeg Police Service for the past 13 years and is currently a Detective assigned to the Organized Crime Unit, where he was a lead investigator and source handler for WPS Project Puma. Prior to his current assignment Sean worked in General patrol, the Community Support Unit, and the Guns and Gangs Unit.",
+          "Sean has been with the Organized Crime Unit for the 5 years routinely investigating criminal organizations and involved in a number of successful long-term inter-provincial projects.",
+          "Sean is currently a member of the WPS Gang Expert Program, assigned a portfolio in non-traditional organized crime groups. Sean is also a facilitator/instructor in confidential human source handling for the WPS."
+        ]
+      },
+      {
+        "name": "Sandra Lloyd",
+        "title": "Supervisor and Accredited Team Commander",
+        "org": "RCMP",
+        "bio": [
+          "Sandy Lloyd is a Corporal, Supervisor and Accredited Team Commander with Federal Policing Pacific Region – Drugs and Organized Crime Group 5 (Nanaimo). She has over 25 years of service, 18 of which have been dedicated to Federal Policing. She has been a court-qualified drug expert since 2008. Constable Jason Ebert is also a member of FPPR-DOC, Nanaimo. He has been a member of the RCMP for over 22 years, 17 of which have been with Federal Policing. Their team is responsible for large-scale, Project-based investigations into high-level drug trafficking, and import/export, and Organized Crime groups. In 2024 and 2025, they both expanded their expertise into contraband tobacco when two of their unit’s investigations resulted in the disruption of extensive contraband cigarette distribution networks throughout BC and Alberta. Both have received advanced training from Rothmans Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, and continual training and development in this area. In turn, they have both been recognized within E Division as subject matter experts in contraband tobacco. They have been sharing this knowledge throughout BC and Nationally, presenting in forums including the Canadian Police College Organized Crime Course, Canadian Forum Against Organized Crime and the Counter-Illicit Finance Alliance of BC Symposium."
+        ]
+      },
+      {
+        "name": "Lloyd Plomp",
+        "title": "Supervisor, Tobacco Enforcement Unit",
+        "org": "Alberta Gaming, Liquor and Cannabis Commission",
+        "bio": [
+          "Twenty-nine year career with Calgary Police Service, spent in Patrol, Drug Undercover Unit, Gangs, CFSEU/ALERT, Targeted Enforcement, Guns and Gangs, Vice, and Agent Handling. Been with Alberta Gaming Liquor Cannabis Commission since 2021 in the Tobacco Enforcement Unit."
+        ]
+      }
+    ],
+    "agenda": [
+      {
+        "time": "08:00",
+        "end": "08:30",
+        "title": "Coffee service and pastries",
+        "detail": "Harbour Room"
+      },
+      {
+        "time": "08:30",
+        "end": "08:35",
+        "title": "Welcome remarks"
+      },
+      {
+        "time": "08:35",
+        "end": "09:15",
+        "title": "The emergence of contraband nicotine in tobacco investigations",
+        "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission",
+        "abstract": "The growing trend of contraband nicotine in tobacco investigations, and its growth outside of tobacco. A new approach to contraband, and working with numerous partners to combat this new illegal market."
+      },
+      {
+        "time": "09:15",
+        "end": "10:00",
+        "title": "Combatting the distribution of contraband tobacco",
+        "detail": "Sandra Lloyd, RCMP Federal Policing Pacific Region",
+        "abstract": "An overview of the current landscape and emerging trends in the distribution of contraband tobacco in Western Canada, with a focus on how the commodity is exploited by organized crime groups. The session will help investigators identify contraband tobacco and understand the police powers available to combat a growing trend. Two recent case studies on the distribution of contraband cigarettes and their links to outlaw motorcycle gangs will be highlighted."
+      },
+      {
+        "time": "10:00",
+        "end": "10:15",
+        "title": "Coffee break",
+        "detail": "Harbour Room"
+      },
+      {
+        "time": "10:15",
+        "end": "11:00",
+        "title": "Project Puma: a case study",
+        "detail": "Sean Kirby, Winnipeg Police Service",
+        "abstract": "A case study of Project Puma. The criminal organizations investigated within Manitoba and their links to the Hells Angels, the Wolfpack and Asian organized crime; the illicit tobacco and the individuals linked to Project Puma; and the file management and disclosure system used during the investigation."
+      },
+      {
+        "time": "11:00",
+        "end": "12:00",
+        "title": "BC tobacco update",
+        "detail": "Marco Greco, Government of British Columbia — the lay of the land and how the Province can help"
+      },
+      {
+        "time": "12:00",
+        "end": "13:00",
+        "title": "Lunch",
+        "detail": "Harbour Room"
+      },
+      {
+        "time": "13:00",
+        "end": "13:45",
+        "title": "Session to be confirmed"
+      },
+      {
+        "time": "13:45",
+        "end": "14:30",
+        "title": "Websites and online interdiction: a complement to law enforcement efforts",
+        "detail": "Danny Fournier, Rothmans, Benson & Hedges"
+      },
+      {
+        "time": "14:30",
+        "end": "15:00",
+        "title": "Coffee break",
+        "detail": "Harbour Room"
+      },
+      {
+        "time": "15:00",
+        "end": "16:00",
+        "title": "Discussion panel"
+      },
+      {
+        "time": "16:00",
+        "end": "16:20",
+        "title": "Closing remarks"
+      },
+      {
+        "time": "16:30",
+        "end": "18:30",
+        "title": "Networking social",
+        "detail": "Harbour Foyer"
+      }
+    ]
+  },
+  "fr": {
+    "speakers": [
+      {
+        "name": "Jason Ebert",
+        "org": "RCMP  FPPR-DOC"
+      },
+      {
+        "name": "Sean Kirby",
+        "title": "Détective, unité du crime organisé",
+        "org": "Service de police de Winnipeg",
+        "bio": [
+          "Sean Kirby est membre du Service de police de Winnipeg depuis 13 ans. Il est actuellement détective à l'unité du crime organisé, où il a été enquêteur principal et responsable de sources pour le projet Puma du SPW. Avant cette affectation, il a travaillé à la patrouille générale, à l'unité de soutien communautaire et à l'unité des armes et des gangs.",
+          "Il est à l'unité du crime organisé depuis cinq ans, où il enquête régulièrement sur des organisations criminelles et a pris part à plusieurs projets interprovinciaux de longue haleine menés à bien.",
+          "Il fait partie du programme d'experts en gangs du SPW, avec un portefeuille consacré aux groupes du crime organisé non traditionnels. Il est également formateur en gestion de sources humaines confidentielles pour le SPW."
+        ]
+      },
+      {
+        "name": "Sandra Lloyd",
+        "title": "Superviseure et commandante d'équipe accréditée",
+        "org": "Police fédérale de la GRC, région du Pacifique — Drogues et crime organisé, Nanaimo",
+        "bio": [
+          "Sandy Lloyd is a Corporal, Supervisor and Accredited Team Commander with Federal Policing Pacific Region – Drugs and Organized Crime Group 5 (Nanaimo). She has over 25 years of service, 18 of which have been dedicated to Federal Policing. She has been a court-qualified drug expert since 2008. Constable Jason Ebert is also a member of FPPR-DOC, Nanaimo. He has been a member of the RCMP for over 22 years, 17 of which have been with Federal Policing. Their team is responsible for large-scale, Project-based investigations into high-level drug trafficking, and import/export, and Organized Crime groups. In 2024 and 2025, they both expanded their expertise into contraband tobacco when two of their unit’s investigations resulted in the disruption of extensive contraband cigarette distribution networks throughout BC and Alberta. Both have received advanced training from Rothmans Benson & Hedges’ Illicit Trade Prevention Unit on the manufacturing and distribution of contraband cigarettes, and continual training and development in this area. In turn, they have both been recognized within E Division as subject matter experts in contraband tobacco. They have been sharing this knowledge throughout BC and Nationally, presenting in forums including the Canadian Police College Organized Crime Course, Canadian Forum Against Organized Crime and the Counter-Illicit Finance Alliance of BC Symposium."
+        ]
+      },
+      {
+        "name": "Lloyd Plomp",
+        "title": "Superviseur, unité d'application de la loi sur le tabac",
+        "org": "Alberta Gaming, Liquor and Cannabis Commission",
+        "bio": [
+          "Lloyd Plomp a fait carrière pendant vingt-neuf ans au Service de police de Calgary, en patrouille, à l'unité antidrogue d'infiltration, aux gangs, au CFSEU et à l'ALERT, à l'application ciblée, aux armes et gangs, aux mœurs et à la gestion d'agents sources.",
+          "Il est à l'Alberta Gaming, Liquor and Cannabis Commission depuis 2021, au sein de l'unité d'application de la loi sur le tabac."
+        ]
+      }
+    ],
+    "agenda": [
+      {
+        "time": "08:00",
+        "end": "08:30",
+        "title": "Café et viennoiseries",
+        "detail": "Salle Harbour"
+      },
+      {
+        "time": "08:30",
+        "end": "08:35",
+        "title": "Mot de bienvenue"
+      },
+      {
+        "time": "08:35",
+        "end": "09:15",
+        "title": "L'émergence de la nicotine de contrebande dans les enquêtes sur le tabac",
+        "detail": "Lloyd Plomp, Alberta Gaming, Liquor and Cannabis Commission",
+        "abstract": "La tendance croissante de la nicotine de contrebande dans les enquêtes sur le tabac et son expansion au-delà du tabac. Une nouvelle approche de la contrebande et la collaboration avec de nombreux partenaires pour contrer ce nouveau marché illégal."
+      },
+      {
+        "time": "09:15",
+        "end": "10:00",
+        "title": "Lutter contre la distribution du tabac de contrebande",
+        "detail": "Sandra Lloyd, Police fédérale de la GRC, région du Pacifique",
+        "abstract": "Un portrait de la situation actuelle et des tendances émergentes dans la distribution du tabac de contrebande dans l'Ouest canadien, et de la façon dont les groupes du crime organisé exploitent ce produit. La séance aidera les enquêteurs à reconnaître le tabac de contrebande et à connaître les pouvoirs policiers dont ils disposent pour contrer cette tendance croissante. Deux études de cas récentes sur la distribution de cigarettes de contrebande et ses liens avec les bandes de motards criminalisées seront présentées."
+      },
+      {
+        "time": "10:00",
+        "end": "10:15",
+        "title": "Pause-café",
+        "detail": "Salle Harbour"
+      },
+      {
+        "time": "10:15",
+        "end": "11:00",
+        "title": "Projet Puma : étude de cas",
+        "detail": "Sean Kirby, Service de police de Winnipeg",
+        "abstract": "Une étude de cas du projet Puma. Les organisations criminelles visées par l'enquête au Manitoba et leurs liens avec les Hells Angels, le Wolfpack et le crime organisé asiatique; le tabac illicite et les individus liés au projet Puma; ainsi que le système de gestion des dossiers et de divulgation utilisé pendant l'enquête."
+      },
+      {
+        "time": "11:00",
+        "end": "12:00",
+        "title": "Le point sur le tabac en Colombie-Britannique",
+        "detail": "Marco Greco, gouvernement de la Colombie-Britannique — l’état des lieux et comment la Province peut aider"
+      },
+      {
+        "time": "12:00",
+        "end": "13:00",
+        "title": "Dîner",
+        "detail": "Salle Harbour"
+      },
+      {
+        "time": "13:00",
+        "end": "13:45",
+        "title": "Séance à confirmer"
+      },
+      {
+        "time": "13:45",
+        "end": "14:30",
+        "title": "Sites Web et interdiction en ligne : un complément au travail policier",
+        "detail": "Danny Fournier, Rothmans, Benson & Hedges"
+      },
+      {
+        "time": "14:30",
+        "end": "15:00",
+        "title": "Pause-café",
+        "detail": "Salle Harbour"
+      },
+      {
+        "time": "15:00",
+        "end": "16:00",
+        "title": "Table ronde"
+      },
+      {
+        "time": "16:00",
+        "end": "16:20",
+        "title": "Mot de la fin"
+      },
+      {
+        "time": "16:30",
+        "end": "18:30",
+        "title": "Activité de réseautage",
+        "detail": "Foyer Harbour"
+      }
+    ],
+    "blurb": "La porte d'entrée du Pacifique : terminaux à conteneurs, corridor maritime, mouvements transfrontaliers dans la mer des Salish, et les groupes actifs sur la côte ouest."
+  }
+}
